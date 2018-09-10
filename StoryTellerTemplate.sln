@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTellerTemplate", "StoryTellerTemplate\StoryTellerTemplate\StoryTellerTemplate.csproj", "{EC53BC34-1746-465C-8898-F2D3EAAA96EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTellerTemplate.Android", "StoryTellerTemplate\StoryTellerTemplate.Android\StoryTellerTemplate.Android.csproj", "{75281EA6-4877-4FA1-87EC-9CBACCCDDC20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Domain", "1 - Domain", "{F71E36B7-5268-42D1-A9E9-E8A03E0701AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Core", "StoryTeller.Core\StoryTeller.Core.csproj", "{EDC6C821-BD72-45FE-A1DF-4453F90A5F5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Infra", "2 - Infra", "{8133B14F-127B-484E-9597-469BF4BA411F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1 - CrossCutting", "2.1 - CrossCutting", "{A59A77FB-B3B5-4509-AEC4-2D1BA1EEC260}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.2 - Data", "2.2 - Data", "{7D9525F8-14C4-4C1A-8F00-F982058CB799}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC53BC34-1746-465C-8898-F2D3EAAA96EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC53BC34-1746-465C-8898-F2D3EAAA96EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC53BC34-1746-465C-8898-F2D3EAAA96EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC53BC34-1746-465C-8898-F2D3EAAA96EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75281EA6-4877-4FA1-87EC-9CBACCCDDC20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75281EA6-4877-4FA1-87EC-9CBACCCDDC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75281EA6-4877-4FA1-87EC-9CBACCCDDC20}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{75281EA6-4877-4FA1-87EC-9CBACCCDDC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75281EA6-4877-4FA1-87EC-9CBACCCDDC20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75281EA6-4877-4FA1-87EC-9CBACCCDDC20}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EDC6C821-BD72-45FE-A1DF-4453F90A5F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC6C821-BD72-45FE-A1DF-4453F90A5F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC6C821-BD72-45FE-A1DF-4453F90A5F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC6C821-BD72-45FE-A1DF-4453F90A5F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDC6C821-BD72-45FE-A1DF-4453F90A5F5C} = {F71E36B7-5268-42D1-A9E9-E8A03E0701AE}
+		{A59A77FB-B3B5-4509-AEC4-2D1BA1EEC260} = {8133B14F-127B-484E-9597-469BF4BA411F}
+		{7D9525F8-14C4-4C1A-8F00-F982058CB799} = {8133B14F-127B-484E-9597-469BF4BA411F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B79B0C29-4423-4D2C-96A1-5D36060F8272}
+	EndGlobalSection
+EndGlobal

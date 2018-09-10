@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="StoryTellerTemplate.Views.MainPage"
+             Title="{Binding Title}">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout
+        Grid.Row="0"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+
+            <Label Text="<Título>" 
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand" />
+
+
+
+        </StackLayout>
+
+        <ScrollView
+        x:Name="contentScrollView"
+        Grid.Row="1"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always">
+
+            <Label 
+                x:Name="contentLbl" />
+
+
+        </ScrollView>
+
+        <Button Grid.Row="3" Text="Next" Command="{Binding NextPageCommand}" />
+
+    </Grid>
+
+</ContentPage>
