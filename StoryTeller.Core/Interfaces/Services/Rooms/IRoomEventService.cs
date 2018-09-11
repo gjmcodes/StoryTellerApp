@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Services.Rooms
 {
-    public interface IRoomEventService
+    public interface IRoomEventService : IBaseService
     {
         Task<IEnumerable<RoomEvent>> GetRoomEventsAsync(string roomId);
     }

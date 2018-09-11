@@ -10,7 +10,7 @@ using StoryTeller.Core.Rooms;
 
 namespace StoryTeller.Core.Services.Rooms
 {
-    public class RoomService : IRoomEventService
+    public class RoomService : BaseService, IRoomEventService
     {
         private readonly IRoomLocalRepository _roomLocalRepository;
         private readonly IRoomExternalRepository _roomExternalRepository;
@@ -66,6 +66,11 @@ namespace StoryTeller.Core.Services.Rooms
             }
 
             return BuildRoom(room, roomActions, roomContent);
+        }
+
+        public Task<IEnumerable<RoomEvent>> GetRoomEventsAsync(string roomId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

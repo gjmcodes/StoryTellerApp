@@ -18,7 +18,7 @@ namespace StoryTellerTemplate.Factories
                 FontSize = Device.GetNamedSize((NamedSize)textSpan.fontSize.GetHashCode(), typeof(Label)),
                 BackgroundColor = Color.FromHex(textSpan.hexBackgroundColor),
                 ForegroundColor = Color.FromHex(textSpan.hexForegroundColor),
-                FontFamily = textSpan.fontFamily,
+                FontFamily =  textSpan.fontFamily,
                 FontAttributes = (FontAttributes)textSpan.fontAttribute.GetHashCode()
             };
     

@@ -8,7 +8,7 @@ using StoryTeller.Core.Rooms;
 
 namespace StoryTeller.Core.Services.Rooms
 {
-    public class RoomActionService : IRoomActionService
+    public class RoomActionService : BaseService, IRoomActionService
     {
         private readonly IRoomActionLocalRepository _roomActionLocalRepository;
         private readonly IRoomActionExternalRepository _roomActionExternalRepository;
@@ -19,12 +19,12 @@ namespace StoryTeller.Core.Services.Rooms
 
         public async Task<IEnumerable<RoomAction>> GetRoomActionsAsync(string roomId)
         {
-            var roomActions = await _roomActionLocalRepository.GetRoomActionsAsync(roomId);
+            //var roomActions = await _roomActionLocalRepository.GetRoomActionsAsync(roomId);
 
-            if (roomActions?.Count() > 0)
-                return roomActions;
+            //if (roomActions?.Count() > 0)
+            //    return roomActions;
 
-            roomActions = await _roomActionExternalRepository.GetRoomActionsAsync(roomId);
+            var roomActions = await _roomActionExternalRepository.GetRoomActionsAsync(roomId);
 
             return roomActions;
         }

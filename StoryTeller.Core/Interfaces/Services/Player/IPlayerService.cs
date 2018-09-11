@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Services.Player
 {
-    public interface IPlayerService
+    public interface IPlayerService : IBaseService
     {
         Task<PlayerStatusInventoryAggregate> GetPlayerStatusInventoryAsync();
     }

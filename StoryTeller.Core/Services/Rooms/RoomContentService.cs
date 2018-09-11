@@ -7,7 +7,7 @@ using StoryTeller.Core.Rooms;
 
 namespace StoryTeller.Core.Services.Rooms
 {
-    public class RoomContentService : IRoomContentService
+    public class RoomContentService :BaseService, IRoomContentService
     {
         private readonly IRoomContentLocalRepository _roomContentLocalRepository;
         private readonly IRoomContentExternalRepository _roomContentExternalRepository;

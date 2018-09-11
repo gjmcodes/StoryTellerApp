@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Services.Rooms
 {
-    public interface IRoomContentService
+    public interface IRoomContentService : IBaseService
     {
         Task<RoomContent> GetRoomContentByIdAsync(string contentId);
         Task<RoomContent> GetRoomDefaultContentAsync(string roomId);

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Services.Player
 {
-    public class PlayerService : IPlayerService
+    public class PlayerService : BaseService, IPlayerService
     {
         public async Task<PlayerStatusInventoryAggregate> GetPlayerStatusInventoryAsync()
         {

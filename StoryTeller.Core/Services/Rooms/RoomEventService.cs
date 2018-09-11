@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Services.Rooms
 {
-    public class RoomEventService : IRoomEventService
+    public class RoomEventService : BaseService, IRoomEventService
     {
 
         private readonly IRoomEventLocalRepository _roomEventLocalRepository;
