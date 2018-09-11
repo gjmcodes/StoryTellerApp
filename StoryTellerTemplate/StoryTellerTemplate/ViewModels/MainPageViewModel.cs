@@ -1,6 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using StoryTeller.Core.Pages;
 using StoryTeller.Core.Services;
 using StoryTellerTemplate.Interfaces.Services;
 using StoryTellerTemplate.Interfaces.ViewModels;

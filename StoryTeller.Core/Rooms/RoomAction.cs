@@ -1,13 +1,16 @@
 ﻿using StoryTeller.Core.Enums.Rooms;
+using System;
 
 namespace StoryTeller.Core.Rooms
 {
-    public class RoomAction
+    public struct RoomAction
     {
-        public string Id { get; private set; }
-        public string RoomId { get; private set; }
-        public string Description { get; private set; }
-        public RoomActionType ActionType { get; private set; }
-        public string RoomToNavigateId { get; private set; }
+        public string id;
+        public string roomId;
+        public string description;
+        public string roomActionType;
+        public string roomToNavigateId;
+
+        public RoomActionType actionTypeEnum => (RoomActionType)Enum.Parse(typeof(RoomActionType), roomActionType);
     }
 }

@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Pages;
+﻿using StoryTeller.Core.Text;
 using System.Collections.Generic;
 using Xamarin.Forms;
 

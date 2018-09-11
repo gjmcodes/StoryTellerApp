@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\StoryTeller.Core\StoryTeller.Core.csproj" />
+    <ProjectReference Include="..\..\StoryTeller.IoC\StoryTeller.IoC.csproj" />
   </ItemGroup>
 
   <ItemGroup>

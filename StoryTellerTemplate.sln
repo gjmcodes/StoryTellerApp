@@ -17,15 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1 - CrossCutting", "2.1 -
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.2 - Data", "2.2 - Data", "{7D9525F8-14C4-4C1A-8F00-F982058CB799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.ExternalData", "StoryTeller.ExternalData\StoryTeller.ExternalData.csproj", "{261094D2-D2F2-4339-A8AF-B0D2E0211EFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.ExternalData", "StoryTeller.ExternalData\StoryTeller.ExternalData.csproj", "{261094D2-D2F2-4339-A8AF-B0D2E0211EFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Extensions", "StoryTeller.Extensions\StoryTeller.Extensions.csproj", "{8ADBFC18-ECA9-4AB4-ACBE-404B244F42EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.Extensions", "StoryTeller.Extensions\StoryTeller.Extensions.csproj", "{8ADBFC18-ECA9-4AB4-ACBE-404B244F42EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.CrossCutting.Disposable", "StoryTeller.CrossCutting.Disposable\StoryTeller.CrossCutting.Disposable.csproj", "{DB1194FF-6259-4BCF-8B7A-F8BCF28115B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.CrossCutting.Disposable", "StoryTeller.CrossCutting.Disposable\StoryTeller.CrossCutting.Disposable.csproj", "{DB1194FF-6259-4BCF-8B7A-F8BCF28115B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{DDE4A2CB-A865-424D-AE3C-F0CA6BD0B11E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{DDE4A2CB-A865-424D-AE3C-F0CA6BD0B11E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.IoC", "StoryTeller.IoC\StoryTeller.IoC.csproj", "{2FE2344B-AD53-463A-BB1C-C81C13DFCD29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.IoC", "StoryTeller.IoC\StoryTeller.IoC.csproj", "{A81395AC-4365-46D5-81D3-30810115DE9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,10 @@ Global
 		{DDE4A2CB-A865-424D-AE3C-F0CA6BD0B11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDE4A2CB-A865-424D-AE3C-F0CA6BD0B11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDE4A2CB-A865-424D-AE3C-F0CA6BD0B11E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2FE2344B-AD53-463A-BB1C-C81C13DFCD29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FE2344B-AD53-463A-BB1C-C81C13DFCD29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2FE2344B-AD53-463A-BB1C-C81C13DFCD29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2FE2344B-AD53-463A-BB1C-C81C13DFCD29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A81395AC-4365-46D5-81D3-30810115DE9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A81395AC-4365-46D5-81D3-30810115DE9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A81395AC-4365-46D5-81D3-30810115DE9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A81395AC-4365-46D5-81D3-30810115DE9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,7 +78,7 @@ Global
 		{261094D2-D2F2-4339-A8AF-B0D2E0211EFB} = {7D9525F8-14C4-4C1A-8F00-F982058CB799}
 		{8ADBFC18-ECA9-4AB4-ACBE-404B244F42EA} = {A59A77FB-B3B5-4509-AEC4-2D1BA1EEC260}
 		{DB1194FF-6259-4BCF-8B7A-F8BCF28115B5} = {A59A77FB-B3B5-4509-AEC4-2D1BA1EEC260}
-		{2FE2344B-AD53-463A-BB1C-C81C13DFCD29} = {A59A77FB-B3B5-4509-AEC4-2D1BA1EEC260}
+		{A81395AC-4365-46D5-81D3-30810115DE9D} = {A59A77FB-B3B5-4509-AEC4-2D1BA1EEC260}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B79B0C29-4423-4D2C-96A1-5D36060F8272}

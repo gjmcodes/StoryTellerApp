@@ -16,7 +16,6 @@ namespace StoryTellerTemplate.Services.Pages
 
         public PaginationAppService()
         {
-            _paginationService = new PaginationService();
             _textSpanFactory = new TextSpanFactory();
         }
 

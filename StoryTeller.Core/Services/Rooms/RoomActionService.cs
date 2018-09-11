@@ -13,8 +13,9 @@ namespace StoryTeller.Core.Services.Rooms
         private readonly IRoomActionLocalRepository _roomActionLocalRepository;
         private readonly IRoomActionExternalRepository _roomActionExternalRepository;
 
-        public RoomActionService()
+        public RoomActionService(IRoomActionExternalRepository roomActionExternalRepository)
         {
+            _roomActionExternalRepository = roomActionExternalRepository;
         }
 
         public async Task<IEnumerable<RoomAction>> GetRoomActionsAsync(string roomId)

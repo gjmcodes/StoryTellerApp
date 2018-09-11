@@ -17,26 +17,25 @@ namespace StoryTeller.Core.Services.Rooms
 
         } 
 
-        public async Task<RoomContent> GetRoomContentByIdAsync(string contentId)
+        public async Task<RoomContent> GetRoomContentByIdAsync(string roomId, string contentId)
         {
-            var roomContent = await _roomContentLocalRepository.GetRoomContentByIdAsync(contentId);
-            if (roomContent.Content?.Count() > 0)
-                return roomContent;
+            //var roomContent = await _roomContentLocalRepository.GetRoomContentByIdAsync(contentId);
+            //if (roomContent.content?.Count() > 0)
+            //    return roomContent;
 
-            roomContent = await _roomContentExternalRepository.GetRoomContentByIdAsync(contentId);
+            var roomContent = await _roomContentExternalRepository.GetRoomContentByIdAsync(roomId, contentId);
 
             return roomContent;
         }
 
         public async Task<RoomContent> GetRoomDefaultContentAsync(string roomId)
         {
+            //var roomContent = await _roomContentExternalRepository.GetRoomDefaultContentAsync(roomId);
+
+            //if (roomContent.Content?.Count() > 0)
+            //    return roomContent;
+
             var roomContent = await _roomContentExternalRepository.GetRoomDefaultContentAsync(roomId);
-
-            if (roomContent.Content?.Count() > 0)
-                return roomContent;
-
-
-            roomContent = await _roomContentExternalRepository.GetRoomDefaultContentAsync(roomId);
 
             return roomContent;
         }
