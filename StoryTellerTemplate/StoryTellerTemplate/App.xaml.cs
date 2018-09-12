@@ -5,6 +5,8 @@ using StoryTellerTemplate.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Autofac;
+using StoryTellerTemplate.Factories;
+using StoryTellerTemplate.Interfaces.Factories;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace StoryTellerTemplate
@@ -29,9 +31,18 @@ namespace StoryTellerTemplate
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDependencies();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<PrismContentPage1>();
+
+            RegisterFactories(containerRegistry);
+        }
+
+
+        void RegisterFactories(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.Register<ITextSpanFactory, TextSpanFactory>();
         }
     }
 }

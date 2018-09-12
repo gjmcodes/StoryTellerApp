@@ -59,7 +59,7 @@ namespace StoryTeller.Core.Services.Rooms
                 {
                     var maxPriority = eventsWithConditionsMet.Max(x => x.EventPriority);
                     var priorityEvent = eventsWithConditionsMet.First(x => x.EventPriority == maxPriority);
-                    roomContent = await _roomContentService.GetRoomContentByIdAsync(priorityEvent.RoomContentIdTriggeredByEvent);
+                    roomContent = await _roomContentService.GetRoomContentByIdAsync(roomId, priorityEvent.RoomContentIdTriggeredByEvent);
 
                     return BuildRoom(room, roomActions, roomContent);
                 }

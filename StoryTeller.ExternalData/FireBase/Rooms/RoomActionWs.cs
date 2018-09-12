@@ -9,26 +9,27 @@ namespace StoryTeller.ExternalData.FireBase.Rooms
     public class RoomActionWs : BaseFirebaseWs, IRoomActionExternalRepository
     {
         public RoomActionWs()
-            : base("RoomAction")
+            : base("RoomActions")
         {
         }
 
         public async Task<IEnumerable<RoomAction>> GetRoomActionsAsync(string roomId)
         {
-            var actions = new List<RoomAction>();
+            return await base.GetByKey<RoomAction>(nameof(roomId), roomId);
+            //var actions = new List<RoomAction>();
 
-            var request = await _fireBaseClient
-                .Child(collection)
-                .OrderBy("roomId")
-                .EqualTo(roomId)
-                .OnceAsync<RoomAction>();
+            //var request = await _fireBaseClient
+            //    .Child(collection)
+            //    .OrderBy("roomId")
+            //    .EqualTo(roomId)
+            //    .OnceAsync<RoomAction>();
 
-            foreach (var item in request)
-            {
-                actions.Add(item.Object);
-            }
+            //foreach (var item in request)
+            //{
+            //    actions.Add(item.Object);
+            //}
 
-            return actions;
+            //return actions;
         }
 
         protected override void ReleaseResources()

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using StoryTeller.Core.Pages;
+using StoryTeller.Core.Text;
 using StoryTellerTemplate.Interfaces.Factories;
 using Xamarin.Forms;
 
@@ -9,12 +9,12 @@ namespace StoryTellerTemplate.Factories
     {
         public Span MapTextSpanToXamarinSpan(TextSpan textSpan)
         {
-            if (textSpan.IsNewLine)
-                return new Span() { Text = textSpan.content };
+            if (textSpan.lineBreak)
+                return new Span() { Text = textSpan.Content };
 
             var span = new Span()
             {
-                Text = textSpan.content,
+                Text = textSpan.Content,
                 FontSize = Device.GetNamedSize((NamedSize)textSpan.fontSize.GetHashCode(), typeof(Label)),
                 BackgroundColor = Color.FromHex(textSpan.hexBackgroundColor),
                 ForegroundColor = Color.FromHex(textSpan.hexForegroundColor),

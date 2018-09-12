@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller.Core\StoryTeller.Core.csproj" />
+    <ProjectReference Include="..\StoryTeller.ExternalData\StoryTeller.ExternalData.csproj" />
   </ItemGroup>
 
 </Project>

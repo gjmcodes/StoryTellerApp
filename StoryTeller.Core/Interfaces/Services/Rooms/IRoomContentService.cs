@@ -5,7 +5,7 @@ namespace StoryTeller.Core.Interfaces.Services.Rooms
 {
     public interface IRoomContentService : IBaseService
     {
-        Task<RoomContent> GetRoomContentByIdAsync(string contentId);
+        Task<RoomContent> GetRoomContentByIdAsync(string roomId, string contentId);
         Task<RoomContent> GetRoomDefaultContentAsync(string roomId);
     }
 }

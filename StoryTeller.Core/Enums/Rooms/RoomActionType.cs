@@ -5,6 +5,5 @@
         Navigation = 1,
         Dialogue = 2,
         Interaction = 3
-
     }
 }
