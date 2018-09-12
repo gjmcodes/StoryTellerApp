@@ -15,7 +15,7 @@ namespace StoryTeller.ExternalData.FireBase.Rooms
 
         public async Task<IEnumerable<RoomAction>> GetRoomActionsAsync(string roomId)
         {
-            return await base.GetByKey<RoomAction>(nameof(roomId), roomId);
+            return await base.GetByKeyWithLanguageAsync<RoomAction>(nameof(roomId), roomId);
             //var actions = new List<RoomAction>();
 
             //var request = await _fireBaseClient

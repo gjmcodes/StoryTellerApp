@@ -17,14 +17,14 @@ namespace StoryTeller.ExternalData.FireBase.Rooms
 
         public async Task<RoomContent> GetRoomContentByIdAsync(string roomId, string roomContentId)
         {
-            var data = await base.GetByField<RoomContent>(nameof(roomId), roomId, "id", roomContentId);
+            var data = await base.GetByFieldWithLanguageAsync<RoomContent>(nameof(roomId), roomId, "id", roomContentId);
 
             return data.FirstOrDefault();
         }
 
         public async Task<RoomContent> GetRoomDefaultContentAsync(string roomId)
         {
-            var data = await base.GetByKey<RoomContent>(nameof(roomId), roomId);
+            var data = await base.GetByKeyWithLanguageAsync<RoomContent>(nameof(roomId), roomId);
 
             return data.FirstOrDefault();
         }

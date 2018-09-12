@@ -16,7 +16,7 @@ namespace StoryTeller.ExternalData.FireBase.Rooms
 
         public async Task<IEnumerable<RoomEvent>> GetRoomEventsAsync(string roomId)
         {
-            return await base.GetByKey<RoomEvent>(nameof(roomId), roomId);
+            return await base.GetByKeyAsync<RoomEvent>(nameof(roomId), roomId);
         }
 
         protected override void ReleaseResources()
