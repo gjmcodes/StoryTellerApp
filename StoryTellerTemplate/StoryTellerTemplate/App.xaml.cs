@@ -7,6 +7,8 @@ using Xamarin.Forms.Xaml;
 using Prism.Autofac;
 using StoryTellerTemplate.Factories;
 using StoryTellerTemplate.Interfaces.Factories;
+using StoryTellerTemplate.Interfaces.Services.GameContent;
+using StoryTellerTemplate.Services.GameContent;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace StoryTellerTemplate
@@ -36,9 +38,14 @@ namespace StoryTellerTemplate
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<PrismContentPage1>();
 
+            RegisterAppServices(containerRegistry);
             RegisterFactories(containerRegistry);
         }
 
+        void RegisterAppServices(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.Register<IGameContentAppService, GameContentAppService>();
+        }
 
         void RegisterFactories(IContainerRegistry containerRegistry)
         {

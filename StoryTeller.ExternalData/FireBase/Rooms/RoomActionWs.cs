@@ -3,13 +3,14 @@ using System.Threading.Tasks;
 using Firebase.Database.Query;
 using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Rooms;
+using StoryTeller.CrossCutting.User.Preferences;
 
 namespace StoryTeller.ExternalData.FireBase.Rooms
 {
     public class RoomActionWs : BaseFirebaseWs, IRoomActionExternalRepository
     {
-        public RoomActionWs()
-            : base("RoomActions")
+        public RoomActionWs(UserPreferences userPreferences)
+            : base("RoomActions", userPreferences)
         {
         }
 

@@ -12,9 +12,9 @@ namespace StoryTeller.Core.Services.Rooms
         private readonly IRoomContentLocalRepository _roomContentLocalRepository;
         private readonly IRoomContentExternalRepository _roomContentExternalRepository;
 
-        public RoomContentService()
+        public RoomContentService(IRoomContentExternalRepository roomContentExternalRepository)
         {
-
+            _roomContentExternalRepository = roomContentExternalRepository;
         } 
 
         public async Task<RoomContent> GetRoomContentByIdAsync(string roomId, string contentId)

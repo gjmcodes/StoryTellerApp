@@ -1,29 +1,24 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using StoryTeller.Core.Services;
-using StoryTellerTemplate.Interfaces.Services;
+using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
-using StoryTellerTemplate.Services.GameContent;
-using StoryTellerTemplate.Services.Pages;
 using System.Threading.Tasks;
 
 namespace StoryTellerTemplate.ViewModels
 {
     public class MainPageViewModel : ViewModelBase, ICustomTextBindingViewModel
     {
-        private readonly IPaginationAppService _paginationAppService;
+        private readonly IGameContentAppService _gameContentAppService;
         private ICustomTextBindingPage _customTextBindingPage;
-        private readonly GameContentAppService _gameContentAppService;
 
-        public MainPageViewModel(INavigationService navigationService) 
+        public MainPageViewModel(INavigationService navigationService, IGameContentAppService gameContentAppService) 
             : base (navigationService)
         {
             Title = "Main Page";
 
             NextPageCommand = new DelegateCommand(async() => await LoadDataAsync());
-            _paginationAppService = new PaginationAppService();
-            _gameContentAppService = new GameContentAppService();
+            _gameContentAppService = gameContentAppService;
         }
 
         public DelegateCommand NextPageCommand { get; }
@@ -35,9 +30,9 @@ namespace StoryTellerTemplate.ViewModels
 
         async Task LoadDataAsync()
         {
-            var gameContent = await _gameContentAppService.GetCurrentGameContextAsync(null, 0);
+            var roomVm = await _gameContentAppService.GetCurrentRoomDataAsync();
 
-            _customTextBindingPage.BindContentText(gameContent.Room.Content);
+            _customTextBindingPage.BindContentText(roomVm.Content);
         }
 
         public void BindCustomTextBindingPage(ICustomTextBindingPage page)

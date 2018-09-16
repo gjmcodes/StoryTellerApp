@@ -1,14 +1,16 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using StoryTeller.Core.Interfaces.Repositories.External;
+using StoryTeller.Core.Interfaces.Repositories.Rooms;
 using StoryTeller.Core.Rooms;
+using StoryTeller.CrossCutting.User.Preferences;
 
 namespace StoryTeller.ExternalData.FireBase.Rooms
 {
-    public class RoomWs : BaseFirebaseWs, IRoomExternalRepository
+    public class RoomWs : BaseFirebaseWs, IRoomExternalRepository, IRoomRepository
     {
-        public RoomWs() 
-            : base("Rooms")
+        public RoomWs(UserPreferences userPreferences) 
+            : base("Rooms", userPreferences)
         {
         }
 

@@ -1,41 +1,49 @@
-﻿using StoryTellerTemplate.Interfaces.Services;
-using StoryTellerTemplate.Models.GameContent;
-using StoryTellerTemplate.Services.Pages;
-using System.Collections.Generic;
+﻿using StoryTeller.Core.Interfaces.Services.Rooms;
+using StoryTeller.CrossCutting.User.Interfaces.Services;
+using StoryTellerTemplate.Interfaces.Factories;
+using StoryTellerTemplate.Interfaces.Services.GameContent;
+using StoryTellerTemplate.Models.MainPage;
 using System.Threading.Tasks;
 
 namespace StoryTellerTemplate.Services.GameContent
 {
-    public class GameContentAppService
+    public class GameContentAppService : BaseAppService, IGameContentAppService
     {
-        GameContextVm ctxMock;
-        RoomVm roomMock;
+        private readonly IRoomService _roomService;
+        private readonly IUserStatusService _userStatusService;
+        private readonly ITextSpanFactory _textSpanFactory;
 
-        private readonly IPaginationAppService _paginationAppService;
-
-        public GameContentAppService()
+        public GameContentAppService(IRoomService roomService, 
+            IUserStatusService userStatusService,
+            ITextSpanFactory textSpanFactory)
         {
-            _paginationAppService = new PaginationAppService();
-
-            ctxMock = new GameContextVm();
-            roomMock = new RoomVm();
-
-            var actionsMock = new List<RoomActionVm>()
-            {
-                new RoomActionVm(){Name="Observar ao redor"},
-                new RoomActionVm(){Name="Gritar por socorro"},
-            };
-
-            roomMock.Actions = actionsMock;
-            ctxMock.Room = roomMock;
+            _roomService = roomService;
+            _userStatusService = userStatusService;
+            _textSpanFactory = textSpanFactory;
         }
 
-        public async Task<GameContextVm> GetCurrentGameContextAsync(string roomId, int chapter)
-        {
-            var text = await _paginationAppService.GetCurrentPageContentTextSpansAsync();
-            ctxMock.Room.Content = text;
 
-            return ctxMock;
+        async Task<RoomVm> BuildRoomVmAsync(string roomId)
+        {
+            var roomData = await _roomService.GetRoomByIdAsync(roomId);
+            var textSpans = _textSpanFactory.MapTextSpanToXamarinSpan(roomData.Content.content);
+            var roomVm = new RoomVm();
+            roomVm.Content = textSpans;
+
+            return roomVm;
+        }
+
+        public async Task<RoomVm> GetCurrentRoomDataAsync()
+        {
+            var currentRoomId = await _userStatusService.GetCurrentRoomIdAsync();
+            var vm = await BuildRoomVmAsync(currentRoomId);
+
+            return vm;
+        }
+
+        public async Task<RoomVm> GetRoomDataAsync(string roomId)
+        {
+            return await BuildRoomVmAsync(roomId);
         }
     }
 }

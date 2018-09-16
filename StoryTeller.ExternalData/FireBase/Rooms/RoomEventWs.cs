@@ -1,5 +1,6 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Rooms;
+using StoryTeller.CrossCutting.User.Preferences;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,8 +10,8 @@ namespace StoryTeller.ExternalData.FireBase.Rooms
 {
     public class RoomEventWs : BaseFirebaseWs, IRoomEventExternalRepository
     {
-        public RoomEventWs() 
-            : base("RoomEvents")
+        public RoomEventWs(UserPreferences userPreferences) 
+            : base("RoomEvents", userPreferences)
         {
         }
 

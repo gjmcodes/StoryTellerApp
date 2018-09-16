@@ -10,7 +10,7 @@ using StoryTeller.Core.Rooms;
 
 namespace StoryTeller.Core.Services.Rooms
 {
-    public class RoomService : BaseService, IRoomEventService
+    public class RoomService : BaseService, IRoomService
     {
         private readonly IRoomLocalRepository _roomLocalRepository;
         private readonly IRoomExternalRepository _roomExternalRepository;
@@ -21,8 +21,15 @@ namespace StoryTeller.Core.Services.Rooms
 
         private readonly IPlayerService _playerService;
 
-        public RoomService()
+        public RoomService(IRoomExternalRepository roomExternalRepository,
+            IRoomActionService roomActionService,
+            IRoomEventService roomEventService,
+            IRoomContentService roomContentService)
         {
+            _roomExternalRepository = roomExternalRepository;
+            _roomActionService = roomActionService;
+            _roomEventService = roomEventService;
+            _roomContentService = roomContentService;
         }
 
         Room BuildRoom(Room room, IEnumerable<RoomAction> actions, RoomContent content)
@@ -36,11 +43,13 @@ namespace StoryTeller.Core.Services.Rooms
         public async Task<Room> GetRoomByIdAsync(string roomId)
         {
 
-            var room = await _roomLocalRepository.GetRoomByIdAsync(roomId);
-            if(room == null)
-            {
-                room = await _roomExternalRepository.GetRoomByIdAsync(roomId);
-            }
+            //var room = await _roomLocalRepository.GetRoomByIdAsync(roomId);
+            //if(room == null)
+            //{
+            //    room = await _roomExternalRepository.GetRoomByIdAsync(roomId);
+            //}
+
+            var room = await _roomExternalRepository.GetRoomByIdAsync(roomId);
 
             RoomContent roomContent = await _roomContentService.GetRoomDefaultContentAsync(roomId);
 
