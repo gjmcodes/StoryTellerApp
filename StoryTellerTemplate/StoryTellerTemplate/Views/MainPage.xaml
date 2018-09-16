@@ -4,6 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="StoryTellerTemplate.Views.MainPage"
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              Title="{Binding Title}">
 
 
@@ -40,7 +41,14 @@
 
         </ScrollView>
 
-        <Button Grid.Row="3" Text="Next" Command="{Binding NextPageCommand}" />
+        <cv:CarouselView Grid.Row="2" ItemsSource="{Binding RoomActions}">
+            <cv:CarouselView.ItemTemplate>
+                <DataTemplate>
+                            <Label TextColor="Black" Text="{Binding Name}" FontSize="16" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                </DataTemplate>
+            </cv:CarouselView.ItemTemplate>
+        </cv:CarouselView>
+        <!--<Button Grid.Row="3" Text="Next" Command="{Binding NextPageCommand}" />-->
 
     </Grid>
 
