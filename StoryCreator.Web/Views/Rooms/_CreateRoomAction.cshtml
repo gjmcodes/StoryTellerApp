@@ -8,7 +8,15 @@
     <div class="col-md-4">
         <form id="createRoomActionForm" onsubmit="return onSubmit(Event)">
 
-            <button type="button" id="submitBtn"  class="btn btn-primary">Save</button>
+            @for (int i = 0; i < Model.RoomActions.Count; i++)
+            {
+                <input hidden asp-for="@Model.RoomActions[i].Description" />
+                <input hidden asp-for="@Model.RoomActions[i].RoomToNavigateId" />
+                <input hidden asp-for="@Model.RoomActions[i].DialogueToOpenId" />
+                <input hidden asp-for="@Model.RoomActions[i].ActionType" />
+            }
+           
+            <button type="button" id="submitBtn" class="btn btn-primary">Save</button>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">

@@ -39,37 +39,42 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-<script>
 
-    $(document).ready(function () {
-        alert('teste');
-
-        $('#submitBtn').click(function (evt) {
-            alert('wow');
-            onSubmit(evt);
-        });
-    });
-    function onSubmit(e) {
-
-        e.preventDefault();
-
-        debugger
-
-        $.ajax({
-            type: 'post',
-            url: './CreateRoomAction',
-            data: $('#createRoomActionForm').serialize(),
-            success: function (result) {
-            },
-            error: function (result) {
-
-            }
-
-        });
-    }
-
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        $(document).ready(function () {
+            bindClickSubmitBtn();
+        });
+
+        function bindClickSubmitBtn() {
+            $('#submitBtn').click(function (evt) {
+                onSubmit(evt);
+            });
+        }
+        function onSubmit(e) {
+
+            e.preventDefault();
+
+
+            $.ajax({
+                type: 'post',
+                url: './CreateRoomAction',
+                data: $('#createRoomActionForm').serialize(),
+                success: function (result) {
+                    console.log(result);
+                    $('#roomActions').empty().append(result);
+                    bindClickSubmitBtn();
+                },
+                error: function (result) {
+
+                }
+
+            });
+        }
+
+    </script>
 }
