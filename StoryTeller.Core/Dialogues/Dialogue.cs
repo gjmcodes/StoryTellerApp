@@ -1,6 +1,5 @@
-﻿using System;
+﻿using StoryTeller.Core.Actions;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StoryTeller.Core.Dialogues
 {
@@ -8,5 +7,6 @@ namespace StoryTeller.Core.Dialogues
     {
         public string dialogueId;
         public string content;
+        public Dictionary<string, DialogueAction> dialogueOptions;
     }
 }

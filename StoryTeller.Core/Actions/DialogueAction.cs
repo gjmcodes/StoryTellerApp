@@ -2,10 +2,10 @@
 
 namespace StoryTeller.Core.Actions
 {
-    public struct Action
+    public struct DialogueAction
     {
         public ActionTypeEnum actionType;
-        public string description;
+        public string content;
         public string roomToNavigateId;
         public string nextDialogueId;
     }
