@@ -4,9 +4,8 @@ namespace StoryTeller.Core.Actions
 {
     public struct DialogueAction
     {
-        public ActionTypeEnum actionType;
-        public string content;
-        public string roomToNavigateId;
-        public string nextDialogueId;
+        public string id;
+        public string dialogueId;
+        public GameAction action;
     }
 }
