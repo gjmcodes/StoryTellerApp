@@ -1,0 +1,14 @@
+﻿
+@using StoryCreator.Web.Models.Rooms.Create
+
+@model CreateRoomVm
+
+
+
+<div class="col-md-12">
+    @Html.Partial("_CreateRoomAction", Model)
+</div>
+
+<div class="col-md-12">
+    @Html.Partial("_RoomActionsIndex", Model.RoomActions)
+</div>
