@@ -23,6 +23,7 @@ public static class Bootstrapper
         containerRegistry.Register<IRoomContentService, RoomContentService>();
         containerRegistry.Register<IRoomEventService, RoomEventService>();
         containerRegistry.Register<IRoomActionService, RoomActionService>();
+        containerRegistry.Register<IRoomActionService, RoomActionService>();
     }
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)
