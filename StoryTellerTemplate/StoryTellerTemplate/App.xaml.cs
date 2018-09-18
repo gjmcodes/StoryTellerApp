@@ -9,6 +9,8 @@ using StoryTellerTemplate.Factories;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Services.GameContent;
+using StoryTellerTemplate.Interfaces.Services.RoomActions;
+using StoryTellerTemplate.Services.RoomActions;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace StoryTellerTemplate
@@ -45,11 +47,13 @@ namespace StoryTellerTemplate
         void RegisterAppServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IGameContentAppService, GameContentAppService>();
+            containerRegistry.Register<IRoomActionAppService, RoomActionAppService>();
         }
 
         void RegisterFactories(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ITextSpanFactory, TextSpanFactory>();
+            containerRegistry.Register<IRoomVmFactory, RoomVmFactory>();
         }
     }
 }

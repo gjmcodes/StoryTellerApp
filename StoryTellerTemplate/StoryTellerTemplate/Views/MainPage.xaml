@@ -41,14 +41,13 @@
 
         </ScrollView>
 
-        <cv:CarouselView Grid.Row="2" ItemsSource="{Binding RoomActions}">
+        <!--<cv:CarouselView Grid.Row="2" ItemsSource="{Binding RoomActions}">
             <cv:CarouselView.ItemTemplate>
                 <DataTemplate>
                             <Label TextColor="Black" Text="{Binding Name}" FontSize="16" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
                 </DataTemplate>
             </cv:CarouselView.ItemTemplate>
-        </cv:CarouselView>
-        <!--<Button Grid.Row="3" Text="Next" Command="{Binding NextPageCommand}" />-->
+        </cv:CarouselView>-->
 
     </Grid>
 

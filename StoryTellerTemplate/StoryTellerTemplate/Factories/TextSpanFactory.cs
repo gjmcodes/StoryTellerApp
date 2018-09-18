@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using StoryTeller.Core.Text;
+using StoryTeller.CrossCutting.Disposable;
 using StoryTellerTemplate.Interfaces.Factories;
 using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Factories
 {
-    public class TextSpanFactory : ITextSpanFactory
+    public class TextSpanFactory : BaseFactory, ITextSpanFactory 
     {
         public Span MapTextSpanToXamarinSpan(TextSpan textSpan)
         {
@@ -37,6 +38,10 @@ namespace StoryTellerTemplate.Factories
             }
 
             return spans;
+        }
+
+        protected override void ReleaseResources()
+        {
         }
     }
 }

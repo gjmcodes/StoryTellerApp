@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Enums.Rooms;
+﻿using StoryTeller.Core.Enums.Actions;
 using System;
 
 namespace StoryTeller.Core.Rooms
@@ -11,6 +11,6 @@ namespace StoryTeller.Core.Rooms
         public string roomActionType;
         public string roomToNavigateId;
 
-        public RoomActionType actionTypeEnum => (RoomActionType)Enum.Parse(typeof(RoomActionType), roomActionType);
+        public ActionTypeEnum actionTypeEnum => (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), roomActionType);
     }
 }

@@ -1,7 +1,9 @@
 ﻿using StoryTeller.Core.Interfaces.Services.Rooms;
+using StoryTeller.Core.Rooms;
 using StoryTeller.CrossCutting.User.Interfaces.Services;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
+using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.MainPage;
 using System.Threading.Tasks;
 
@@ -12,23 +14,24 @@ namespace StoryTellerTemplate.Services.GameContent
         private readonly IRoomService _roomService;
         private readonly IUserStatusService _userStatusService;
         private readonly ITextSpanFactory _textSpanFactory;
+        private readonly IRoomVmFactory _roomVmFactory;
 
         public GameContentAppService(IRoomService roomService, 
             IUserStatusService userStatusService,
-            ITextSpanFactory textSpanFactory)
+            ITextSpanFactory textSpanFactory,
+            IRoomVmFactory roomVmFactory)
         {
             _roomService = roomService;
             _userStatusService = userStatusService;
             _textSpanFactory = textSpanFactory;
+            _roomVmFactory = roomVmFactory;
         }
 
 
         async Task<RoomVm> BuildRoomVmAsync(string roomId)
         {
             var roomData = await _roomService.GetRoomByIdAsync(roomId);
-            var textSpans = _textSpanFactory.MapTextSpanToXamarinSpan(roomData.Content.content);
-            var roomVm = new RoomVm();
-            roomVm.Content = textSpans;
+            var roomVm = _roomVmFactory.MapRoomToRoomVm(roomData);
 
             return roomVm;
         }

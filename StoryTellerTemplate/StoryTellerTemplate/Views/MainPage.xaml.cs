@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Views
 {
-    public partial class MainPage : ContentPage, ICustomTextBindingPage
+    public partial class MainPage : ContentPage, IGameContentManager
     {
         private FormattedString fortText;
         public MainPage()

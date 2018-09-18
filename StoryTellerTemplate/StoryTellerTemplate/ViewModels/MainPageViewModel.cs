@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
+using StoryTellerTemplate.Interfaces.Services.RoomActions;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
 using System.Collections.ObjectModel;
@@ -8,33 +9,25 @@ using System.Threading.Tasks;
 
 namespace StoryTellerTemplate.ViewModels
 {
-    public class RoomActionsTest
+    
+    public class MainPageViewModel : ViewModelBase, IGameContentManagerViewModelBinder
     {
-        public string Name { get; set; }
-    }
-
-    public class MainPageViewModel : ViewModelBase, ICustomTextBindingViewModel
-    {
+        private readonly IRoomActionAppService _roomActionAppService;
         private readonly IGameContentAppService _gameContentAppService;
-        private ICustomTextBindingPage _customTextBindingPage;
+        IGameContentManager _gameContentManager;
 
-        public MainPageViewModel(INavigationService navigationService, IGameContentAppService gameContentAppService) 
+        public MainPageViewModel(INavigationService navigationService,
+            IGameContentAppService gameContentAppService,
+            IRoomActionAppService roomActionAppService) 
             : base (navigationService)
         {
             Title = "Main Page";
 
             NextPageCommand = new DelegateCommand(async() => await LoadDataAsync());
             _gameContentAppService = gameContentAppService;
-
-            RoomActions = new ObservableCollection<RoomActionsTest>()
-            {
-                new RoomActionsTest(){Name="Action 1"},
-                new RoomActionsTest(){Name="Action 2"},
-                new RoomActionsTest(){Name="Action 3"},
-            };
+            _roomActionAppService = roomActionAppService;
         }
 
-        public ObservableCollection<RoomActionsTest> RoomActions { get; }
         public DelegateCommand NextPageCommand { get; }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
@@ -46,12 +39,15 @@ namespace StoryTellerTemplate.ViewModels
         {
             var roomVm = await _gameContentAppService.GetCurrentRoomDataAsync();
 
-            _customTextBindingPage.BindContentText(roomVm.Content);
+            _gameContentManager.BindContentText(roomVm.Content);
+
+            await Task.Delay(5000);
+
         }
 
-        public void BindCustomTextBindingPage(ICustomTextBindingPage page)
+        public void BindCustomTextBindingPage(IGameContentManager manager)
         {
-            _customTextBindingPage = page;
+            _gameContentManager = manager;
         }
     }
 }

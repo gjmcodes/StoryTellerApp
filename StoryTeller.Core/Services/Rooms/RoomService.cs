@@ -74,7 +74,9 @@ namespace StoryTeller.Core.Services.Rooms
                 }
             }
 
-            return BuildRoom(room, roomActions, roomContent);
+            var newRoom = BuildRoom(room, roomActions, roomContent);
+
+            return newRoom;
         }
 
         public Task<IEnumerable<RoomEvent>> GetRoomEventsAsync(string roomId)

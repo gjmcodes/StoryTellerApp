@@ -3,9 +3,8 @@ using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Interfaces.Views
 {
-    public interface ICustomTextBindingPage
+    public interface IRoomContentBinding
     {
-        void BindToViewModel();
         void BindContentText(IEnumerable<Span> textSpans);
     }
 }
