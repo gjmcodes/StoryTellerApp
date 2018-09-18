@@ -10,5 +10,13 @@ namespace StoryTeller.Core.Actions
         public string dialogueToOpenId;
 
         public ActionTypeEnum actionType;
+
+        public string GetIdToFetch()
+        {
+            if (actionType == ActionTypeEnum.Dialogue)
+                return dialogueToOpenId;
+
+            return roomToNavigateId;
+        }
     }
 }

@@ -54,6 +54,7 @@ namespace StoryTellerTemplate
         {
             containerRegistry.Register<ITextSpanFactory, TextSpanFactory>();
             containerRegistry.Register<IRoomVmFactory, RoomVmFactory>();
+            containerRegistry.Register<IGameActionVmFactory, GameActionVmFactory>();
         }
     }
 }
