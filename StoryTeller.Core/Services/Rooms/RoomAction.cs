@@ -1,6 +1,5 @@
 ﻿using StoryTeller.Core.Actions;
-using StoryTeller.Core.Enums.Actions;
-using System;
+using System.Collections.Generic;
 
 namespace StoryTeller.Core.Rooms
 {
@@ -8,6 +7,6 @@ namespace StoryTeller.Core.Rooms
     {
         public string id;
         public string roomId;
-        public GameAction action;
+        public IEnumerable<GameAction> action;
     }
 }
