@@ -1,0 +1,73 @@
+﻿@model StoryCreator.Web.Models.Rooms.Create.CreateRoomVm
+
+<h4>Criar Room Content</h4>
+<hr />
+<div class="row">
+    <form id="createRoomContentForm" asp-action="_CreateRoomContent" onsubmit="return onSubmitContent(Event)">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <div class="col-md-3">
+                <label asp-for="CreateRoomContent.Id" class="control-label"></label>
+                <input asp-for="CreateRoomContent.Id" class="form-control" />
+                <span asp-validation-for="CreateRoomContent.Id" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="CreateRoomContent.Content.LineBreak" class="control-label"></label>
+                <div class="col-md-12">
+                    <input type="radio" asp-for="CreateRoomContent.Content.LineBreak" value="Yes" /> Yes
+                    <input type="radio" asp-for="CreateRoomContent.Content.LineBreak" value="No" /> No
+                </div>
+                <span asp-validation-for="CreateRoomContent.Content.LineBreak" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="CreateRoomContent.Content.AmountLineBreaks" class="control-label"></label>
+                <input type="number" asp-for="CreateRoomContent.Content.AmountLineBreaks" class="form-control" />
+                <span asp-validation-for="CreateRoomContent.Content.AmountLineBreaks" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="CreateRoomContent.Content.HexForegroundColor" class="control-label"></label>
+                <input type="text" asp-for="CreateRoomContent.Content.HexForegroundColor" value="#000" class="form-control" />
+                <span asp-validation-for="CreateRoomContent.Content.HexForegroundColor" class="text-danger"></span>
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-3">
+                <label asp-for="CreateRoomContent.Content.HexBackgroundColor" class="control-label"></label>
+                <input type="text" asp-for="CreateRoomContent.Content.HexBackgroundColor" value="#000" class="form-control" />
+                <span asp-validation-for="CreateRoomContent.Content.HexBackgroundColor" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="CreateRoomContent.Content.FontSize" class="control-label"></label>
+                <input type="number" asp-for="CreateRoomContent.Content.FontSize" value="14" class="form-control" />
+                <span asp-validation-for="CreateRoomContent.Content.FontSize" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="CreateRoomContent.Content.FontAttribute" class="control-label"></label>
+                <input type="number" asp-for="CreateRoomContent.Content.FontAttribute" value="14" class="form-control" />
+                <span asp-validation-for="CreateRoomContent.Content.FontAttribute" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <textarea asp-for="CreateRoomContent.Content.Content"></textarea>
+
+        <div class="form-group">
+            <input type="button" id="submitContentBtn" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

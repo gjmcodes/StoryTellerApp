@@ -9,15 +9,18 @@ namespace StoryCreator.Web.Models.Rooms.Create
         public CreateRoomVm()
         {
             CreateRoomAction = new CreateRoomActionVm();
+            CreateRoomContent = new CreateRoomContentVm();
             RoomActions = new List<CreateRoomActionVm>();
-            RoomContent = new List<ContentViewModel>();
+            RoomContent = new List<CreateRoomContentVm>();
         }
 
         public string Id { get; set; }
         public string RoomName { get; set; }
 
         public CreateRoomActionVm CreateRoomAction { get; set; }
+        public CreateRoomContentVm CreateRoomContent{ get; set; }
+
         public List<CreateRoomActionVm> RoomActions { get; set; }
-        public List<ContentViewModel> RoomContent { get; set; }
+        public List<CreateRoomContentVm> RoomContent { get; set; }
     }
 }

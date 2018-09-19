@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoryCreator.Web.Models.Contents;
 using StoryCreator.Web.Models.Rooms.Create;
 
 namespace StoryCreator.Web.Controllers
@@ -62,7 +63,26 @@ namespace StoryCreator.Web.Controllers
             }
 
         }
-        
+
+        [HttpPost]
+        public ActionResult CreateRoomContent(CreateRoomVm model)
+        {
+            try
+            {
+                var t = ContentMarkupTranslator.Translate(model.CreateRoomContent.Content.Content);
+
+                model.RoomContent.Add(model.CreateRoomContent);
+                // TODO: Add insert logic here
+
+                return PartialView("_RoomContents", model);
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
 
         // GET: Rooms/Edit/5
         public ActionResult Edit(int id)

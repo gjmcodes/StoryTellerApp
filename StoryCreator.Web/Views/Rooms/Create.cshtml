@@ -8,9 +8,6 @@
 
 <hr />
 <div class="row">
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-default" />
-    </div>
 
     <div class="col-md-12">
         <div class="col-md-4">
@@ -33,48 +30,18 @@
     <div class="col-md-12" id="roomActions">
         @Html.Partial("_RoomActions", Model)
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+
+    <div class="col-md-12" id="roomContents">
+        @Html.Partial("_RoomContents", Model)
+    </div>
+
+
 </div>
 
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script>
-
-        $(document).ready(function () {
-            bindClickSubmitBtn();
-        });
-
-        function bindClickSubmitBtn() {
-            $('#submitBtn').click(function (evt) {
-                onSubmit(evt);
-            });
-        }
-        function onSubmit(e) {
-
-            e.preventDefault();
-
-
-            $.ajax({
-                type: 'post',
-                url: './CreateRoomAction',
-                data: $('#createRoomActionForm').serialize(),
-                success: function (result) {
-                    console.log(result);
-                    $('#roomActions').empty().append(result);
-                    bindClickSubmitBtn();
-                },
-                error: function (result) {
-
-                }
-
-            });
-        }
-
-    </script>
+    <script src="~/js/Rooms/CreateRoom.js"></script>
 }
