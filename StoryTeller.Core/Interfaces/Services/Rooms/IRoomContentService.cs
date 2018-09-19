@@ -1,4 +1,5 @@
 ﻿using StoryTeller.Core.Rooms;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Services.Rooms
@@ -7,5 +8,7 @@ namespace StoryTeller.Core.Interfaces.Services.Rooms
     {
         Task<RoomContent> GetRoomContentByIdAsync(string roomId, string contentId);
         Task<RoomContent> GetRoomDefaultContentAsync(string roomId);
+        Task CreateRoomContentAsync(IEnumerable<RoomContent> roomContents, string culture);
+            
     }
 }

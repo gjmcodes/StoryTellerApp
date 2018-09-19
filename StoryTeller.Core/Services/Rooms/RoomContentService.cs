@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Repositories.Local;
@@ -15,7 +16,12 @@ namespace StoryTeller.Core.Services.Rooms
         public RoomContentService(IRoomContentExternalRepository roomContentExternalRepository)
         {
             _roomContentExternalRepository = roomContentExternalRepository;
-        } 
+        }
+
+        public Task CreateRoomContentAsync(IEnumerable<RoomContent> roomContents, string culture)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public async Task<RoomContent> GetRoomContentByIdAsync(string roomId, string contentId)
         {

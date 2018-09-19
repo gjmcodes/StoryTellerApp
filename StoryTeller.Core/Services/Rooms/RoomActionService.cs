@@ -18,6 +18,11 @@ namespace StoryTeller.Core.Services.Rooms
             _roomActionExternalRepository = roomActionExternalRepository;
         }
 
+        public Task CreateRoomActionsAsync(IEnumerable<RoomAction> roomaActions, string culture)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<IEnumerable<RoomAction>> GetRoomActionsAsync(string roomId)
         {
             //var roomActions = await _roomActionLocalRepository.GetRoomActionsAsync(roomId);

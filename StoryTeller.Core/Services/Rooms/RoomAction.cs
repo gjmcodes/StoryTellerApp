@@ -7,6 +7,6 @@ namespace StoryTeller.Core.Rooms
     {
         public string id;
         public string roomId;
-        public IEnumerable<GameAction> action;
+        public GameAction action;
     }
 }

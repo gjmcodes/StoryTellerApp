@@ -7,6 +7,7 @@ using StoryTeller.Core.Interfaces.Repositories.Local;
 using StoryTeller.Core.Interfaces.Services.Player;
 using StoryTeller.Core.Interfaces.Services.Rooms;
 using StoryTeller.Core.Rooms;
+using StoryTeller.Core.Rooms.Aggregates;
 
 namespace StoryTeller.Core.Services.Rooms
 {
@@ -82,6 +83,13 @@ namespace StoryTeller.Core.Services.Rooms
         public Task<IEnumerable<RoomEvent>> GetRoomEventsAsync(string roomId)
         {
             throw new System.NotImplementedException();
+        }
+
+        public async Task CreateRoomAsync(RoomCreationAggregate roomCreationAggregate, string culture)
+        {
+            await _roomExternalRepository.CreateRoomAsync(roomCreationAggregate.Room, culture);
+            await _roomActionService.CreateRoomActionsAsync(roomCreationAggregate.RoomActions, culture);
+            await _roomContentService.CreateRoomContentAsync(roomCreationAggregate.RoomContents, culture);
         }
     }
 }

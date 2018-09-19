@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller.Core\StoryTeller.Core.csproj" />
+    <ProjectReference Include="..\StoryTeller.ExternalData\StoryTeller.ExternalData.csproj" />
   </ItemGroup>
 
 </Project>

@@ -109,5 +109,15 @@ namespace StoryTeller.ExternalData.FireBase
 
             return objects;
         }
+
+        protected async Task CreateAsync<T>(T model, string culture)
+        {
+            var url = baseDatabaseUrl + $"/{culture}";
+
+            var obj = await _fireBaseClient
+                .Child(collection)
+                .Child(culture)
+                .PostAsync<T>(model);
+        }
     }
 }

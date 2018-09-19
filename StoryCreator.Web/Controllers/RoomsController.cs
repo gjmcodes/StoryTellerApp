@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoryCreator.Web.Interfaces.Services.Rooms;
 using StoryCreator.Web.Models.Contents;
 using StoryCreator.Web.Models.Rooms.Create;
 
@@ -11,6 +12,14 @@ namespace StoryCreator.Web.Controllers
 {
     public class RoomsController : Controller
     {
+
+        private readonly IRoomAppService _roomAppService;
+
+        public RoomsController(IRoomAppService roomAppService)
+        {
+            _roomAppService = roomAppService;
+        }
+
         // GET: Rooms
         public ActionResult Index()
         {
@@ -31,11 +40,12 @@ namespace StoryCreator.Web.Controllers
 
         // POST: Rooms/Create
         [HttpPost]
-        public ActionResult Create(CreateRoomVm model)
+        public async Task<ActionResult> Create(CreateRoomVm model)
         {
             try
             {
                 // TODO: Add insert logic here
+                await _roomAppService.CreateRoomAsync(model);
 
                 return RedirectToAction(nameof(Index));
             }

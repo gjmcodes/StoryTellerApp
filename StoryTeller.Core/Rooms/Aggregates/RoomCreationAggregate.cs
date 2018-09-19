@@ -1,20 +1,21 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace StoryTeller.Core.Rooms.Aggregates
 {
     public class RoomCreationAggregate
     {
-        public RoomCreationAggregate(Room room, RoomContent roomContent, RoomAction roomAction)
+        public RoomCreationAggregate(Room room, IEnumerable<RoomContent> roomContents, IEnumerable<RoomAction> roomActions)
         {
             Room = room;
-            RoomContent = roomContent;
-            RoomAction = roomAction;
+            RoomContents = roomContents;
+            RoomActions = roomActions;
         }
 
         public string RoomId => Room.Id;
 
         public Room Room { get; private set; }
-        public RoomContent RoomContent { get; private set; }
-        public RoomAction RoomAction { get; private set; }
+        public IEnumerable<RoomContent> RoomContents { get; private set; }
+        public IEnumerable<RoomAction> RoomActions { get; }
     }
 }
