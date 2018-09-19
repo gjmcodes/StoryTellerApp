@@ -11,7 +11,7 @@ namespace StoryCreator.Web.Models.Rooms.Create
             CreateRoomAction = new CreateRoomActionVm();
             CreateRoomContent = new CreateRoomContentVm();
             RoomActions = new List<CreateRoomActionVm>();
-            RoomContent = new List<CreateRoomContentVm>();
+            RoomContents = new List<CreateRoomContentVm>();
         }
 
         public string Id { get; set; }
@@ -21,6 +21,6 @@ namespace StoryCreator.Web.Models.Rooms.Create
         public CreateRoomContentVm CreateRoomContent{ get; set; }
 
         public List<CreateRoomActionVm> RoomActions { get; set; }
-        public List<CreateRoomContentVm> RoomContent { get; set; }
+        public List<CreateRoomContentVm> RoomContents { get; set; }
     }
 }

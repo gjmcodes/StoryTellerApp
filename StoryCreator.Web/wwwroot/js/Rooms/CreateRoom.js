@@ -27,7 +27,7 @@ function onSubmitAction(e) {
         data: $('#createRoomActionForm').serialize(),
         success: function (result) {
             $('#roomActions').empty().append(result);
-            bindClickSubmitBtn();
+            bindClickActionSubmitBtn();
         },
         error: function (result) {
         }
@@ -42,7 +42,7 @@ function onSubmitContent(e) {
         data: $('#createRoomContentForm').serialize(),
         success: function (result) {
             $('#roomContents').empty().append(result);
-            bindClickSubmitBtn();
+            bindClickContentSubmitBtn();
         },
         error: function (result) {
         }

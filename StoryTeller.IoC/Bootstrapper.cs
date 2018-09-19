@@ -1,4 +1,5 @@
 ﻿using Prism.Ioc;
+using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Services.Rooms;
 using StoryTeller.Core.Services.Rooms;
@@ -24,6 +25,9 @@ public static class Bootstrapper
         containerRegistry.Register<IRoomEventService, RoomEventService>();
         containerRegistry.Register<IRoomActionService, RoomActionService>();
         containerRegistry.Register<IRoomActionService, RoomActionService>();
+        containerRegistry.Register<IRoomActionService, RoomActionService>();
+        containerRegistry.Register<IRoomActionService, RoomActionService>();
+        containerRegistry.Register<ContentMarkupTranslator>();
     }
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)

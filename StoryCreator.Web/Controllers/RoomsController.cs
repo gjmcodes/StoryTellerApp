@@ -69,16 +69,13 @@ namespace StoryCreator.Web.Controllers
         {
             try
             {
-                var t = ContentMarkupTranslator.Translate(model.CreateRoomContent.Content.Content);
-
-                model.RoomContent.Add(model.CreateRoomContent);
+                model.RoomContents.Add(model.CreateRoomContent);
                 // TODO: Add insert logic here
 
                 return PartialView("_RoomContents", model);
             }
             catch(Exception e)
             {
-                e = e;
                 return View();
             }
 

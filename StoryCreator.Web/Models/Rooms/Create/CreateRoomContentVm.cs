@@ -7,6 +7,6 @@ namespace StoryCreator.Web.Models.Rooms.Create
         public string Id { get; set; }
         public string RoomId { get; set; }
 
-        public ContentViewModel Content { get; set; }
+        public string Content { get; set; }
     }
 }
