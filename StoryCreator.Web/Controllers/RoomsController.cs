@@ -76,8 +76,9 @@ namespace StoryCreator.Web.Controllers
 
                 return PartialView("_RoomContents", model);
             }
-            catch
+            catch(Exception e)
             {
+                e = e;
                 return View();
             }
 
