@@ -2,6 +2,7 @@
 $(document).ready(function () {
     bindClickActionSubmitBtn();
     bindClickContentSubmitBtn();
+    bindClickSubmitBtn();
 });
 
 function bindClickActionSubmitBtn() {
@@ -14,7 +15,12 @@ function bindClickContentSubmitBtn() {
     $('#submitContentBtn').click(function (evt) {
         onSubmitContent(evt);
     });
+}
 
+function bindClickSubmitBtn() {
+    $('#submitBtn').click(function (evt) {
+        onSubmitRoom(evt);
+    });
 }
 
 function onSubmitAction(e) {
@@ -42,6 +48,27 @@ function onSubmitContent(e) {
         data: $('#createRoomContentForm').serialize(),
         success: function (result) {
             $('#roomContents').empty().append(result);
+            bindClickContentSubmitBtn();
+        },
+        error: function (result) {
+        }
+
+    });
+}
+
+function onSubmitRoom(e) {
+
+    var roomFormData = $('#createRoomForm').serialize();
+    var contentFormData = $('#createRoomContentForm').serialize();
+    var actionFormData = $('#createRoomActionForm').serialize();
+    var formData = roomFormData + '&' + contentFormData + '&' + actionFormData;
+
+    $.ajax({
+        type: 'post',
+        url: './Create',
+        data: formData,
+        success: function (result) {
+            $('#roomPage').parent().empty().append(result);
             bindClickContentSubmitBtn();
         },
         error: function (result) {

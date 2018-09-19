@@ -31,8 +31,7 @@ namespace StoryCreator.Web.Controllers
 
         // POST: Rooms/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CreateRoomVm model)
         {
             try
             {

@@ -7,35 +7,45 @@
 <h2>Criar Room</h2>
 
 <hr />
-<div class="row">
+<div id="roomPage">
+    <form id="createRoomForm" onsubmit="return onSubmitRoom(Event)" class="form-horizontal">
 
-    <div class="col-md-12">
-        <div class="col-md-4">
+        <div class="row">
+            <div class="form-group">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoomName" class="control-label"></label>
-                <input asp-for="RoomName" class="form-control" />
-                <span asp-validation-for="RoomName" class="text-danger"></span>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-4">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="RoomName" class="control-label"></label>
+                    <input asp-for="RoomName" class="form-control" />
+                    <span asp-validation-for="RoomName" class="text-danger"></span>
+                </div>
             </div>
         </div>
 
+    </form>
+
+
+    <div class="row">
+        <div id="roomActions">
+            @Html.Partial("_RoomActions", Model)
+        </div>
     </div>
 
-    <div class="col-md-12" id="roomActions">
-        @Html.Partial("_RoomActions", Model)
+
+    <div class="row">
+        <div id="roomContents">
+            @Html.Partial("_RoomContents", Model)
+        </div>
     </div>
 
-
-    <div class="col-md-12" id="roomContents">
-        @Html.Partial("_RoomContents", Model)
+    <div class="row">
+        <input id="submitBtn" type="button" value="Save" class="btn btn-primary" />
     </div>
-
 
 </div>
 
