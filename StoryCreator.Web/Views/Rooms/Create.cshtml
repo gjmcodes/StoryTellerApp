@@ -19,31 +19,41 @@
                     <input asp-for="Id" class="form-control" />
                     <span asp-validation-for="Id" class="text-danger"></span>
                 </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row">
+            <h4>Room Name</h4>
+            <div class="form-group">
                 <div class="col-md-4">
-                    <label asp-for="RoomName" class="control-label"></label>
-                    <input asp-for="RoomName" class="form-control" />
-                    <span asp-validation-for="RoomName" class="text-danger"></span>
+                    @foreach (var item in Model.CultureNames)
+                    {
+                        <label class="control-label">@item.Key</label>
+                        <input asp-for="CultureNames[item.Key]" type="text" class="form-control" />
+                    }
                 </div>
             </div>
         </div>
 
     </form>
 
+    <hr />
 
     <div class="row">
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#roomActions">Room Actions</button>
-            <div id="roomActions" class="collapse">
-                @Html.Partial("_RoomActions", Model)
-            </div>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#roomActions">Room Actions</button>
+        <div id="roomActions" class="collapse">
+            @Html.Partial("_RoomActions", Model)
+        </div>
     </div>
 
 
     <div class="row">
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#roomContents">Room Contents</button>
-            <div id="roomContents" class="collapse">
-                @Html.Partial("_RoomContents", Model)
-            </div>
-      
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#roomContents">Room Contents</button>
+        <div id="roomContents" class="collapse">
+            @Html.Partial("_RoomContents", Model)
+        </div>
+
     </div>
 
     <div class="row">

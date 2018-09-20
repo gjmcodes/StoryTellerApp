@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace StoryCreator.Web.Models.Rooms.Create
 {
@@ -19,10 +20,20 @@ namespace StoryCreator.Web.Models.Rooms.Create
             CreateRoomContent = new CreateRoomContentVm(cultures);
             RoomActions = new List<CreateRoomActionVm>();
             RoomContents = new List<CreateRoomContentVm>();
+
+            CultureNames = new Dictionary<string, string>();
+
+            foreach (var item in cultures)
+            {
+                CultureNames.Add(item, string.Empty);
+            }
         }
+
 
         public string Id { get; set; }
         public string RoomName { get; set; }
+
+        public Dictionary<string, string> CultureNames { get; set; }
 
         public CreateRoomActionVm CreateRoomAction { get; set; }
         public CreateRoomContentVm CreateRoomContent{ get; set; }

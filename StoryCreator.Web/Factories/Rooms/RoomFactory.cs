@@ -1,24 +1,42 @@
 ﻿using StoryCreator.Web.Models.Rooms.Create;
+using StoryCreator.Web.Models.Rooms.PersistenceDto;
 using StoryTeller.Core.Rooms;
-using StoryTeller.Core.Rooms.Aggregates;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StoryCreator.Web.Factories.Rooms
 {
     public class RoomFactory
     {
-        public Room MapCreateRoomVmToRoom(CreateRoomVm createRoomVm)
+        Room MapCreateRoomVmToRoom(string id, string roomName)
         {
-            var room = new Room(createRoomVm.Id, createRoomVm.RoomName);
+            var room = new Room(id, roomName);
 
             return room;
         }
 
-        public RoomCreationAggregate MapRoomCreationAggregate(Room room, IEnumerable<RoomContent> roomContents, IEnumerable<RoomAction> roomActions)
+        public IEnumerable<CultureRoomPersistence> MapRoomCreationAggregate(CreateRoomVm roomVm)
         {
-            var roomAggr = new RoomCreationAggregate(room, roomContents, roomActions);
+            var cultureRoomPersistence = new CultureRoomPersistence();
 
-            return roomAggr;
+            var cultures = roomVm.CultureNames.Select(x => x.Key).Distinct();
+
+            var persList = new List<CultureRoomPersistence>();
+
+            foreach (var culture in cultures)
+            {
+                var persObj = new CultureRoomPersistence();
+                persObj.culture = culture;
+
+                var room = MapCreateRoomVmToRoom(roomVm.Id, roomVm.CultureNames[culture]);
+
+                persObj.rooms.Add(room);
+
+                persList.Add(persObj);
+            }
+
+
+            return persList;
         }
     }
 }
