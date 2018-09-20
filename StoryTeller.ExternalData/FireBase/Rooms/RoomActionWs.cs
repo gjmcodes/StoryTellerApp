@@ -14,6 +14,14 @@ namespace StoryTeller.ExternalData.FireBase.Rooms
         {
         }
 
+        public async Task CreateRoomActionsAsync(IEnumerable<RoomAction> roomActions, string culture)
+        {
+            foreach (var item in roomActions)
+            {
+                await base.CreateAsync<RoomAction>(item, culture);
+            }
+        }
+
         public async Task<IEnumerable<RoomAction>> GetRoomActionsAsync(string roomId)
         {
             return await base.GetByKeyWithLanguageAsync<RoomAction>(nameof(roomId), roomId);
