@@ -2,6 +2,7 @@
 using StoryCreator.Web.Interfaces.Services.Rooms;
 using StoryCreator.Web.Models.Results;
 using StoryCreator.Web.Models.Rooms.Create;
+using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Services.Rooms;
 using System.Threading.Tasks;
 
@@ -10,6 +11,10 @@ namespace StoryCreator.Web.Services.Rooms
     public class RoomAppService : BaseAppService, IRoomAppService
     {
         private readonly IRoomService _roomService;
+        private readonly IRoomExternalRepository _roomExternalRepository;
+        private readonly IRoomActionExternalRepository _roomActionExternalRepository;
+        private readonly IRoomContentExternalRepository _roomContentExternalRepository;
+
         private readonly RoomFactory _roomFactory;
         private readonly RoomContentFactory _roomContentFactory;
         private readonly RoomActionFactory _roomActionFactory;
@@ -17,23 +22,43 @@ namespace StoryCreator.Web.Services.Rooms
         public RoomAppService(IRoomService roomService,
              RoomFactory roomFactory,
              RoomContentFactory roomContentFactory,
-            RoomActionFactory roomActionFactory)
+            RoomActionFactory roomActionFactory,
+            IRoomExternalRepository roomExternalRepository,
+            IRoomActionExternalRepository roomActionExternalRepository,
+            IRoomContentExternalRepository roomContentExternalRepository)
         {
             _roomService = roomService;
             _roomFactory = roomFactory;
             _roomContentFactory = roomContentFactory;
             _roomActionFactory = roomActionFactory;
+
+            _roomExternalRepository = roomExternalRepository;
+            _roomActionExternalRepository = roomActionExternalRepository;
+            _roomContentExternalRepository = roomContentExternalRepository;
         }
 
         public async Task<OperationResult> CreateRoomAsync(CreateRoomVm roomVm)
         {
             var room = _roomFactory.MapCreateRoomVmToRoom(roomVm);
-            var roomContents = _roomContentFactory.MapCreateRoomContentVmToRoomContent(roomVm.RoomContents, roomVm.Id);
-            var roomActions = _roomActionFactory.MapCreateRoomActionToRoomAction(roomVm.RoomActions, roomVm.Id);
 
-            var roomAggr = _roomFactory.MapRoomCreationAggregate(room, roomContents, roomActions);
+            var roomContents = _roomContentFactory.MapToCultureRoomContent(roomVm.RoomContents, roomVm.Id);
+            var roomActions = _roomActionFactory.MapToCultureRoomAction(roomVm.RoomActions, roomVm.Id);
 
-            await _roomService.CreateRoomAsync(roomAggr, "EN");
+            //var roomAggr = _roomFactory.MapRoomCreationAggregate(room);
+
+            await _roomExternalRepository.CreateRoomAsync(room, "EN");
+
+            foreach (var item in roomContents)
+            {
+                await _roomContentExternalRepository.CreateRoomContentsAsync(item.roomContents, item.culture);
+            }
+
+            foreach (var item in roomActions)
+            {
+                await _roomActionExternalRepository.CreateRoomActionsAsync(item.roomActions, item.culture);
+            }
+
+
 
             return new OperationResult();
         }

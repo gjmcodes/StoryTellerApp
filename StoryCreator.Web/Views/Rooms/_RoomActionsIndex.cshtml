@@ -17,6 +17,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ActionType)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescriptionPreview)
+                </th>
             <th></th>
         </tr>
     </thead>
@@ -34,6 +37,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ActionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionPreview)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

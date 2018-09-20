@@ -1,6 +1,7 @@
 ﻿using StoryTeller.Core.Enums.Actions;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace StoryCreator.Web.Models.Rooms.Create
 {
@@ -17,6 +18,9 @@ namespace StoryCreator.Web.Models.Rooms.Create
         }
         public string Id { get; set; }
 
+        [Description("Descrição")]
+        public string DescriptionPreview => CultureDescription?["PT"] ?? string.Empty;
+
         public Dictionary<string, string> CultureDescription { get; set; }
 
         [Description("Id Para Room")]
@@ -30,5 +34,6 @@ namespace StoryCreator.Web.Models.Rooms.Create
 
         [Description("Cultura")]
         public string Culture { get; set; }
+
     }
 }

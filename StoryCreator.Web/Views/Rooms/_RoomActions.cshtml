@@ -4,11 +4,24 @@
 @model CreateRoomVm
 
 
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Room Actions</h3>
+    </div>
 
-<div class="row">
-    @Html.Partial("_CreateRoomAction", Model)
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="row">
+                @Html.Partial("_CreateRoomAction", Model)
+            </div>
+
+            <div class="row">
+                @Html.Partial("_RoomActionsIndex", Model.RoomActions)
+            </div>
+        </div>
+     
+    </div>
+
 </div>
 
-<div class="row">
-    @Html.Partial("_RoomActionsIndex", Model.RoomActions)
-</div>
+

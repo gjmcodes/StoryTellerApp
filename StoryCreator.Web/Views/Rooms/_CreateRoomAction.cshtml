@@ -10,6 +10,7 @@
 
     @for (int i = 0; i < Model.RoomActions.Count; i++)
     {
+        <input hidden asp-for="@Model.RoomActions[i].Id" />
         <input hidden asp-for="@Model.RoomActions[i].RoomToNavigateId" />
         <input hidden asp-for="@Model.RoomActions[i].DialogueToOpenId" />
         <input hidden asp-for="@Model.RoomActions[i].ActionType" />
@@ -22,58 +23,70 @@
 
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <div class="col-md-4">
-            <label asp-for="CreateRoomAction.Id" class="control-label"></label>
-            <input asp-for="CreateRoomAction.Id" class="form-control" />
-            <span asp-validation-for="CreateRoomAction.Id" class="text-danger"></span>
-        </div>
 
-        <div class="col-md-4">
-            <label asp-for="CreateRoomAction.RoomToNavigateId" class="control-label"></label>
-            <input asp-for="CreateRoomAction.RoomToNavigateId" class="form-control" />
-            <span asp-validation-for="CreateRoomAction.RoomToNavigateId" class="text-danger"></span>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label asp-for="CreateRoomAction.Id" class="control-label"></label>
+                <input asp-for="CreateRoomAction.Id" class="form-control" />
+                <span asp-validation-for="CreateRoomAction.Id" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="CreateRoomAction.RoomToNavigateId" class="control-label"></label>
+                <input asp-for="CreateRoomAction.RoomToNavigateId" class="form-control" />
+                <span asp-validation-for="CreateRoomAction.RoomToNavigateId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="CreateRoomAction.DialogueToOpenId" class="control-label"></label>
+                <input asp-for="CreateRoomAction.DialogueToOpenId" class="form-control" />
+                <span asp-validation-for="CreateRoomAction.DialogueToOpenId" class="text-danger"></span>
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-4">
-            <label asp-for="CreateRoomAction.DialogueToOpenId" class="control-label"></label>
-            <input asp-for="CreateRoomAction.DialogueToOpenId" class="form-control" />
-            <span asp-validation-for="CreateRoomAction.DialogueToOpenId" class="text-danger"></span>
-        </div>
 
-        <div class="col-md-4">
-            <label asp-for="CreateRoomAction.ActionType" class="control-label"></label>
-            <select asp-for="CreateRoomAction.ActionType"
-                    class="form-control"
-                    asp-items="Html.GetEnumSelectList<ActionTypeEnum>()">
-                <option selected="selected" value="">Escolher</option>
-            </select>
-            <span asp-validation-for="CreateRoomAction.ActionType" class="text-danger"></span>
-        </div>
+    <div class="row">
+        <div class="form-group">
 
-        <div class="col-md-offset-4"></div>
+
+            <div class="col-md-4">
+                <label asp-for="CreateRoomAction.ActionType" class="control-label"></label>
+                <select asp-for="CreateRoomAction.ActionType"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<ActionTypeEnum>()">
+                    <option selected="selected" value="">Escolher</option>
+                </select>
+                <span asp-validation-for="CreateRoomAction.ActionType" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-offset-4"></div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-12">
-            @foreach (var item in Model.CreateRoomAction.CultureDescription)
-            {
-                <div class="row">
+    <hr />
+
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-4">
+                @foreach (var item in Model.CreateRoomAction.CultureDescription)
+                {
                     <label class="control-label">@item.Key</label>
                     <input asp-for="CreateRoomAction.CultureDescription[item.Key]" type="text" class="form-control" />
                     <span asp-validation-for="CreateRoomAction.DialogueToOpenId" class="text-danger"></span>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-12">
-            <button type="button" id="submitActionBtn" class="btn btn-primary">Save</button>
-        </div>
+    <div class="row">
+            <div class="col-md-12">
+                <button type="button" id="submitActionBtn" class="btn btn-primary">Save</button>
+            </div>
     </div>
+  
 
 </form>
 

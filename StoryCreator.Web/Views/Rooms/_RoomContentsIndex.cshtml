@@ -7,7 +7,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
-            
+                <th>
+                    @Html.DisplayNameFor(model => model.ContentPreview)
+                </th>
             <th></th>
         </tr>
     </thead>
@@ -17,7 +19,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-        
+            <td>
+                @Html.DisplayFor(model => item.ContentPreview)
+            </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |

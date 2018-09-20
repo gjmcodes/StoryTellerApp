@@ -85,11 +85,9 @@ namespace StoryTeller.Core.Services.Rooms
             throw new System.NotImplementedException();
         }
 
-        public async Task CreateRoomAsync(RoomCreationAggregate roomCreationAggregate, string culture)
+        public async Task CreateRoomAsync(Room room, string culture)
         {
-            await _roomExternalRepository.CreateRoomAsync(roomCreationAggregate.Room, culture);
-            await _roomActionService.CreateRoomActionsAsync(roomCreationAggregate.RoomActions, culture);
-            await _roomContentService.CreateRoomContentAsync(roomCreationAggregate.RoomContents, culture);
+            await _roomExternalRepository.CreateRoomAsync(room, culture);
         }
     }
 }

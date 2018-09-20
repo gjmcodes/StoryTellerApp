@@ -20,6 +20,8 @@ namespace StoryCreator.Web.Models.Rooms.Create
         public string Id { get; set; }
         public string RoomId { get; set; }
 
+        public string ContentPreview => CultureContent?["PT"] ?? string.Empty;
+
         public Dictionary<string, string> CultureContent { get; set; }
     }
 }
