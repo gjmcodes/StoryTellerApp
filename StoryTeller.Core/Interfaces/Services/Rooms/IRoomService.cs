@@ -1,5 +1,4 @@
 ﻿using StoryTeller.Core.Rooms;
-using StoryTeller.Core.Rooms.Aggregates;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Services.Rooms

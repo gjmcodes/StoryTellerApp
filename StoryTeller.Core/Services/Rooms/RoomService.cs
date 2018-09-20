@@ -7,7 +7,6 @@ using StoryTeller.Core.Interfaces.Repositories.Local;
 using StoryTeller.Core.Interfaces.Services.Player;
 using StoryTeller.Core.Interfaces.Services.Rooms;
 using StoryTeller.Core.Rooms;
-using StoryTeller.Core.Rooms.Aggregates;
 
 namespace StoryTeller.Core.Services.Rooms
 {

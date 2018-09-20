@@ -15,7 +15,7 @@ namespace StoryCreator.Web.Factories.Rooms
             return room;
         }
 
-        public IEnumerable<CultureRoomPersistence> MapRoomCreationAggregate(CreateRoomVm roomVm)
+        public IEnumerable<CultureRoomPersistence> MapCultureRoomPersistence(CreateRoomVm roomVm)
         {
             var cultureRoomPersistence = new CultureRoomPersistence();
 
@@ -30,7 +30,7 @@ namespace StoryCreator.Web.Factories.Rooms
 
                 var room = MapCreateRoomVmToRoom(roomVm.Id, roomVm.CultureNames[culture]);
 
-                persObj.rooms.Add(room);
+                persObj.room = room;
 
                 persList.Add(persObj);
             }

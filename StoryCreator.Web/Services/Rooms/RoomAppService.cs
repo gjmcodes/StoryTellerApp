@@ -39,14 +39,17 @@ namespace StoryCreator.Web.Services.Rooms
 
         public async Task<OperationResult> CreateRoomAsync(CreateRoomVm roomVm)
         {
-            var room = _roomFactory.MapCreateRoomVmToRoom(roomVm);
+            var rooms = _roomFactory.MapCultureRoomPersistence(roomVm);
 
             var roomContents = _roomContentFactory.MapToCultureRoomContent(roomVm.RoomContents, roomVm.Id);
             var roomActions = _roomActionFactory.MapToCultureRoomAction(roomVm.RoomActions, roomVm.Id);
 
             //var roomAggr = _roomFactory.MapRoomCreationAggregate(room);
 
-            await _roomExternalRepository.CreateRoomAsync(room, "EN");
+            foreach (var roomCulture in rooms)
+            {
+                await _roomExternalRepository.CreateRoomAsync(roomCulture.room, roomCulture.culture);
+            }
 
             foreach (var item in roomContents)
             {
