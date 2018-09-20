@@ -15,7 +15,6 @@ namespace StoryCreator.Web.Factories.Rooms
 
             roomAction.action = new GameAction();
             roomAction.action.actionType = createRoomActionVm.ActionType;
-            roomAction.action.description = createRoomActionVm.Description;
             roomAction.action.dialogueToOpenId = createRoomActionVm.DialogueToOpenId;
             roomAction.action.roomToNavigateId = createRoomActionVm.RoomToNavigateId;
 

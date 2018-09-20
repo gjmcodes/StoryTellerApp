@@ -6,22 +6,13 @@ namespace StoryCreator.Web.Factories.Rooms
 {
     public class RoomContentFactory
     {
-        private readonly StoryTeller.Core.ContentTranslation.ContentMarkupTranslator _contentMarkupTranslator;
-
-        public RoomContentFactory(StoryTeller.Core.ContentTranslation.ContentMarkupTranslator contentMarkupTranslator)
-        {
-            _contentMarkupTranslator = contentMarkupTranslator;
-        }
 
         public RoomContent MapCreateRoomContentVmToRoomContent(CreateRoomContentVm createRoomContet, string roomId)
         {
             var roomContent = new RoomContent();
             roomContent.id = createRoomContet.Id;
             roomContent.roomId = roomId;
-
-            var contents = _contentMarkupTranslator.Translate(createRoomContet.Content);
-
-            roomContent.content = contents;
+            roomContent.content = createRoomContet.Content;
 
             return roomContent;
         }

@@ -1,14 +1,23 @@
 ﻿using StoryTeller.Core.Enums.Actions;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace StoryCreator.Web.Models.Rooms.Create
 {
     public class CreateRoomActionVm
     {
+        public CreateRoomActionVm(){}
+        public CreateRoomActionVm(IEnumerable<string> cultures)
+        {
+            CultureDescription = new Dictionary<string, string>();
+            foreach (var culture in cultures)
+            {
+                CultureDescription.Add(culture, string.Empty);
+            }
+        }
         public string Id { get; set; }
 
-        [Description("Descrição")]
-        public string Description { get; set; }
+        public Dictionary<string, string> CultureDescription { get; set; }
 
         [Description("Id Para Room")]
         public string RoomToNavigateId { get; set; }
@@ -18,5 +27,8 @@ namespace StoryCreator.Web.Models.Rooms.Create
 
         [Description("Ação")]
         public ActionTypeEnum ActionType { get; set; }
+
+        [Description("Cultura")]
+        public string Culture { get; set; }
     }
 }

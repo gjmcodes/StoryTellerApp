@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc;
 using StoryCreator.Web.Interfaces.Services.Rooms;
 using StoryCreator.Web.Models.Contents;
 using StoryCreator.Web.Models.Rooms.Create;
+using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 
 namespace StoryCreator.Web.Controllers
 {
     public class RoomsController : Controller
     {
 
+        private readonly IGameCultureRepository _gameCultureRepository;
         private readonly IRoomAppService _roomAppService;
 
-        public RoomsController(IRoomAppService roomAppService)
+        public RoomsController(IRoomAppService roomAppService,
+            IGameCultureRepository gameCultureRepository)
         {
+            _gameCultureRepository = gameCultureRepository;
             _roomAppService = roomAppService;
         }
 
@@ -33,9 +37,13 @@ namespace StoryCreator.Web.Controllers
         }
 
         // GET: Rooms/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View(new CreateRoomVm());
+            var gameCultures = await _gameCultureRepository.GetGameCulturesAsync();
+
+            var vm = new CreateRoomVm(gameCultures.cultures);
+
+            return View(vm);
         }
 
         // POST: Rooms/Create
@@ -66,8 +74,9 @@ namespace StoryCreator.Web.Controllers
 
                 return PartialView("_RoomActions", model);
             }
-            catch
+            catch(Exception e)
             {
+                e = e;
                 return View();
             }
 

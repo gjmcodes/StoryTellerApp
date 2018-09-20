@@ -3,9 +3,11 @@ using StoryCreator.Web.Factories.Rooms;
 using StoryCreator.Web.Interfaces.Services.Rooms;
 using StoryCreator.Web.Services.Rooms;
 using StoryTeller.Core.Interfaces.Repositories.External;
+using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 using StoryTeller.Core.Interfaces.Services.Rooms;
 using StoryTeller.Core.Services.Rooms;
 using StoryTeller.CrossCutting.User.Preferences;
+using StoryTeller.ExternalData.FireBase.GameCulture;
 using StoryTeller.ExternalData.FireBase.Rooms;
 
 namespace StoryCreator.Web.IoC
@@ -49,7 +51,7 @@ namespace StoryCreator.Web.IoC
             services.AddScoped<IRoomActionExternalRepository, RoomActionWs>();
             services.AddScoped<IRoomContentExternalRepository, RoomContentWs>();
             services.AddScoped<IRoomEventExternalRepository, RoomEventWs>();
-
+            services.AddScoped<IGameCultureRepository, GameCultureWs>();
         }
     }
 }

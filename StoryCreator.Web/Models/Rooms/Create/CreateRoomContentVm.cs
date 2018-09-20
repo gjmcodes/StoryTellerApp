@@ -1,4 +1,5 @@
 ﻿using StoryCreator.Web.Models.Contents;
+using System.ComponentModel;
 
 namespace StoryCreator.Web.Models.Rooms.Create
 {
@@ -8,5 +9,8 @@ namespace StoryCreator.Web.Models.Rooms.Create
         public string RoomId { get; set; }
 
         public string Content { get; set; }
+
+        [Description("Cultura")]
+        public string Culture { get; set; }
     }
 }

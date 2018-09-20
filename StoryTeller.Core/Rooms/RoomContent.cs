@@ -7,6 +7,7 @@ namespace StoryTeller.Core.Rooms
     {
         public string id;
         public string roomId;
-        public IEnumerable<TextSpan> content;
+        public string content;
+        //public IEnumerable<TextSpan> content;
     }
 }

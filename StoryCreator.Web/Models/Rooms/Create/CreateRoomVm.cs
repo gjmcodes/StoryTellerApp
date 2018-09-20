@@ -1,6 +1,4 @@
-﻿using StoryCreator.Web.Models.Contents;
-using StoryCreator.Web.Models.Rooms.Create;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace StoryCreator.Web.Models.Rooms.Create
 {
@@ -14,6 +12,15 @@ namespace StoryCreator.Web.Models.Rooms.Create
             RoomContents = new List<CreateRoomContentVm>();
         }
 
+        public CreateRoomVm(IEnumerable<string> cultures)
+        {
+            this.Cultures = cultures;
+            CreateRoomAction = new CreateRoomActionVm(cultures);
+            CreateRoomContent = new CreateRoomContentVm();
+            RoomActions = new List<CreateRoomActionVm>();
+            RoomContents = new List<CreateRoomContentVm>();
+        }
+
         public string Id { get; set; }
         public string RoomName { get; set; }
 
@@ -22,5 +29,7 @@ namespace StoryCreator.Web.Models.Rooms.Create
 
         public List<CreateRoomActionVm> RoomActions { get; set; }
         public List<CreateRoomContentVm> RoomContents { get; set; }
+
+        public IEnumerable<string> Cultures { get; set; }
     }
 }

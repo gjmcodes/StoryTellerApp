@@ -10,10 +10,14 @@
 
     @for (int i = 0; i < Model.RoomActions.Count; i++)
     {
-        <input hidden asp-for="@Model.RoomActions[i].Description" />
         <input hidden asp-for="@Model.RoomActions[i].RoomToNavigateId" />
         <input hidden asp-for="@Model.RoomActions[i].DialogueToOpenId" />
         <input hidden asp-for="@Model.RoomActions[i].ActionType" />
+
+        foreach (var item in Model.RoomActions[i].CultureDescription)
+        {
+            <input hidden asp-for="@Model.RoomActions[i].CultureDescription[item.Key]" />
+        }
     }
 
 
@@ -23,12 +27,6 @@
             <label asp-for="CreateRoomAction.Id" class="control-label"></label>
             <input asp-for="CreateRoomAction.Id" class="form-control" />
             <span asp-validation-for="CreateRoomAction.Id" class="text-danger"></span>
-        </div>
-
-        <div class="col-md-4">
-            <label asp-for="CreateRoomAction.Description" class="control-label"></label>
-            <input asp-for="CreateRoomAction.Description" class="form-control" />
-            <span asp-validation-for="CreateRoomAction.Description" class="text-danger"></span>
         </div>
 
         <div class="col-md-4">
@@ -58,6 +56,18 @@
         <div class="col-md-offset-4"></div>
     </div>
 
+    <div class="form-group">
+        <div class="col-md-12">
+            @foreach (var item in Model.CreateRoomAction.CultureDescription)
+            {
+                <div class="row">
+                    <label class="control-label">@item.Key</label>
+                    <input asp-for="CreateRoomAction.CultureDescription[item.Key]" type="text" class="form-control" />
+                    <span asp-validation-for="CreateRoomAction.DialogueToOpenId" class="text-danger"></span>
+                </div>
+            }
+        </div>
+    </div>
 
     <div class="form-group">
         <div class="col-md-12">
