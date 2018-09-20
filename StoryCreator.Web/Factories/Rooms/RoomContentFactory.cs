@@ -12,7 +12,6 @@ namespace StoryCreator.Web.Factories.Rooms
             var roomContent = new RoomContent();
             roomContent.id = createRoomContet.Id;
             roomContent.roomId = roomId;
-            roomContent.content = createRoomContet.Content;
 
             return roomContent;
         }

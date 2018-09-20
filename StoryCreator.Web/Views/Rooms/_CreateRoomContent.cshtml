@@ -10,16 +10,24 @@
     {
         <input hidden asp-for="@Model.RoomContents[i].Id" />
         <input hidden asp-for="@Model.RoomContents[i].RoomId" />
-        <input hidden asp-for="@Model.RoomContents[i].Content" />
+
+        foreach (var item in Model.RoomContents[i].CultureContent)
+        {
+            <input hidden asp-for="@Model.RoomContents[i].CultureContent[item.Key]" />
+        }
     }
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
         <div class="col-md-12">
-            <label asp-for="CreateRoomContent.Content" class="control-label"></label>
-            <textarea asp-for="CreateRoomContent.Content" class="form-control"></textarea>
-            <span asp-validation-for="CreateRoomContent.Content" class="text-danger"></span>
+            @foreach (var item in Model.CreateRoomContent.CultureContent)
+            {
+                <div class="row">
+                    <label class="control-label">@item.Key</label>
+                    <textarea asp-for="CreateRoomContent.CultureContent[item.Key]" type="text" class="form-control"></textarea>
+                </div>
+            }
         </div>
 
         <div class="col-md-offset-12"></div>

@@ -16,7 +16,7 @@ namespace StoryCreator.Web.Models.Rooms.Create
         {
             this.Cultures = cultures;
             CreateRoomAction = new CreateRoomActionVm(cultures);
-            CreateRoomContent = new CreateRoomContentVm();
+            CreateRoomContent = new CreateRoomContentVm(cultures);
             RoomActions = new List<CreateRoomActionVm>();
             RoomContents = new List<CreateRoomContentVm>();
         }
