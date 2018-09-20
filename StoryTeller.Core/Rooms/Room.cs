@@ -15,7 +15,7 @@ namespace StoryTeller.Core.Rooms
         public string Id { get; private set; }
         public string RoomName { get; private set; }
 
-        public RoomContent Content { get; set; }
+        public RoomContent content;
         public IEnumerable<RoomAction> Actions { get; set; }
     }
 }

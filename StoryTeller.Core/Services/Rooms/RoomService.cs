@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Repositories.Local;
 using StoryTeller.Core.Interfaces.Services.Player;
@@ -20,22 +21,25 @@ namespace StoryTeller.Core.Services.Rooms
         private readonly IRoomContentService _roomContentService;
 
         private readonly IPlayerService _playerService;
+        private readonly ContentMarkupTranslator _contentMarkupTranslator;
 
         public RoomService(IRoomExternalRepository roomExternalRepository,
             IRoomActionService roomActionService,
             IRoomEventService roomEventService,
-            IRoomContentService roomContentService)
+            IRoomContentService roomContentService,
+            ContentMarkupTranslator contentMarkupTranslator)
         {
             _roomExternalRepository = roomExternalRepository;
             _roomActionService = roomActionService;
             _roomEventService = roomEventService;
             _roomContentService = roomContentService;
+            _contentMarkupTranslator = contentMarkupTranslator;
         }
 
         Room BuildRoom(Room room, IEnumerable<RoomAction> actions, RoomContent content)
         {
             room.Actions = actions;
-            room.Content = content;
+            room.content.textSpans = _contentMarkupTranslator.Translate(content.content);
 
             return room;
         }
