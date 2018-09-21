@@ -24,16 +24,23 @@ namespace StoryTellerTemplate.ViewModels
         {
             Title = "Main Page";
 
-            NextPageCommand = new DelegateCommand(async() => await LoadDataAsync());
             _gameContentAppService = gameContentAppService;
             _roomActionAppService = roomActionAppService;
 
             Actions = new ObservableCollection<GameActionVm>();
+            ExecuteActionCommand = new DelegateCommand<GameActionVm>(async (action) => await ExecuteAction(action));
         }
 
         public ObservableCollection<GameActionVm> Actions { get; }
 
         public DelegateCommand NextPageCommand { get; }
+        public DelegateCommand<GameActionVm> ExecuteActionCommand { get; }
+
+        async Task ExecuteAction(GameActionVm action)
+        {
+            var t = action;
+            await Task.Delay(1000);
+        }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {

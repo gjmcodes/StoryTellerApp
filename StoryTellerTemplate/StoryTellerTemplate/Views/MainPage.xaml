@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="StoryTellerTemplate.Views.MainPage"
              xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             x:Name="Page">
 
 
     <Grid>
@@ -50,6 +51,8 @@
 
         </ScrollView>
 
+        <Label Grid.Row="2" Grid.Column="0" Text="&lt;" />
+        
         <cv:CarouselView 
             HorizontalOptions="FillAndExpand" 
             VerticalOptions="CenterAndExpand" 
@@ -59,10 +62,18 @@
             ItemsSource="{Binding Actions}">
             <cv:CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Button Text="{Binding Description}" FontSize="Micro" HorizontalOptions="FillAndExpand"  VerticalOptions="Center" />
+                    <Button Text="{Binding Description}" 
+                            FontSize="Micro" 
+                            HorizontalOptions="FillAndExpand"  
+                            VerticalOptions="Center"
+                            Command="{Binding Source={x:Reference Page}, Path=BindingContext.ExecuteActionCommand}"
+                            CommandParameter="{Binding .}"
+                            />
                 </DataTemplate>
             </cv:CarouselView.ItemTemplate>
         </cv:CarouselView>
+
+        <Label Grid.Row="2" Grid.Column="2" Text=">" />
 
     </Grid>
 
