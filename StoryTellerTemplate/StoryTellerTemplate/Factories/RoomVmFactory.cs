@@ -16,7 +16,7 @@ namespace StoryTellerTemplate.Factories
         public RoomVm MapRoomToRoomVm(Room room)
         {
             var roomVm = new RoomVm();
-            var content = _textSpanFactory.MapTextSpanToXamarinSpan(room.Content.content);
+            var content = _textSpanFactory.MapTextSpanToXamarinSpan(room.content.textSpans);
 
             roomVm.Content = content;
 

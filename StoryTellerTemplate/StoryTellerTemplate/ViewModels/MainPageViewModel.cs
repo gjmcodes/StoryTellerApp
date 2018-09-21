@@ -4,6 +4,7 @@ using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.Services.RoomActions;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
+using StoryTellerTemplate.Models.GameContent;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -26,7 +27,11 @@ namespace StoryTellerTemplate.ViewModels
             NextPageCommand = new DelegateCommand(async() => await LoadDataAsync());
             _gameContentAppService = gameContentAppService;
             _roomActionAppService = roomActionAppService;
+
+            Actions = new ObservableCollection<GameActionVm>();
         }
+
+        public ObservableCollection<GameActionVm> Actions { get; }
 
         public DelegateCommand NextPageCommand { get; }
 
@@ -41,8 +46,12 @@ namespace StoryTellerTemplate.ViewModels
 
             _gameContentManager.BindContentText(roomVm.Content);
 
-            await Task.Delay(5000);
+            Actions.Clear();
 
+            foreach (var item in roomVm.Actions)
+            {
+                Actions.Add(item);
+            }
         }
 
         public void BindCustomTextBindingPage(IGameContentManager manager)

@@ -21,6 +21,19 @@ namespace StoryTellerTemplate.Factories
             return gameActionVm;
         }
 
+        public IEnumerable<GameActionVm> MapRoomActionToGameActionVm(IEnumerable<RoomAction> roomActions)
+        {
+            var actions = new List<GameActionVm>();
+
+            foreach (var item in roomActions)
+            {
+                var act = MapRoomActionToGameActionVm(item);
+                actions.Add(act);
+            }
+
+            return actions;
+        }
+
         public GameActionVm MapRoomActionToGameActionVm(DialogueAction dialogueAction)
         {
             var gameActionVm = new GameActionVm(

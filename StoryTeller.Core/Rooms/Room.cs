@@ -8,11 +8,11 @@ namespace StoryTeller.Core.Rooms
 
         public Room(string id, string roomName)
         {
-            Id = id;
+            RoomId = id;
             RoomName = roomName;
         }
 
-        public string Id { get; private set; }
+        public string RoomId { get; private set; }
         public string RoomName { get; private set; }
 
         public RoomContent content;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using StoryTellerTemplate.Interfaces.Views;
+using StoryTellerTemplate.Models.GameContent;
 using StoryTellerTemplate.ViewModels;
 using Xamarin.Forms;
 

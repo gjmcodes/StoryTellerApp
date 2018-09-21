@@ -15,16 +15,19 @@ namespace StoryTellerTemplate.Services.GameContent
         private readonly IUserStatusService _userStatusService;
         private readonly ITextSpanFactory _textSpanFactory;
         private readonly IRoomVmFactory _roomVmFactory;
+        private readonly IGameActionVmFactory _gameActionVmFactory;
 
         public GameContentAppService(IRoomService roomService, 
             IUserStatusService userStatusService,
             ITextSpanFactory textSpanFactory,
-            IRoomVmFactory roomVmFactory)
+            IRoomVmFactory roomVmFactory,
+            IGameActionVmFactory gameActionVmFactory)
         {
             _roomService = roomService;
             _userStatusService = userStatusService;
             _textSpanFactory = textSpanFactory;
             _roomVmFactory = roomVmFactory;
+            _gameActionVmFactory = gameActionVmFactory;
         }
 
 
@@ -32,6 +35,9 @@ namespace StoryTellerTemplate.Services.GameContent
         {
             var roomData = await _roomService.GetRoomByIdAsync(roomId);
             var roomVm = _roomVmFactory.MapRoomToRoomVm(roomData);
+
+            var actions = _gameActionVmFactory.MapRoomActionToGameActionVm(roomData.Actions);
+            roomVm.Actions = actions;
 
             return roomVm;
         }

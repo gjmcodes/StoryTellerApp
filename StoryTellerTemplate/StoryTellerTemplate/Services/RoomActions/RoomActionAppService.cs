@@ -31,9 +31,9 @@ namespace StoryTellerTemplate.Services.RoomActions
         {
             var room = await _roomService.GetRoomByIdAsync(roomId);
 
-            await _userStatusService.SetCurrentRoomIdAsync(room.Id);
+            await _userStatusService.SetCurrentRoomIdAsync(room.RoomId);
 
-            var content = _textSpanFactory.MapTextSpanToXamarinSpan(room.Content.content);
+            var content = _textSpanFactory.MapTextSpanToXamarinSpan(room.content.textSpans);
 
             contentManager.BindContentText(content);
         }
