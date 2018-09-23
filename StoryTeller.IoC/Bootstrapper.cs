@@ -1,11 +1,13 @@
 ﻿using Prism.Ioc;
 using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.Interfaces.Repositories.External;
+using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Services.Rooms;
 using StoryTeller.Core.Services.Rooms;
 using StoryTeller.CrossCutting.User.Interfaces.Services;
 using StoryTeller.CrossCutting.User.Preferences;
 using StoryTeller.CrossCutting.User.Services.Status;
+using StoryTeller.ExternalData.FireBase.Pages;
 using StoryTeller.ExternalData.FireBase.Rooms;
 using System;
 
@@ -36,6 +38,7 @@ public static class Bootstrapper
         containerRegistry.Register<IRoomContentExternalRepository, RoomContentWs>();
         containerRegistry.Register<IRoomEventExternalRepository, RoomEventWs>();
         containerRegistry.Register<IRoomActionExternalRepository, RoomActionWs>();
+        containerRegistry.Register<IPageExternalRepository, PageWs>();
     }
 
     static void RegisterCrossCuttingServices(IContainerRegistry containerRegistry)

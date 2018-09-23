@@ -71,6 +71,7 @@ namespace StoryTeller.ExternalData.FireBase
                 //    var content = await data.Content.ReadAsJsonAsync<Dictionary<string, T>>();
                 //    return content.Select(x => x.Value).ToArray();
                 //}
+
                 var request = await _fireBaseClient
                 .Child(collection)
                 .Child(_userPreferences.CurrentLanguage)

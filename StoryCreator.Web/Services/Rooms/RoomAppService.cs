@@ -14,11 +14,6 @@ namespace StoryCreator.Web.Services.Rooms
         private readonly IRoomExternalRepository _roomExternalRepository;
         private readonly IRoomActionExternalRepository _roomActionExternalRepository;
         private readonly IRoomContentExternalRepository _roomContentExternalRepository;
-
-        private readonly RoomFactory _roomFactory;
-        private readonly RoomContentFactory _roomContentFactory;
-        private readonly RoomActionFactory _roomActionFactory;
-
         public RoomAppService(IRoomService roomService,
              RoomFactory roomFactory,
              RoomContentFactory roomContentFactory,
