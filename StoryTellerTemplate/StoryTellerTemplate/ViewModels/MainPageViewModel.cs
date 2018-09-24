@@ -7,6 +7,7 @@ using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.GameContent;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace StoryTellerTemplate.ViewModels
 {
@@ -28,16 +29,17 @@ namespace StoryTellerTemplate.ViewModels
             _roomActionAppService = roomActionAppService;
 
             Actions = new ObservableCollection<GameActionVm>();
-            ExecuteActionCommand = new DelegateCommand<GameActionVm>(async (action) => await ExecuteAction(action));
+            ExecuteActionCommand = new Command<GameActionVm>(async (action) => await ExecuteAction(action));
         }
 
         public ObservableCollection<GameActionVm> Actions { get; }
 
         public DelegateCommand NextPageCommand { get; }
-        public DelegateCommand<GameActionVm> ExecuteActionCommand { get; }
+        public Command<GameActionVm> ExecuteActionCommand { get; }
 
         async Task ExecuteAction(GameActionVm action)
         {
+
             var t = action;
             await Task.Delay(1000);
         }

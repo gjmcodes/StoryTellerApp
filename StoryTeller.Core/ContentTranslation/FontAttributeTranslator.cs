@@ -32,7 +32,7 @@ namespace StoryTeller.Core.ContentTranslation
                     var hasAttribute = (item.Contains(attributeMarkStart) && item.Contains(attributeMarkEnd));
                     var formattedItem = item.Replace(attributeMarkStart, string.Empty).Replace(attributeMarkEnd, string.Empty);
 
-                    var dto = new ContentTranslationDto() { content = formattedItem, fontAttribute = hasAttribute ? attribute : FontAttribute.None };
+                    var dto = new ContentTranslationDto() { content = formattedItem, fontAttribute = hasAttribute ? attribute : content.fontAttribute };
 
                     newContents.Add(dto);
                 }
