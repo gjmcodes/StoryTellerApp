@@ -28,18 +28,19 @@ namespace StoryTellerTemplate
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/CharacterCreation");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            RegisterAppServices(containerRegistry);
+            RegisterFactories(containerRegistry);
+
             containerRegistry.RegisterDependencies();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
-            containerRegistry.RegisterForNavigation<PrismContentPage1>();
+            containerRegistry.RegisterForNavigation<CharacterCreation>();
 
-            RegisterAppServices(containerRegistry);
-            RegisterFactories(containerRegistry);
         }
 
         void RegisterAppServices(IContainerRegistry containerRegistry)

@@ -2,9 +2,9 @@
 
 namespace StoryTellerTemplate.Views
 {
-    public partial class PrismContentPage1 : ContentPage
+    public partial class CharacterCreation : ContentPage
     {
-        public PrismContentPage1()
+        public CharacterCreation()
         {
             InitializeComponent();
         }
