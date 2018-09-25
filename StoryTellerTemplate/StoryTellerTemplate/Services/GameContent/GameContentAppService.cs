@@ -1,9 +1,7 @@
-﻿using StoryTeller.Core.Interfaces.Services.Rooms;
-using StoryTeller.Core.Rooms;
+﻿using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.CrossCutting.User.Interfaces.Services;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
-using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.MainPage;
 using System.Threading.Tasks;
 
@@ -11,48 +9,43 @@ namespace StoryTellerTemplate.Services.GameContent
 {
     public class GameContentAppService : BaseAppService, IGameContentAppService
     {
-        private readonly IRoomService _roomService;
+        private readonly IPageExternalRepository _pageExternalRepository;
         private readonly IUserStatusService _userStatusService;
-        private readonly ITextSpanFactory _textSpanFactory;
-        private readonly IRoomVmFactory _roomVmFactory;
-        private readonly IGameActionVmFactory _gameActionVmFactory;
+        private readonly IPageVmFactory _pageVmFactory;
 
-        public GameContentAppService(IRoomService roomService, 
+        public GameContentAppService(
             IUserStatusService userStatusService,
-            ITextSpanFactory textSpanFactory,
-            IRoomVmFactory roomVmFactory,
-            IGameActionVmFactory gameActionVmFactory)
+            IPageExternalRepository pageExternalRepository,
+            IPageVmFactory pageVmFactory)
         {
-            _roomService = roomService;
+            _pageExternalRepository = pageExternalRepository;
             _userStatusService = userStatusService;
-            _textSpanFactory = textSpanFactory;
-            _roomVmFactory = roomVmFactory;
-            _gameActionVmFactory = gameActionVmFactory;
+            _pageVmFactory = pageVmFactory;
         }
 
-
-        async Task<RoomVm> BuildRoomVmAsync(string roomId)
+        async Task<PageVm> GetPageAsync(string pageId)
         {
-            var roomData = await _roomService.GetRoomByIdAsync(roomId);
-            var roomVm = _roomVmFactory.MapRoomToRoomVm(roomData);
+            var page = await _pageExternalRepository.GetPageByIdAsync(pageId);
+            var pageVm = _pageVmFactory.MapPageToPageVm(page);
 
-            var actions = _gameActionVmFactory.MapRoomActionToGameActionVm(roomData.Actions);
-            roomVm.Actions = actions;
-
-            return roomVm;
+            return pageVm;
         }
 
-        public async Task<RoomVm> GetCurrentRoomDataAsync()
+        public async Task<PageVm> GetCurrentPageAsync()
         {
-            var currentRoomId = await _userStatusService.GetCurrentRoomIdAsync();
-            var vm = await BuildRoomVmAsync(currentRoomId);
+            var currentPageId = await _userStatusService.GetCurrentPageIdAsync();
+            var vm = await GetPageAsync(currentPageId);
 
             return vm;
         }
 
-        public async Task<RoomVm> GetRoomDataAsync(string roomId)
+        public async Task<PageVm> GetPageByIdAsync(string pageId)
         {
-            return await BuildRoomVmAsync(roomId);
+            var pageVm = await GetPageAsync(pageId);
+
+            await _userStatusService.SetCurrentPageIdAsync(pageId);
+
+            return pageVm;
         }
     }
 }

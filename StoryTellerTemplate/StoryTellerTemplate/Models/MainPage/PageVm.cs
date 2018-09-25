@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Models.MainPage
 {
-    public class RoomVm
+    public class PageVm
     {
         public IEnumerable<GameActionVm> Actions { get; set; }
         public IEnumerable<Span> Content { get; set; }

@@ -11,8 +11,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="3*" />
+            <RowDefinition Height=".5*" />
+            <RowDefinition Height="8*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -24,19 +24,21 @@
 
         <StackLayout
         Grid.Row="0"
+            Grid.RowSpan="3"
         Grid.Column="1"
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand">
 
             <Label Text="| | Título | |" 
                VerticalOptions="FillAndExpand"
-               HorizontalOptions="FillAndExpand" />
+               HorizontalOptions="CenterAndExpand" />
 
 
 
         </StackLayout>
 
         <ScrollView
+            BackgroundColor="Red"
         x:Name="contentScrollView"
         Grid.Row="1"
         Grid.ColumnSpan="3"
@@ -51,8 +53,6 @@
 
         </ScrollView>
 
-        <Label Grid.Row="2" Grid.Column="0" Text="&lt;" />
-        
         <cv:CarouselView 
             HorizontalOptions="FillAndExpand" 
             VerticalOptions="CenterAndExpand" 
@@ -72,8 +72,6 @@
                 </DataTemplate>
             </cv:CarouselView.ItemTemplate>
         </cv:CarouselView>
-
-        <Label Grid.Row="2" Grid.Column="2" Text=">" />
 
     </Grid>
 

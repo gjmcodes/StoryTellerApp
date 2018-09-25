@@ -10,39 +10,28 @@ namespace StoryTellerTemplate.Factories
 {
     public class GameActionVmFactory : BaseFactory, IGameActionVmFactory
     {
-        public GameActionVm MapRoomActionToGameActionVm(RoomAction roomAction)
+
+        public GameActionVm MapGameActionToVm(GameAction action)
         {
             var gameActionVm = new GameActionVm(
-                roomAction.id, 
-                roomAction.action.actionType, 
-                roomAction.action.description,
-                roomAction.action.GetIdToFetch());
+            action.description,
+            action.pageIdToNavigate);
 
             return gameActionVm;
         }
 
-        public IEnumerable<GameActionVm> MapRoomActionToGameActionVm(IEnumerable<RoomAction> roomActions)
+        public IEnumerable<GameActionVm> MapGameActionToVm(IEnumerable<GameAction> actions)
         {
-            var actions = new List<GameActionVm>();
+            var gameActionsVms = new List<GameActionVm>();
 
-            foreach (var item in roomActions)
+            foreach (var item in actions)
             {
-                var act = MapRoomActionToGameActionVm(item);
-                actions.Add(act);
+                var act = MapGameActionToVm(item);
+                gameActionsVms.Add(act);
             }
 
-            return actions;
+            return gameActionsVms;
         }
 
-        public GameActionVm MapRoomActionToGameActionVm(DialogueAction dialogueAction)
-        {
-            var gameActionVm = new GameActionVm(
-                dialogueAction.id,
-                dialogueAction.action.actionType,
-                dialogueAction.action.description,
-                dialogueAction.action.GetIdToFetch());
-
-            return gameActionVm;
-        }
     }
 }

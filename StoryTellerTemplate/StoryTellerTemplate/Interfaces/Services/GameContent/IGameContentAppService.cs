@@ -5,7 +5,7 @@ namespace StoryTellerTemplate.Interfaces.Services.GameContent
 {
     public interface IGameContentAppService : IBaseAppService
     {
-        Task<RoomVm> GetCurrentRoomDataAsync();
-        Task<RoomVm> GetRoomDataAsync(string roomId);
+        Task<PageVm> GetCurrentPageAsync();
+        Task<PageVm> GetPageByIdAsync(string roomId);
     }
 }

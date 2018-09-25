@@ -4,17 +4,13 @@ namespace StoryTellerTemplate.Models.GameContent
 {
     public class GameActionVm
     {
-        public GameActionVm(string id, ActionTypeEnum actionType, string description, string idToFetch)
+        public GameActionVm(string description, string pageIdToFetch)
         {
-            Id = id;
-            ActionType = actionType;
             Description = description;
-            IdToFetch = idToFetch;
+            PageIdToFetch = pageIdToFetch;
         }
 
-        public string Id { get; private set; }
-        public ActionTypeEnum ActionType { get; private set; }
         public string Description { get; private set; }
-        public string IdToFetch { get; private set; }
+        public string PageIdToFetch { get; private set; }
     }
 }

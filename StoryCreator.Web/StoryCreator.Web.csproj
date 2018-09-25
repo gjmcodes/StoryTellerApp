@@ -18,8 +18,4 @@
     <ProjectReference Include="..\StoryTeller.ExternalData\StoryTeller.ExternalData.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Factories\" />
-  </ItemGroup>
-
 </Project>

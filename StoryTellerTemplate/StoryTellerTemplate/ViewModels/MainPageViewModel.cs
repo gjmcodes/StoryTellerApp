@@ -1,32 +1,29 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
-using StoryTellerTemplate.Interfaces.Services.RoomActions;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.GameContent;
+using StoryTellerTemplate.Models.MainPage;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace StoryTellerTemplate.ViewModels
 {
-    
+
     public class MainPageViewModel : ViewModelBase, IGameContentManagerViewModelBinder
     {
-        private readonly IRoomActionAppService _roomActionAppService;
         private readonly IGameContentAppService _gameContentAppService;
         IGameContentManager _gameContentManager;
 
         public MainPageViewModel(INavigationService navigationService,
-            IGameContentAppService gameContentAppService,
-            IRoomActionAppService roomActionAppService) 
-            : base (navigationService)
+            IGameContentAppService gameContentAppService)
+            : base(navigationService)
         {
             Title = "Main Page";
 
             _gameContentAppService = gameContentAppService;
-            _roomActionAppService = roomActionAppService;
 
             Actions = new ObservableCollection<GameActionVm>();
             ExecuteActionCommand = new Command<GameActionVm>(async (action) => await ExecuteAction(action));
@@ -39,9 +36,21 @@ namespace StoryTellerTemplate.ViewModels
 
         async Task ExecuteAction(GameActionVm action)
         {
+            var page = await _gameContentAppService.GetPageByIdAsync(action.PageIdToFetch);
 
-            var t = action;
-            await Task.Delay(1000);
+            BindContentData(page);
+        }
+
+        void BindContentData(PageVm pageVm)
+        {
+            _gameContentManager.BindContentText(pageVm.Content);
+
+            Actions.Clear();
+
+            foreach (var item in pageVm.Actions)
+            {
+                Actions.Add(item);
+            }
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
@@ -51,16 +60,10 @@ namespace StoryTellerTemplate.ViewModels
 
         async Task LoadDataAsync()
         {
-            var roomVm = await _gameContentAppService.GetCurrentRoomDataAsync();
+            var pageVm = await _gameContentAppService.GetCurrentPageAsync();
 
-            _gameContentManager.BindContentText(roomVm.Content);
 
-            Actions.Clear();
-
-            foreach (var item in roomVm.Actions)
-            {
-                Actions.Add(item);
-            }
+            BindContentData(pageVm);
         }
 
         public void BindCustomTextBindingPage(IGameContentManager manager)

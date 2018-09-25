@@ -7,7 +7,7 @@ namespace StoryTeller.CrossCutting.User.Services.Status
     {
         string currentRoomId;
 
-        public async Task SetCurrentPageId(string roomId)
+        public async Task SetCurrentPageIdAsync(string roomId)
         {
             this.currentRoomId = roomId;
         }

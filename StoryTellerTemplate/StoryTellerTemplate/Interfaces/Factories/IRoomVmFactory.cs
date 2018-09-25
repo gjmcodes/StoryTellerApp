@@ -5,6 +5,6 @@ namespace StoryTellerTemplate.Interfaces.Factories
 {
     public interface IRoomVmFactory : IBaseFactory
     {
-        RoomVm MapRoomToRoomVm(Room room);
+        PageVm MapRoomToRoomVm(Room room);
     }
 }
