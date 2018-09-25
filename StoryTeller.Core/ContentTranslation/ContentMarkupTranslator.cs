@@ -11,10 +11,12 @@ namespace StoryTeller.Core.ContentTranslation
     public class ContentMarkupTranslator : DisposableObject
     {
         readonly FontAttributeTranslator _fontAttributeTranslator;
+        readonly CharacterDataTranslator _characterDataTranslator;
 
         public ContentMarkupTranslator()
         {
             _fontAttributeTranslator = new FontAttributeTranslator();
+            _characterDataTranslator = new CharacterDataTranslator();
         }
 
         public const string paragraphStart = "<p>";
@@ -28,6 +30,7 @@ namespace StoryTeller.Core.ContentTranslation
 
             var contents = BreakIntoParagraphs(content);
             contents = BreakFontAttributes(contents);
+            contents = BreakCharacterData(contents);
 
             foreach (var item in contents)
             {
@@ -81,6 +84,13 @@ namespace StoryTeller.Core.ContentTranslation
         IEnumerable<ContentTranslationDto> BreakFontAttributes(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
             var contents = _fontAttributeTranslator.BreakAttributes(paragraphedContents);
+
+            return contents;
+        }
+
+        IEnumerable<ContentTranslationDto> BreakCharacterData(IEnumerable<ContentTranslationDto> paragraphedContents)
+        {
+            var contents = _characterDataTranslator.BreakCharacterData(paragraphedContents);
 
             return contents;
         }

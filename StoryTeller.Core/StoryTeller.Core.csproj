@@ -8,4 +8,9 @@
     <ProjectReference Include="..\StoryTeller.CrossCutting.Disposable\StoryTeller.CrossCutting.Disposable.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Repositories\External\ReadOnly\" />
+    <Folder Include="Interfaces\Repositories\Local\ReadOnly\" />
+  </ItemGroup>
+
 </Project>

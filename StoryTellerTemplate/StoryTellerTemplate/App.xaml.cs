@@ -28,7 +28,7 @@ namespace StoryTellerTemplate
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/CharacterCreation");
+            await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

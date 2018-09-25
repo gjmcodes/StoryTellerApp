@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StoryTeller.Core.ContentTranslation
 {
-    public class FontAttributeTranslator
+    public struct FontAttributeTranslator
     {
         const string italicRegexPattern = @"(<atr-italic>[\s\S]+?<\/atr-italic>)";
         const string boldRegexPattern = @"(<atr-bold>[\s\S]+?<\/atr-bold>)";
