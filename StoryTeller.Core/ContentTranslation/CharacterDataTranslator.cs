@@ -9,10 +9,12 @@ namespace StoryTeller.Core.ContentTranslation
         const string characterNameStart = "<c-data_name>";
         const string characterNameEnd = "</c-data_name>";
 
+        ContentBuilder contentBuilder;
 
         IList<ContentTranslationDto> BreakIntoData(IEnumerable<ContentTranslationDto> paragraphedContents,
             string regexPattern, string attributeMarkStart, string attributeMarkEnd, string dataToFill)
         {
+
             var regexSplitter = new RegexSplitter();
 
             var newContents = new List<ContentTranslationDto>();
@@ -52,6 +54,8 @@ namespace StoryTeller.Core.ContentTranslation
 
         public IEnumerable<ContentTranslationDto> BreakCharacterData(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
+            contentBuilder = new ContentBuilder();
+
             var contents = BreakCharacterName(paragraphedContents);
 
             return contents;

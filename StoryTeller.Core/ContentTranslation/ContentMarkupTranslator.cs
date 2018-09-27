@@ -33,7 +33,7 @@ namespace StoryTeller.Core.ContentTranslation
             var contents = BreakIntoParagraphs(content);
             contents = BreakFontAttributes(contents);
             contents = BreakCharacterData(contents);
-            contents = BreakNameCalls(contents);
+            //contents = BreakNameCalls(contents);
 
             foreach (var item in contents)
             {

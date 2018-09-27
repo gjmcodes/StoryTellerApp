@@ -78,5 +78,31 @@ namespace StoryTeller.UnitTests.ContentTranslator
 
             Assert.IsTrue((testQtdBold + testQtdItalic + testQtParagraph) == (qtdBold + qtdItalic + qtdParagraphs));
         }
+
+        [TestMethod]
+        public void Can_Translate_With_NameCalls_Formal_Male()
+        {
+            string content = @"\r\n\r\n<p>- <namecall_formal>charId=0001</namecall_formal>. Wake up!</p>\r\n\r\n<c-data_name></c-data_name> open <namecall_gender></namecall_gender> eyes and you see T-2, the robot assigned to help you. <namecall_gender></namecall_gender> head hurts and the last \r\nthing <namecall_gender></namecall_gender> can remember was fleeing in a pod from Zeta, a ship ruled by errand smugglers.\r\n\r\n- T-2... what happened?\r\n\r\n- Well, <namecall_formal></namecall_formal>, it seems like they didn't like your message and that you're terrible at poker.\r\n\r\n";
+
+            //Assert
+            // ToDo: Configure character data as male
+
+            var result = _contentMarkupTranslator.Translate(content);
+
+            Assert.IsTrue(result.Any(x => x.content.ToLower() == "sir"));
+        }
+
+        
+        public void Can_Translate_With_NameCalls_Formal_Female()
+        {
+            string content = @"\r\n\r\n<p>- <namecall_formal>charId=0001</namecall_formal>. Wake up!</p>\r\n\r\n<c-data_name></c-data_name> open <namecall_gender></namecall_gender> eyes and you see T-2, the robot assigned to help you. <namecall_gender></namecall_gender> head hurts and the last \r\nthing <namecall_gender></namecall_gender> can remember was fleeing in a pod from Zeta, a ship ruled by errand smugglers.\r\n\r\n- T-2... what happened?\r\n\r\n- Well, <namecall_formal></namecall_formal>, it seems like they didn't like your message and that you're terrible at poker.\r\n\r\n";
+
+            //Assert
+            // ToDo: Configure character data as female
+
+            var result = _contentMarkupTranslator.Translate(content);
+
+            Assert.IsTrue(result.Any(x => x.content.ToLower() == "sir"));
+        }
     }
 }

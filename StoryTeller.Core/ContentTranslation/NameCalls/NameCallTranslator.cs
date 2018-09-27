@@ -1,4 +1,5 @@
 ﻿using StoryTeller.Core.CharacterData;
+using StoryTeller.Core.ContentTranslation.NameCalls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,15 +7,25 @@ using System.Linq;
 namespace StoryTeller.Core.ContentTranslation
 {
 
-    public struct NameCallTranslator
+    public class NameCallTranslator
     {
+        readonly ContentBuilder _contentBuilder;
+        readonly NameCallContentFormatter _nameCallContentFormatter;
+
         const string formalCallRegexPattern = @"(<namecall_formal>[\s\S]+?<\/namecall_formal>)";
         const string formalCallStart = "<namecall_formal>";
         const string formalCallEnd = "</namecall_formal>";
 
+
         public IEnumerable<CharacterNameCall> charactersNameCalls;
 
-        Func<IEnumerable<CharacterNameCall>, bool, string, string> NameCallFilterFunc;
+        //Func<IEnumerable<CharacterNameCall>, bool, string, string> NameCallFilterFunc;
+
+        public NameCallTranslator()
+        {
+            _contentBuilder = new ContentBuilder();
+            _nameCallContentFormatter = new NameCallContentFormatter(charactersNameCalls, false);
+        }
 
         IList<ContentTranslationDto> BreakIntoData(IEnumerable<ContentTranslationDto> paragraphedContents,
        string regexPattern, string attributeMarkStart, string attributeMarkEnd, bool isFemale)
@@ -27,7 +38,7 @@ namespace StoryTeller.Core.ContentTranslation
                     isFemale = true 
                 },
                 new CharacterNameCall(){
-                    characterId ="0002",
+                    characterId ="0001",
                     formalPronoum = "Sir",
                     isFemale = false
                 },
@@ -46,16 +57,12 @@ namespace StoryTeller.Core.ContentTranslation
 
                 foreach (var item in contents)
                 {
-                    var hasAttribute = (item.Contains(attributeMarkStart) && item.Contains(attributeMarkEnd));
-                    var formattedItem = item.Replace(attributeMarkStart, string.Empty).Replace(attributeMarkEnd, string.Empty);
-
-                    if (hasAttribute)
-                    {
-                        var pronoum = NameCallFilterFunc(charactersNameCalls, isFemale, formattedItem.Trim());
-                        formattedItem = pronoum;
-                    }
-
-                    var dto = new ContentTranslationDto() { content = formattedItem };
+                    var dto = _contentBuilder.TranslateContentWithDataToFill(
+                        content, 
+                        attributeMarkStart, 
+                        attributeMarkEnd, 
+                        item,
+                        _nameCallContentFormatter);
 
                     newContents.Add(dto);
                 }
@@ -66,14 +73,6 @@ namespace StoryTeller.Core.ContentTranslation
 
         IList<ContentTranslationDto> BreakFormalNameCalls(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            NameCallFilterFunc = new Func<IEnumerable<CharacterNameCall>, bool, string, string>((collection, isFemale, charId) =>
-            {
-                var pronoum = collection.Where(x => x.characterId == charId && x.isFemale == isFemale)
-                .Select(x => x.formalPronoum).First();
-
-                return pronoum;
-            });
-
             bool _isFemale = false;
 
             var contents = BreakIntoData(paragraphedContents, formalCallRegexPattern, formalCallStart, formalCallEnd, _isFemale);
