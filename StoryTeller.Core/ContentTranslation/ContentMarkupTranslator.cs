@@ -12,11 +12,13 @@ namespace StoryTeller.Core.ContentTranslation
     {
         readonly FontAttributeTranslator _fontAttributeTranslator;
         readonly CharacterDataTranslator _characterDataTranslator;
+        readonly NameCallTranslator _nameCallTranslator;
 
         public ContentMarkupTranslator()
         {
             _fontAttributeTranslator = new FontAttributeTranslator();
             _characterDataTranslator = new CharacterDataTranslator();
+            _nameCallTranslator = new NameCallTranslator();
         }
 
         public const string paragraphStart = "<p>";
@@ -31,6 +33,7 @@ namespace StoryTeller.Core.ContentTranslation
             var contents = BreakIntoParagraphs(content);
             contents = BreakFontAttributes(contents);
             contents = BreakCharacterData(contents);
+            contents = BreakNameCalls(contents);
 
             foreach (var item in contents)
             {
@@ -94,6 +97,14 @@ namespace StoryTeller.Core.ContentTranslation
 
             return contents;
         }
+
+        IEnumerable<ContentTranslationDto> BreakNameCalls(IEnumerable<ContentTranslationDto> paragraphedContents)
+        {
+            var contents = _nameCallTranslator.BreakNameCalls(paragraphedContents);
+
+            return contents;
+        }
+
 
         protected override void ReleaseResources()
         {
