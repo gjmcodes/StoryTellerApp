@@ -25,6 +25,11 @@ namespace StoryTeller.Core.ContentTranslation.NameCalls
             this.isFemale = isFemale;
         }
 
+        public override ContentTranslationDto GetContent()
+        {
+            throw new NotImplementedException();
+        }
+
         public override string GetFormattedContent(string contentBetweenMarkers)
         {
             return func(collection, isFemale, contentBetweenMarkers);

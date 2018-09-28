@@ -1,10 +1,15 @@
-﻿using StoryTeller.Core.Enums.Text;
+﻿using StoryTeller.Core.ContentTranslation.FontAttributes;
+using StoryTeller.Core.Enums.Text;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StoryTeller.Core.ContentTranslation
 {
-    public struct FontAttributeTranslator
+    public class FontAttributeTranslator
     {
+        readonly ContentBuilder contentBuilder;
+        FontAttributeContentFormatter fontAttributeContentFormatter;
+
         const string italicRegexPattern = @"(<atr-italic>[\s\S]+?<\/atr-italic>)";
         const string boldRegexPattern = @"(<atr-bold>[\s\S]+?<\/atr-bold>)";
 
@@ -16,29 +21,12 @@ namespace StoryTeller.Core.ContentTranslation
 
         IList<ContentTranslationDto> BreakIntoAttribute(IEnumerable<ContentTranslationDto> paragraphedContents, FontAttribute attribute, string regexPattern, string attributeMarkStart, string attributeMarkEnd)
         {
-            var regexSplitter = new RegexSplitter();
+            fontAttributeContentFormatter = new FontAttributeContentFormatter();
 
-            var newContents = new List<ContentTranslationDto>();
+            var newContents = contentBuilder.TranslateContentWithDataToFill(paragraphedContents, attributeMarkStart, attributeMarkEnd, regexPattern, fontAttributeContentFormatter);
 
-            foreach (var content in paragraphedContents)
-            {
-                var contents = regexSplitter.Split(content.content, regexPattern);
-
-                if (content.lineBreak)
-                    newContents.Add(content);
-
-                foreach (var item in contents)
-                {
-                    var hasAttribute = (item.Contains(attributeMarkStart) && item.Contains(attributeMarkEnd));
-                    var formattedItem = item.Replace(attributeMarkStart, string.Empty).Replace(attributeMarkEnd, string.Empty);
-
-                    var dto = new ContentTranslationDto() { content = formattedItem, fontAttribute = hasAttribute ? attribute : content.fontAttribute };
-
-                    newContents.Add(dto);
-                }
-            }
-
-            return newContents;
+            
+            return newContents.ToList();
         }
 
         IList<ContentTranslationDto> BreakBoldContent(IEnumerable<ContentTranslationDto> paragraphedContents)

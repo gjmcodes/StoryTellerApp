@@ -1,7 +1,21 @@
-﻿namespace StoryTeller.Core.ContentTranslation
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace StoryTeller.Core.ContentTranslation
 {
     public struct ContentBuilder
     {
+        RegexSplitter regexSplitter;
+        RegexSplitter RegexSplitter
+        {
+            get
+            {
+                regexSplitter = regexSplitter ?? new RegexSplitter();
+
+                return regexSplitter;
+            }
+        }
+
         ContentTranslationDto BuildContentDto(ContentTranslationDto originalContent, string formattedItem)
         {
             var dto = new ContentTranslationDto()
@@ -19,16 +33,40 @@
 
             return dto;
         }
-        public ContentTranslationDto TranslateContentWithDataToFill(ContentTranslationDto originalContent, string attributeMarkStart, string attributeMarkEnd, string item, ContentFormatter contentFormatter)
+
+
+        public IEnumerable<ContentTranslationDto> TranslateContentWithDataToFill(IEnumerable<ContentTranslationDto> breakingContents,
+            string attributeMarkStart, string attributeMarkEnd,
+            string regexPattern, ContentFormatter contentFormatter)
         {
-            var hasAttribute = (item.Contains(attributeMarkStart) && item.Contains(attributeMarkEnd));
+            var newContents = new List<ContentTranslationDto>();
 
-            var formattedItem = item.Replace(attributeMarkStart, string.Empty).Replace(attributeMarkEnd, string.Empty);
+            foreach (var content in breakingContents)
+            {
+                var contents = RegexSplitter.Split(content.content, regexPattern);
 
-            if (hasAttribute)
-                formattedItem = contentFormatter.GetFormattedContent(formattedItem);
+                if (content.lineBreak)
+                {
+                    newContents.Add(content);
+                    continue;
+                }
 
-            return BuildContentDto(originalContent, formattedItem);
+                foreach (var item in contents)
+                {
+                    var hasAttribute = (item.Contains(attributeMarkStart) && item.Contains(attributeMarkEnd));
+
+                    var formattedItem = item.Replace(attributeMarkStart, string.Empty).Replace(attributeMarkEnd, string.Empty);
+
+                    if (hasAttribute)
+                        formattedItem = contentFormatter.GetFormattedContent(formattedItem);
+
+                    var dto = BuildContentDto(content, formattedItem);
+
+                    newContents.Add(dto);
+                }
+            }
+
+            return newContents;
         }
     }
 }

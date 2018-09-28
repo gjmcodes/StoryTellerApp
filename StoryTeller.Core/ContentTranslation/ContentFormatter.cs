@@ -2,6 +2,11 @@
 {
     public abstract class ContentFormatter
     {
-        public abstract string GetFormattedContent(string contentBetweenMarkers);
+        public abstract ContentTranslationDto GetContent();
+
+        public virtual string GetFormattedContent(string contentBetweenMarkers)
+        {
+            return contentBetweenMarkers;
+        }
     }
 }

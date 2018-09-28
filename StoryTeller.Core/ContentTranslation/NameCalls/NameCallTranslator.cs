@@ -10,7 +10,6 @@ namespace StoryTeller.Core.ContentTranslation
     public class NameCallTranslator
     {
         readonly ContentBuilder _contentBuilder;
-        readonly NameCallContentFormatter _nameCallContentFormatter;
 
         const string formalCallRegexPattern = @"(<namecall_formal>[\s\S]+?<\/namecall_formal>)";
         const string formalCallStart = "<namecall_formal>";
@@ -18,13 +17,11 @@ namespace StoryTeller.Core.ContentTranslation
 
 
         public IEnumerable<CharacterNameCall> charactersNameCalls;
-
-        //Func<IEnumerable<CharacterNameCall>, bool, string, string> NameCallFilterFunc;
+        NameCallContentFormatter _nameCallContentFormatter;
 
         public NameCallTranslator()
         {
             _contentBuilder = new ContentBuilder();
-            _nameCallContentFormatter = new NameCallContentFormatter(charactersNameCalls, false);
         }
 
         IList<ContentTranslationDto> BreakIntoData(IEnumerable<ContentTranslationDto> paragraphedContents,
@@ -44,31 +41,12 @@ namespace StoryTeller.Core.ContentTranslation
                 },
             };
 
-            var regexSplitter = new RegexSplitter();
+            _nameCallContentFormatter = new NameCallContentFormatter(charactersNameCalls, false);
 
-            var newContents = new List<ContentTranslationDto>();
+            var contents = _contentBuilder.TranslateContentWithDataToFill(paragraphedContents, attributeMarkStart, attributeMarkEnd,
+                regexPattern, _nameCallContentFormatter);
 
-            foreach (var content in paragraphedContents)
-            {
-                var contents = regexSplitter.Split(content.content, regexPattern);
-
-                if (content.lineBreak)
-                    newContents.Add(content);
-
-                foreach (var item in contents)
-                {
-                    var dto = _contentBuilder.TranslateContentWithDataToFill(
-                        content, 
-                        attributeMarkStart, 
-                        attributeMarkEnd, 
-                        item,
-                        _nameCallContentFormatter);
-
-                    newContents.Add(dto);
-                }
-            }
-
-            return newContents;
+            return contents.ToList();
         }
 
         IList<ContentTranslationDto> BreakFormalNameCalls(IEnumerable<ContentTranslationDto> paragraphedContents)
