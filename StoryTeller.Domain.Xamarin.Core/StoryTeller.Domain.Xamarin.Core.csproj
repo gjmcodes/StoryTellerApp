@@ -6,11 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.840541-pre1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StoryTeller.CrossCutting.Disposable\StoryTeller.CrossCutting.Disposable.csproj" />
+    <ProjectReference Include="..\StoryTeller.Core\StoryTeller.Core.csproj" />
   </ItemGroup>
 
 </Project>
