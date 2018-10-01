@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation
 {
@@ -26,14 +27,14 @@ namespace StoryTeller.Core.ContentTranslation
         public const string paragraphEndRegexEscape = @"<\/p>";
 
 
-        public IEnumerable<TextSpan> Translate(string content)
+        public async Task<IEnumerable<TextSpan>> TranslateAsync(string content)
         {
             var textSpans = new List<TextSpan>();
 
             var contents = BreakIntoParagraphs(content);
-            contents = BreakFontAttributes(contents);
-            contents = BreakCharacterData(contents);
-            contents = BreakNameCalls(contents);
+            contents = await BreakFontAttributesAsync(contents);
+            contents = await BreakCharacterDataAsync(contents);
+            contents = await BreakNameCallsAsync(contents);
 
             foreach (var item in contents)
             {
@@ -84,23 +85,23 @@ namespace StoryTeller.Core.ContentTranslation
             return dtos;
         }
 
-        IEnumerable<ContentTranslationDto> BreakFontAttributes(IEnumerable<ContentTranslationDto> paragraphedContents)
+        async Task<IEnumerable<ContentTranslationDto>> BreakFontAttributesAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            var contents = _fontAttributeTranslator.BreakAttributes(paragraphedContents);
+            var contents = await _fontAttributeTranslator.BreakAttributesAsync(paragraphedContents);
 
             return contents;
         }
 
-        IEnumerable<ContentTranslationDto> BreakCharacterData(IEnumerable<ContentTranslationDto> paragraphedContents)
+        async Task<IEnumerable<ContentTranslationDto>> BreakCharacterDataAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            var contents = _characterDataTranslator.BreakCharacterData(paragraphedContents);
+            var contents = await _characterDataTranslator.BreakCharacterDataAsync(paragraphedContents);
 
             return contents;
         }
 
-        IEnumerable<ContentTranslationDto> BreakNameCalls(IEnumerable<ContentTranslationDto> paragraphedContents)
+        async Task<IEnumerable<ContentTranslationDto>> BreakNameCallsAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            var contents = _nameCallTranslator.BreakNameCalls(paragraphedContents);
+            var contents = await _nameCallTranslator.BreakNameCallsAsync(paragraphedContents);
 
             return contents;
         }

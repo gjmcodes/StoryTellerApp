@@ -4,9 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace StoryTeller.Core.ContentTranslation
 {
-    public class RegexSplitter
+    public static class RegexSplitter
     {
-        public string[] Split(string content, string pattern)
+        public static string[] Split(string content, string pattern)
         {
             var split = Regex.Split(content, pattern).ToArray();
 

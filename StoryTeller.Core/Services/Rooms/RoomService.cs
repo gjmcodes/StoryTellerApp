@@ -39,7 +39,7 @@ namespace StoryTeller.Core.Services.Rooms
         Room BuildRoom(Room room, IEnumerable<RoomAction> actions, RoomContent content)
         {
             room.Actions = actions;
-            room.content.textSpans = _contentMarkupTranslator.Translate(content.content);
+            //room.content.textSpans = _contentMarkupTranslator.TranslateAsync(content.content);
 
             return room;
         }

@@ -1,66 +1,63 @@
 ﻿using StoryTeller.Core.CharacterData;
 using StoryTeller.Core.ContentTranslation.NameCalls;
+using StoryTeller.Core.NameCalls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation
 {
 
     public class NameCallTranslator
     {
-        readonly ContentBuilder _contentBuilder;
 
-        const string formalCallRegexPattern = @"(<namecall_formal>[\s\S]+?<\/namecall_formal>)";
-        const string formalCallStart = "<namecall_formal>";
-        const string formalCallEnd = "</namecall_formal>";
+        const string pronoumRegexPattern = @"(<pronoum>[\s\S]+?<\/pronoum>)";
+        const string pronoumStart = "<pronoum>";
+        const string pronoumEnd = "</pronoum>";
 
 
-        public IEnumerable<CharacterNameCall> charactersNameCalls;
+        public IEnumerable<PronoumNameCall> pronoums;
         NameCallContentFormatter _nameCallContentFormatter;
 
-        public NameCallTranslator()
-        {
-            _contentBuilder = new ContentBuilder();
-        }
 
-        IList<ContentTranslationDto> BreakIntoData(IEnumerable<ContentTranslationDto> paragraphedContents,
+        async Task<IList<ContentTranslationDto>> BreakIntoDataAsync(IEnumerable<ContentTranslationDto> paragraphedContents,
        string regexPattern, string attributeMarkStart, string attributeMarkEnd, bool isFemale)
         {
-            charactersNameCalls = new List<CharacterNameCall>()
+            pronoums = new List<PronoumNameCall>()
             {
-                new CharacterNameCall(){
-                    characterId ="0001",
-                    formalPronoum = "Ma'am",
-                    isFemale = true 
+                new PronoumNameCall(){
+                    pronoumId = "0001",
+                    forMale = "He",
+                    forFemale = "She"
                 },
-                new CharacterNameCall(){
-                    characterId ="0001",
-                    formalPronoum = "Sir",
-                    isFemale = false
+                new PronoumNameCall(){
+                    pronoumId = "0002",
+                    forMale = "Mister",
+                    forFemale = "Miss"
                 },
             };
 
-            _nameCallContentFormatter = new NameCallContentFormatter(charactersNameCalls, false);
 
-            var contents = _contentBuilder.TranslateContentWithDataToFill(paragraphedContents, attributeMarkStart, attributeMarkEnd,
-                regexPattern, _nameCallContentFormatter);
+            _nameCallContentFormatter = new NameCallContentFormatter(pronoums, false);
+            var contentBuilder = new ContentBuilder(_nameCallContentFormatter);
+            var contents = await contentBuilder.TranslateContentAsync(paragraphedContents, attributeMarkStart, attributeMarkEnd, regexPattern);
 
             return contents.ToList();
         }
 
-        IList<ContentTranslationDto> BreakFormalNameCalls(IEnumerable<ContentTranslationDto> paragraphedContents)
+        async Task<IList<ContentTranslationDto>> BreakPronoumsAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
             bool _isFemale = false;
 
-            var contents = BreakIntoData(paragraphedContents, formalCallRegexPattern, formalCallStart, formalCallEnd, _isFemale);
+            var contents = await BreakIntoDataAsync(paragraphedContents, pronoumRegexPattern, pronoumStart, pronoumEnd, _isFemale);
 
             return contents;
         }
 
-        public IEnumerable<ContentTranslationDto> BreakNameCalls(IEnumerable<ContentTranslationDto> paragraphedContents)
+        public async Task<IEnumerable<ContentTranslationDto>> BreakNameCallsAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            var contents = BreakFormalNameCalls(paragraphedContents);
+            var contents = await BreakPronoumsAsync(paragraphedContents);
 
             return contents;
         }

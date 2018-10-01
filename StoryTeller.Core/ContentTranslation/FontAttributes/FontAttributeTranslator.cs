@@ -1,13 +1,14 @@
-﻿using StoryTeller.Core.ContentTranslation.FontAttributes;
+﻿using StoryTeller.Core.ContentTranslation.ContentBuilders;
+using StoryTeller.Core.ContentTranslation.FontAttributes;
 using StoryTeller.Core.Enums.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation
 {
     public class FontAttributeTranslator
     {
-        readonly ContentBuilder contentBuilder;
         FontAttributeContentFormatter fontAttributeContentFormatter;
 
         const string italicRegexPattern = @"(<atr-italic>[\s\S]+?<\/atr-italic>)";
@@ -19,34 +20,35 @@ namespace StoryTeller.Core.ContentTranslation
         public const string attributeItalicStart = "<atr-italic>";
         public const string attributeItalicEnd = "</atr-italic>";
 
-        IList<ContentTranslationDto> BreakIntoAttribute(IEnumerable<ContentTranslationDto> paragraphedContents, FontAttribute attribute, string regexPattern, string attributeMarkStart, string attributeMarkEnd)
+        async Task<IList<ContentTranslationDto>> BreakIntoAttributeAsync(IEnumerable<ContentTranslationDto> paragraphedContents, FontAttribute attribute, string regexPattern, string attributeMarkStart, string attributeMarkEnd)
         {
+            var contentBuilderParams = new ContentBuilderParameters(attribute);
             fontAttributeContentFormatter = new FontAttributeContentFormatter();
+            var contentBuilder = new ContentBuilder(contentBuilderParams, fontAttributeContentFormatter);
+            var newContents = await contentBuilder.TranslateContentAsync(paragraphedContents, attributeMarkStart, attributeMarkEnd, regexPattern);
 
-            var newContents = contentBuilder.TranslateContentWithDataToFill(paragraphedContents, attributeMarkStart, attributeMarkEnd, regexPattern, fontAttributeContentFormatter);
 
-            
             return newContents.ToList();
         }
 
-        IList<ContentTranslationDto> BreakBoldContent(IEnumerable<ContentTranslationDto> paragraphedContents)
+        async Task<IList<ContentTranslationDto>> BreakBoldContentAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            var contents = BreakIntoAttribute(paragraphedContents, FontAttribute.Bold, boldRegexPattern, attributeBoldStart, attributeBoldEnd);
+            var contents = await BreakIntoAttributeAsync(paragraphedContents, FontAttribute.Bold, boldRegexPattern, attributeBoldStart, attributeBoldEnd);
 
             return contents;
         }
 
-        IList<ContentTranslationDto> BreakItalicContent(IEnumerable<ContentTranslationDto> paragraphedContents)
+        async Task<IList<ContentTranslationDto>> BreakItalicContentAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            var contents = BreakIntoAttribute(paragraphedContents, FontAttribute.Italic, italicRegexPattern, attributeItalicStart, attributeItalicEnd);
+            var contents = await BreakIntoAttributeAsync(paragraphedContents, FontAttribute.Italic, italicRegexPattern, attributeItalicStart, attributeItalicEnd);
 
             return contents;
         }
 
-        public IEnumerable<ContentTranslationDto> BreakAttributes(IEnumerable<ContentTranslationDto> paragraphedContents)
+        public async Task<IEnumerable<ContentTranslationDto>> BreakAttributesAsync(IEnumerable<ContentTranslationDto> paragraphedContents)
         {
-            var newContents = BreakItalicContent(paragraphedContents);
-            newContents = BreakBoldContent(newContents);
+            var newContents = await BreakItalicContentAsync(paragraphedContents);
+            newContents = await BreakBoldContentAsync(newContents);
 
             return newContents;
         }

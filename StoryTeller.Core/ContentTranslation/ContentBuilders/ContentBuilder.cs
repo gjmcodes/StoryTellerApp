@@ -1,28 +1,34 @@
-﻿using System.Collections;
+﻿using StoryTeller.Core.ContentTranslation.ContentBuilders;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation
 {
     public struct ContentBuilder
     {
-        RegexSplitter regexSplitter;
-        RegexSplitter RegexSplitter
-        {
-            get
-            {
-                regexSplitter = regexSplitter ?? new RegexSplitter();
+        readonly ContentBuilderParameters contentParameters;
+        readonly ContentFormatter contentFormatter;
 
-                return regexSplitter;
-            }
+        public ContentBuilder(ContentFormatter contentFormatter)
+        {
+            this.contentFormatter = contentFormatter;
+            contentParameters = new ContentBuilderParameters();
         }
 
-        ContentTranslationDto BuildContentDto(ContentTranslationDto originalContent, string formattedItem)
+        public ContentBuilder(ContentBuilderParameters contentParameters, ContentFormatter contentFormatter)
+        {
+            this.contentParameters = contentParameters;
+            this.contentFormatter = contentFormatter;
+        }
+
+        async Task<ContentTranslationDto> BuildContentDtoAsync(ContentTranslationDto originalContent, string formattedItem, bool hasAttribute)
         {
             var dto = new ContentTranslationDto()
             {
-                content = formattedItem,
+                content = hasAttribute ? await contentFormatter.GetFormattedContentAsync(formattedItem) : formattedItem,
                 amountLineBreaks = originalContent.amountLineBreaks,
-                fontAttribute = originalContent.fontAttribute,
+                fontAttribute = hasAttribute ? contentParameters.fontAttributeOption : originalContent.fontAttribute,
                 fontFamily = originalContent.fontFamily,
                 fontSize = originalContent.fontSize,
                 hexBackgroundColor = originalContent.hexBackgroundColor,
@@ -35,9 +41,8 @@ namespace StoryTeller.Core.ContentTranslation
         }
 
 
-        public IEnumerable<ContentTranslationDto> TranslateContentWithDataToFill(IEnumerable<ContentTranslationDto> breakingContents,
-            string attributeMarkStart, string attributeMarkEnd,
-            string regexPattern, ContentFormatter contentFormatter)
+        public async Task<IEnumerable<ContentTranslationDto>> TranslateContentAsync(IEnumerable<ContentTranslationDto> breakingContents,
+            string attributeMarkStart, string attributeMarkEnd, string regexPattern)
         {
             var newContents = new List<ContentTranslationDto>();
 
@@ -57,10 +62,7 @@ namespace StoryTeller.Core.ContentTranslation
 
                     var formattedItem = item.Replace(attributeMarkStart, string.Empty).Replace(attributeMarkEnd, string.Empty);
 
-                    if (hasAttribute)
-                        formattedItem = contentFormatter.GetFormattedContent(formattedItem);
-
-                    var dto = BuildContentDto(content, formattedItem);
+                    var dto = await BuildContentDtoAsync(content, formattedItem, hasAttribute);
 
                     newContents.Add(dto);
                 }
