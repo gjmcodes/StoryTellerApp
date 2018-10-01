@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryCreator.Web", "StoryCr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Tests", "3 - Tests", "{716181C2-D10F-4E67-83F1-42A41904F998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.UnitTests", "StoryTeller.UnitTests\StoryTeller.UnitTests.csproj", "{F53C0209-5F83-4C16-B024-717BC22A57AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.UnitTests", "StoryTeller.UnitTests\StoryTeller.UnitTests.csproj", "{F53C0209-5F83-4C16-B024-717BC22A57AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

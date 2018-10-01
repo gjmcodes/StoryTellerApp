@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Repositories\External\ReadOnly\" />
-    <Folder Include="Interfaces\Repositories\Local\ReadOnly\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
   </ItemGroup>
 
 </Project>
