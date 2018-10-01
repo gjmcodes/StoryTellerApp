@@ -7,7 +7,7 @@ namespace StoryTeller.Core.ContentTranslation.CharactersData
         //ToDo: Injetar repository de character data
         //ICharacterDataLocalRepository _characterDataLocalRepository;
 
-        protected CharacterDataFormatter()
+        public CharacterDataFormatter()
         {
         }
 

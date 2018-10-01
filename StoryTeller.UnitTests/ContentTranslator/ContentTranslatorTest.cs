@@ -16,41 +16,41 @@ namespace StoryTeller.UnitTests.ContentTranslator
         }
 
         [TestMethod]
-        public async void Can_Translate_Multiple_Paragraphs()
+        public void Can_Translate_Multiple_Paragraphs()
         {
             string content = "<p>Texto texto texto</p> <p>Text 2 text 2 text 2</p> <p>Text 3 texto 3 texto 3 </p>";
 
-            var result = await _contentMarkupTranslator.TranslateAsync(content);
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
 
             Assert.IsTrue(result.Count() >= 3);
         }
 
         [TestMethod]
-        public async void Can_Translate_With_Bold()
+        public void Can_Translate_With_Bold()
         {
             string content = "<p>Texto <atr-bold>texto</atr-bold> texto</p> <p>Text 2 text 2 text 2</p> <p>Text 3 texto 3 texto 3 </p>";
 
-            var result = await _contentMarkupTranslator.TranslateAsync(content);
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
 
             Assert.AreEqual(result.Where(x => x.fontAttribute == FontAttribute.Bold).Count(), 1);
         }
 
         [TestMethod]
-        public async void Can_Translate_With_Italic()
+        public void Can_Translate_With_Italic()
         {
             string content = "<p>Texto <atr-italic>texto</atr-italic> texto</p> <p>Text 2 text 2 text 2</p> <p>Text 3 texto 3 texto 3 </p>";
 
-            var result = await _contentMarkupTranslator.TranslateAsync(content);
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
 
             Assert.IsTrue(result.Where(x => x.fontAttribute == Core.Enums.Text.FontAttribute.Italic).Count() > 0);
         }
 
         [TestMethod]
-        public async void Can_Translate_All_Font_Attributes()
+        public void Can_Translate_All_Font_Attributes()
         {
             string content = "<p>Texto <atr-italic>texto</atr-italic> texto</p> <p>Text 2 <atr-bold>text 2</atr-bold> <atr-italic>texto</atr-italic> <atr-bold>text 2</atr-bold> text 2</p> <atr-italic>texto</atr-italic> <p>Text 3 texto 3 texto 3 </p>";
 
-            var result = await _contentMarkupTranslator.TranslateAsync(content);
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
 
             var qtdBold = 2;
             var qtdItalic = 3;
@@ -62,11 +62,11 @@ namespace StoryTeller.UnitTests.ContentTranslator
         }
 
         [TestMethod]
-        public async void Can_Translate_All_Font_Attributes_With_Multiple_Paragraphs()
+        public void Can_Translate_All_Font_Attributes_With_Multiple_Paragraphs()
         {
             string content = "<p>Texto <atr-italic>texto</atr-italic> texto</p> <p>Text 2 <atr-bold>text 2</atr-bold> <atr-italic>texto</atr-italic> <atr-bold>text 2</atr-bold> text 2</p> <atr-italic>texto</atr-italic> <p>Text 3 texto 3 texto 3 </p>";
 
-            var result = await _contentMarkupTranslator.TranslateAsync(content);
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
 
             var qtdBold = 2;
             var qtdItalic = 3;
@@ -80,26 +80,38 @@ namespace StoryTeller.UnitTests.ContentTranslator
         }
 
         [TestMethod]
-        public async void Can_Translate_With_NameCalls_Formal_Male()
+        public void Can_Translate_Character_Name()
+        {
+            string content = @"<p><cdata>name</cdata></p>";
+
+            //Assert: Configurar nome do personagem
+
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
+
+            Assert.IsTrue(result.Any(x => x.content.ToLower() == "mister"));
+        }
+
+        [TestMethod]
+        public void Can_Translate_With_NameCalls_Formal_Male()
         {
             string content = @"\r\n\r\n<p>- <pronoum>0002</pronoum>. Wake up!</p>\r\n\r\n<c-data_name></c-data_name> open <pronoum>0001</pronoum> eyes and you see T-2, the robot assigned to help you. <namecall_gender></namecall_gender> head hurts and the last \r\nthing <namecall_gender></namecall_gender> can remember was fleeing in a pod from Zeta, a ship ruled by errand smugglers.\r\n\r\n- T-2... what happened?\r\n\r\n- Well, <namecall_formal></namecall_formal>, it seems like they didn't like your message and that you're terrible at poker.\r\n\r\n";
 
             //Assert
             // ToDo: Configure character data as male
-            var result = await _contentMarkupTranslator.TranslateAsync(content);
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
 
             Assert.IsTrue(result.Any(x => x.content.ToLower() == "mister"));
         }
 
         
-        public async void Can_Translate_With_NameCalls_Formal_Female()
+        public void Can_Translate_With_NameCalls_Formal_Female()
         {
             string content = @"\r\n\r\n<p>- <pronoum>0002</pronoum>. Wake up!</p>\r\n\r\n<c-data_name></c-data_name> open <pronoum>0001</pronoum> eyes and you see T-2, the robot assigned to help you. <namecall_gender></namecall_gender> head hurts and the last \r\nthing <namecall_gender></namecall_gender> can remember was fleeing in a pod from Zeta, a ship ruled by errand smugglers.\r\n\r\n- T-2... what happened?\r\n\r\n- Well, <namecall_formal></namecall_formal>, it seems like they didn't like your message and that you're terrible at poker.\r\n\r\n";
 
             //Assert
             // ToDo: Configure character data as female
 
-            var result = await _contentMarkupTranslator.TranslateAsync(content);
+            var result = _contentMarkupTranslator.TranslateAsync(content).Result;
 
             Assert.IsTrue(result.Any(x => x.content.ToLower() == "ma'am"));
         }
