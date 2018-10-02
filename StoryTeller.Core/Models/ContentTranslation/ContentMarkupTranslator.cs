@@ -11,15 +11,15 @@ namespace StoryTeller.Core.ContentTranslation
 {
     public class ContentMarkupTranslator : DisposableObject
     {
-        readonly FontAttributeTranslator _fontAttributeTranslator;
-        readonly CharacterDataTranslator _characterDataTranslator;
-        readonly NameCallTranslator _nameCallTranslator;
+        readonly FontAttributeTranslatorService _fontAttributeTranslator;
+        readonly CharacterDataTranslatorService _characterDataTranslator;
+        readonly NameCallTranslatorService _nameCallTranslator;
 
         public ContentMarkupTranslator()
         {
-            _fontAttributeTranslator = new FontAttributeTranslator();
-            _characterDataTranslator = new CharacterDataTranslator();
-            _nameCallTranslator = new NameCallTranslator();
+            _fontAttributeTranslator = new FontAttributeTranslatorService();
+            _characterDataTranslator = new CharacterDataTranslatorService();
+            _nameCallTranslator = new NameCallTranslatorService();
         }
 
         public const string paragraphStart = "<p>";

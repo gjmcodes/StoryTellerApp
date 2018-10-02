@@ -1,15 +1,15 @@
-﻿using StoryTeller.Core.CharacterData;
+﻿using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.ContentTranslation.NameCalls;
+using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.NameCalls;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StoryTeller.Core.ContentTranslation
+namespace StoryTeller.Core.Services.ContentTranslation
 {
 
-    public class NameCallTranslator
+    public class NameCallTranslatorService : BaseService, INameCallTranslatorService
     {
 
         const string pronoumRegexPattern = @"(<pronoum>[\s\S]+?<\/pronoum>)";
@@ -24,20 +24,6 @@ namespace StoryTeller.Core.ContentTranslation
         async Task<IList<ContentTranslationDto>> BreakIntoDataAsync(IEnumerable<ContentTranslationDto> paragraphedContents,
        string regexPattern, string attributeMarkStart, string attributeMarkEnd, bool isFemale)
         {
-            pronoums = new List<PronoumNameCall>()
-            {
-                new PronoumNameCall(){
-                    pronoumId = "0001",
-                    forMale = "He",
-                    forFemale = "She"
-                },
-                new PronoumNameCall(){
-                    pronoumId = "0002",
-                    forMale = "Mister",
-                    forFemale = "Miss"
-                },
-            };
-
 
             _nameCallContentFormatter = new NameCallContentFormatter(pronoums, false);
             var contentBuilder = new ContentBuilder(_nameCallContentFormatter);
@@ -61,5 +47,7 @@ namespace StoryTeller.Core.ContentTranslation
 
             return contents;
         }
+
+        
     }
 }

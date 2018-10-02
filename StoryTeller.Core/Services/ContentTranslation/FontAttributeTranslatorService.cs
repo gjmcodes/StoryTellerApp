@@ -1,13 +1,16 @@
-﻿using StoryTeller.Core.ContentTranslation.ContentBuilders;
+﻿using StoryTeller.Core.ContentTranslation;
+using StoryTeller.Core.ContentTranslation.ContentBuilders;
 using StoryTeller.Core.ContentTranslation.FontAttributes;
 using StoryTeller.Core.Enums.Text;
+using StoryTeller.Core.Interfaces.Services.ContentTranslation;
+using StoryTeller.Core.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StoryTeller.Core.ContentTranslation
+namespace StoryTeller.Core.Services.ContentTranslation
 {
-    public class FontAttributeTranslator
+    public class FontAttributeTranslatorService : BaseService, IFontAttributeTranslatorService
     {
         FontAttributeContentFormatter fontAttributeContentFormatter;
 

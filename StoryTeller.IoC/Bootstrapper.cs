@@ -1,15 +1,15 @@
 ﻿using Prism.Ioc;
 using StoryTeller.Core.ContentTranslation;
+using StoryTeller.Core.ContentTranslation.NameCalls;
 using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
-using StoryTeller.Core.Interfaces.Services.Rooms;
-using StoryTeller.Core.Services.Rooms;
+using StoryTeller.Core.Interfaces.Services.ContentTranslation;
+using StoryTeller.Core.Services.ContentTranslation;
 using StoryTeller.CrossCutting.User.Interfaces.Services;
 using StoryTeller.CrossCutting.User.Preferences;
 using StoryTeller.CrossCutting.User.Services.Status;
 using StoryTeller.ExternalData.FireBase.Pages;
 using StoryTeller.ExternalData.FireBase.Rooms;
-using System;
 
 public static class Bootstrapper
 {
@@ -22,14 +22,12 @@ public static class Bootstrapper
 
     static void RegisterDomainServices(IContainerRegistry containerRegistry)
     {
-        containerRegistry.Register<IRoomService, RoomService>();
-        containerRegistry.Register<IRoomContentService, RoomContentService>();
-        containerRegistry.Register<IRoomEventService, RoomEventService>();
-        containerRegistry.Register<IRoomActionService, RoomActionService>();
-        containerRegistry.Register<IRoomActionService, RoomActionService>();
-        containerRegistry.Register<IRoomActionService, RoomActionService>();
-        containerRegistry.Register<IRoomActionService, RoomActionService>();
-        containerRegistry.Register<ContentMarkupTranslator>();
+        containerRegistry.Register<INameCallTranslatorService, NameCallTranslatorService>();
+        containerRegistry.Register<IFontAttributeTranslatorService, FontAttributeTranslatorService>();
+        containerRegistry.Register<ICharacterDataTranslatorService, CharacterDataTranslatorService>();
+        containerRegistry.Register<IContentMarkupTranslatorService, ContentMarkupTranslatorService>();
+
+        containerRegistry.Register<NameCallContentFormatter>();
     }
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)

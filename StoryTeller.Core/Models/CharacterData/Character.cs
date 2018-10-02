@@ -9,6 +9,8 @@ namespace StoryTeller.Core.CharacterData
 
         public string Name { get; private set; }
 
-        public bool Gender { get; private set; } 
+        public bool Gender { get; private set; }
+
+        public bool IsFemale => Gender;
     }
 }

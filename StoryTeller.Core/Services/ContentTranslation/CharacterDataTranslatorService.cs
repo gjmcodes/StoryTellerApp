@@ -1,12 +1,14 @@
 ﻿using StoryTeller.Core.ContentTranslation.CharactersData;
 using StoryTeller.Core.Enums.Text;
+using StoryTeller.Core.Interfaces.Services.ContentTranslation;
+using StoryTeller.Core.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation
 {
-    public class CharacterDataTranslator
+    public class CharacterDataTranslatorService : BaseService, ICharacterDataTranslatorService
     {
         const string characterNameRegexPattern = @"(<cdata>[\s\S]+?<\/cdata>)";
         const string characterNameStart = "<cdata>";
