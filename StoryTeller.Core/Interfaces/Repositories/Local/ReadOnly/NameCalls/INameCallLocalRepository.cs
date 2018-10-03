@@ -1,7 +1,7 @@
-﻿using StoryTeller.Core.NameCalls;
+﻿using StoryTeller.Core.Models.NameCalls;
 using System.Threading.Tasks;
 
-namespace StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly
+namespace StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.NameCalls
 {
     public interface INameCallLocalRepository : IBaseRepository
     {

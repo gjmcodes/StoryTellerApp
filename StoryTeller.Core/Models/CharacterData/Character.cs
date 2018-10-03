@@ -1,10 +1,8 @@
-﻿using SQLite;
-using StoryTeller.Core.Models;
+﻿using StoryTeller.Core.Models;
 
 namespace StoryTeller.Core.CharacterData
 {
-    [Table("TB_CHARACTER")]
-    public class Character : BaseEntity
+    public class Character
     {
 
         public string Name { get; private set; }

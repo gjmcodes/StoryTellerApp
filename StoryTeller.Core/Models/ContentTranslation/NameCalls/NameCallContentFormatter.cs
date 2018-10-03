@@ -1,9 +1,5 @@
-﻿using StoryTeller.Core.CharacterData;
-using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly;
-using StoryTeller.Core.NameCalls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly;
+using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.NameCalls;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation.NameCalls

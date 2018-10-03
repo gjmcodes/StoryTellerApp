@@ -1,8 +1,8 @@
 ﻿using SQLite;
 
-namespace StoryTeller.Core.Models
+namespace StoryTeller.InternalData.DTOs.PersistentObjects
 {
-    public abstract class BaseEntity
+    public abstract class BasePersistentObject
     {
         [PrimaryKey, AutoIncrement]
         public int LocalPk { get; set; }
