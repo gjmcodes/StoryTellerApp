@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace StoryTeller.InternalData.Repositories
 {
-    public class BaseRepository<T> : DisposableObject, IBaseRepository
+    public class BaseRepository : DisposableObject, IBaseRepository
     {
         SQLiteAsyncConnection _conn;
         protected SQLiteAsyncConnection Conn
@@ -25,9 +25,6 @@ namespace StoryTeller.InternalData.Repositories
                 return _conn;
             }
         }
-
-        protected AsyncTableQuery<T> tableSet;
-
       
 
         public BaseRepository()
