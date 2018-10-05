@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.CharacterData;
+﻿using StoryTeller.Core.CharactersData;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly

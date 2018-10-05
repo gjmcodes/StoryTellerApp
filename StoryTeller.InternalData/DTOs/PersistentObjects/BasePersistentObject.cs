@@ -2,8 +2,12 @@
 
 namespace StoryTeller.InternalData.DTOs.PersistentObjects
 {
-    public abstract class BasePersistentObject
+    public class BasePersistentObject
     {
+        public BasePersistentObject()
+        {
+
+        }
         [PrimaryKey, AutoIncrement]
         public int LocalPk { get; set; }
     }

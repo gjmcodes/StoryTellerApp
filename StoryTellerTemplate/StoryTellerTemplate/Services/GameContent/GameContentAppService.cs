@@ -1,5 +1,5 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.Pages;
-using StoryTeller.CrossCutting.User.Interfaces.Services;
+using StoryTeller.Core.Interfaces.Services.Users;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Models.MainPage;
@@ -43,7 +43,7 @@ namespace StoryTellerTemplate.Services.GameContent
         {
             var pageVm = await GetPageAsync(pageId);
 
-            await _userStatusService.SetCurrentPageIdAsync(pageId);
+            await _userStatusService.UpdateCurrentPageIdAsync(pageId);
 
             return pageVm;
         }

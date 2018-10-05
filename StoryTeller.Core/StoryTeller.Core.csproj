@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StoryTeller.CrossCutting.Disposable\StoryTeller.CrossCutting.Disposable.csproj" />
+    <Compile Remove="Interfaces\Repositories\External\ReadOnly\**" />
+    <EmbeddedResource Remove="Interfaces\Repositories\External\ReadOnly\**" />
+    <None Remove="Interfaces\Repositories\External\ReadOnly\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Repositories\External\ReadOnly\" />
+    <ProjectReference Include="..\StoryTeller.CrossCutting.Disposable\StoryTeller.CrossCutting.Disposable.csproj" />
   </ItemGroup>
 
 </Project>

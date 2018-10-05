@@ -10,7 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StoryTeller.Core\StoryTeller.Core.csproj" />
     <ProjectReference Include="..\StoryTeller.CrossCutting.Disposable\StoryTeller.CrossCutting.Disposable.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\NameCalls\" />
+    <Folder Include="Repositories\CharacterData\" />
+    <Folder Include="Repositories\Pages\" />
+    <Folder Include="Repositories\Users\" />
   </ItemGroup>
 
 </Project>

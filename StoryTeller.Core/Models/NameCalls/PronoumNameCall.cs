@@ -1,9 +1,9 @@
 ﻿namespace StoryTeller.Core.Models.NameCalls
 {
-    public struct PronoumNameCall
+    public class PronoumNameCall : BaseExternalEntity
     {
-        public string pronoumId;
-        public string forMale;
-        public string forFemale;
+        public string PronoumId { get; private set; }
+        public string ForMale { get; private set; }
+        public string ForFemale { get; private set; }
     }
 }
