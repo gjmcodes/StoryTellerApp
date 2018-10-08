@@ -5,6 +5,7 @@ using StoryTeller.CrossCutting.Disposable;
 using StoryTeller.InternalData.DTOs.PersistentObjects;
 using StoryTeller.InternalData.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -34,6 +35,11 @@ namespace StoryTeller.InternalData.Repositories
 
         protected override void ReleaseResources()
         {
+        }
+
+        public async Task<bool> AddAsync<T>(IEnumerable<T> entities) where T : class
+        {
+            return await Conn.InsertAllAsync(entities) > 0;
         }
     }
 }
