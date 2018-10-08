@@ -11,7 +11,7 @@ namespace StoryTeller.Core.Services.Users
     public class UserStatusService : BaseService, IUserStatusService
     {
         private readonly IUserStatusLocalRepository _userStatusLocalRepository;
-        private readonly IUserStatusServicePersistentRepository _userStatusServicePersistentRepository;
+        private readonly IUserStatusPersistentRepository _userStatusServicePersistentRepository;
 
         public async Task UpdateCurrentPageIdAsync(string pageId)
         {

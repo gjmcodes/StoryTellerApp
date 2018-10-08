@@ -3,6 +3,10 @@ using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.ContentTranslation.NameCalls;
 using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
+using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.CharactersData;
+using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.NameCalls;
+using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
+using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Services.ContentTranslation;
 using StoryTeller.CrossCutting.User.Interfaces.Services;
@@ -10,6 +14,8 @@ using StoryTeller.CrossCutting.User.Preferences;
 using StoryTeller.CrossCutting.User.Services.Status;
 using StoryTeller.ExternalData.FireBase.Pages;
 using StoryTeller.ExternalData.FireBase.Rooms;
+using StoryTeller.InternalData.Repositories.Persistence.NameCalls;
+using StoryTeller.InternalData.Repositories.Persistence.Pages;
 
 public static class Bootstrapper
 {
@@ -30,12 +36,17 @@ public static class Bootstrapper
         containerRegistry.Register<NameCallContentFormatter>();
     }
 
+    static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
+    {
+        
+        containerRegistry.Register<IUserStatusPersistentRepository, >();
+        containerRegistry.Register<ICharacterDataLocalPersistentRepository, >();
+        containerRegistry.Register<IPronoumLocalPersistentRepository, PronoumPersistentRepository>();
+        containerRegistry.Register<IPageLocalPersistentRepository, PagePersistentRepository>();
+    }
+
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)
     {
-        containerRegistry.Register<IRoomExternalRepository, RoomWs>();
-        containerRegistry.Register<IRoomContentExternalRepository, RoomContentWs>();
-        containerRegistry.Register<IRoomEventExternalRepository, RoomEventWs>();
-        containerRegistry.Register<IRoomActionExternalRepository, RoomActionWs>();
         containerRegistry.Register<IPageExternalRepository, PageWs>();
     }
 
