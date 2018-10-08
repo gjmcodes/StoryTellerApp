@@ -37,6 +37,11 @@ namespace StoryTeller.InternalData.Repositories
         {
         }
 
+        public async Task<bool> AddAsync<T>(T entity) where T : class
+        {
+            return await Conn.InsertAsync(entity) > 0;
+        }
+
         public async Task<bool> AddAsync<T>(IEnumerable<T> entities) where T : class
         {
             return await Conn.InsertAllAsync(entities) > 0;

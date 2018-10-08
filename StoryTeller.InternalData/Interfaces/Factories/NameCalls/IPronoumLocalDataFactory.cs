@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.InternalData.Interfaces.Factories.NameCalls
 {
-    public interface ILocalDataPronoumFactory : IBaseLocalDataFactory
+    public interface IPronoumLocalDataFactory : IBaseLocalDataFactory
     {
         Task<IEnumerable<PronoumNameCallDto>> MapPronoumNameCallToDtoAsync(IEnumerable<PronoumNameCall> models);
     }

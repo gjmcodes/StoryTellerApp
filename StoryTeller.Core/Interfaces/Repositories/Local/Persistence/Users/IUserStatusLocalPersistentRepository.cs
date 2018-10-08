@@ -2,7 +2,7 @@
 
 namespace StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users
 {
-    public interface IUserStatusPersistentRepository : IBaseRepository
+    public interface IUserStatusLocalPersistentRepository : IBaseRepository
     {
         Task<bool> UpdateUserCurrentPageAsync(string pageId);
     }

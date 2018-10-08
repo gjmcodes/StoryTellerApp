@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.InternalData.Repositories.Persistence.Pages
 {
-    public class PagePersistentRepository : BaseRepository<PageDto>, IPageLocalPersistentRepository
+    public class PagePersistentRepository : BaseRepository, IPageLocalPersistentRepository
     {
         private readonly IPageActionsPersistentRepository _pageActionPersistentRepository;
         private readonly IPageContentPersistentRepository _pageContentPersistentRepository;

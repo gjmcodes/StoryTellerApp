@@ -10,7 +10,7 @@ namespace StoryTeller.InternalData.Repositories.Persistence.NameCalls
 {
     public class PronoumPersistentRepository : BaseRepository, IPronoumLocalPersistentRepository
     {
-        private readonly ILocalDataPronoumFactory _localDataPronoumFactory;
+        private readonly IPronoumLocalDataFactory _localDataPronoumFactory;
 
 
         public async Task<bool> PersistNameCallsAsync(IEnumerable<PronoumNameCall> nameCalls)
