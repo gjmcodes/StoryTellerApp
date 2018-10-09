@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="StoryTellerTemplate.Views.CharacterCreation"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="True">
+             x:Class="StoryTellerTemplate.Views.CharacterCreationPage">
 
     <StackLayout>
         <StackLayout Orientation="Vertical"
@@ -24,9 +22,9 @@
         </StackLayout>
 
         <StackLayout VerticalOptions="CenterAndExpand">
-            
+
         </StackLayout>
-        
+
         <StackLayout VerticalOptions="End" Padding="5, 10">
             <StackLayout VerticalOptions="End">
                 <Button 
@@ -36,5 +34,5 @@
             </StackLayout>
         </StackLayout>
     </StackLayout>
-
+    
 </ContentPage>

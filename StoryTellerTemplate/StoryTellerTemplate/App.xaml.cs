@@ -41,6 +41,7 @@ namespace StoryTellerTemplate
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<CharacterCreation>();
 
+            containerRegistry.RegisterForNavigation<CharacterCreationPage>();
         }
 
         void RegisterAppServices(IContainerRegistry containerRegistry)
