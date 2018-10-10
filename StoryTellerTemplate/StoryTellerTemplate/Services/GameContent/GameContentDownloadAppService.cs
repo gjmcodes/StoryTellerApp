@@ -1,12 +1,13 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.GameSettings;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
+using StoryTellerTemplate.Interfaces.Services.GameContent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoryTellerTemplate.Services.GameContent
 {
-    public class GameContentDownloadAppService : BaseAppService
+    public class GameContentDownloadAppService : BaseAppService, IGameContentDownloadAppService
     {
         private readonly IPageDownloadTasksService _pageDownloadTasksService;
         private readonly INameCallDownloadTasksService _nameCallDownloadTasksService;
@@ -24,6 +25,11 @@ namespace StoryTellerTemplate.Services.GameContent
 
             var pagesTask = _pageExternalRepository.GetPagesByCultureAsync(selectedCulture);
             var pronoumNameCalls = _nameCallDownloadTasksService.DownloadPronoumNameCallsByCultureAsync(selectedCulture);
+        }
+
+        public async Task<bool> HasLocalContentAsync()
+        {
+            return false;
         }
     }
 }

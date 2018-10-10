@@ -9,6 +9,10 @@ using StoryTellerTemplate.Factories;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Services.GameContent;
+using StoryTellerTemplate.Services.CharacterCreation;
+using StoryTellerTemplate.Interfaces.Services.CharacterCreation;
+using StoryTellerTemplate.Interfaces.Services.CultureSelection;
+using StoryTellerTemplate.Services.CultureSelection;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace StoryTellerTemplate
@@ -28,7 +32,7 @@ namespace StoryTellerTemplate
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/CultureSelectionPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -37,16 +41,19 @@ namespace StoryTellerTemplate
             RegisterFactories(containerRegistry);
 
             containerRegistry.RegisterDependencies();
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
-            containerRegistry.RegisterForNavigation<CharacterCreation>();
-
             containerRegistry.RegisterForNavigation<CharacterCreationPage>();
+            containerRegistry.RegisterForNavigation<GameContentLoaderPage>();
+            containerRegistry.RegisterForNavigation<CultureSelectionPage>();
         }
 
         void RegisterAppServices(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<ICharacterCreationAppService, CharacterCreationAppService>();
             containerRegistry.Register<IGameContentAppService, GameContentAppService>();
+            containerRegistry.Register<ICultureSelectionAppService, CultureSelectionAppService>();
         }
 
         void RegisterFactories(IContainerRegistry containerRegistry)
@@ -55,7 +62,6 @@ namespace StoryTellerTemplate
             containerRegistry.Register<IRoomVmFactory, RoomVmFactory>();
             containerRegistry.Register<IGameActionVmFactory, GameActionVmFactory>();
             containerRegistry.Register<IPageVmFactory, PageVmFactory>();
-
         }
     }
 }

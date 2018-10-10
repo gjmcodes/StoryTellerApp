@@ -1,7 +1,7 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
+using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
 using StoryTeller.CrossCutting.Disposable;
-using StoryTeller.CrossCutting.User.Preferences;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +15,26 @@ namespace StoryTeller.ExternalData.FireBase
         protected string baseDatabaseUrl = "https://storyteller-92a39.firebaseio.com";
         protected FirebaseClient _fireBaseClient;
         protected string collection;
-        protected UserPreferences _userPreferences;
+
+        private readonly IUserStatusLocalRepository _userStatusLocalRepository;
 
         ChildQuery QueryableCollectionWithLanguage => _fireBaseClient
             .Child(collection)
             .Child(_userPreferences.CurrentLanguage);
 
-        public BaseFirebaseWs(string collection, UserPreferences userPreferences)
+        public BaseFirebaseWs(string collection, IUserStatusLocalRepository userStatusLocalRepository)
         {
-            _userPreferences = userPreferences;
+            _userStatusLocalRepository = userStatusLocalRepository;
+
 
             this.collection = collection;
             _fireBaseClient = new FirebaseClient(baseDatabaseUrl);
         }
 
+        Task<ChildQuery> QueryableCollectionWithLanguageAsync()
+        {
+            var userCulture = await _userStatusLocalRepository.
+        }
         protected async Task<IEnumerable<T>> GetByFieldWithLanguageAsync<T>(string keyName, string keyValue, string fieldName, string fieldValue)
         {
             var objects = new List<T>();

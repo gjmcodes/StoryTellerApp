@@ -63,9 +63,9 @@ public static class Bootstrapper
     {
         containerRegistry.Register<ICharacterLocalDataFactory, CharacterLocalDataFactory>();
         containerRegistry.Register<IPronoumLocalDataFactory, PronoumLocalDataFactory>();
-        containerRegistry.Register<IPageActionPersistenceFactory, PageActionPersistenceFactory>();
-        containerRegistry.Register<IPageContentPersistenceFactory, PageActionPersistenceFactory>();
-        containerRegistry.Register<IPageDtoPersistenceFactory, PageActionPersistenceFactory>();
+    //    containerRegistry.Register<IPageActionPersistenceFactory, PageActionPersistenceFactory>();
+    //    containerRegistry.Register<IPageContentPersistenceFactory, PageActionPersistenceFactory>();
+    //    containerRegistry.Register<IPageDtoPersistenceFactory, PageActionPersistenceFactory>();
     }
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)

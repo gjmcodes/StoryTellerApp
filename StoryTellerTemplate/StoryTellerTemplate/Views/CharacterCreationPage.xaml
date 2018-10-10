@@ -5,7 +5,73 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="StoryTellerTemplate.Views.CharacterCreationPage">
 
-    <StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout
+        Grid.Row="0"
+            Grid.RowSpan="3"
+        Grid.Column="1"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+
+            <Label Text="| | Título | |" 
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="CenterAndExpand" />
+
+
+
+        </StackLayout>
+
+        <ScrollView
+            BackgroundColor="Red"
+        x:Name="contentScrollView"
+        Grid.Row="1"
+        Grid.ColumnSpan="3"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            Padding="5, 0, 0, 0">
+
+            <Label 
+                x:Name="contentLbl" />
+
+
+        </ScrollView>
+
+        <cv:CarouselView 
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="CenterAndExpand" 
+            x:Name="gameActions"
+            Grid.Row="2"
+            Grid.Column="1"
+            ItemsSource="{Binding Actions}">
+            <cv:CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Button Text="{Binding Description}" 
+                            FontSize="Micro" 
+                            HorizontalOptions="FillAndExpand"  
+                            VerticalOptions="Center"
+                            Command="{Binding Source={x:Reference Page}, Path=BindingContext.ExecuteActionCommand}"
+                            CommandParameter="{Binding .}"
+                            />
+                </DataTemplate>
+            </cv:CarouselView.ItemTemplate>
+        </cv:CarouselView>
+
+    </Grid>
+    
+    <!--<StackLayout>
         <StackLayout Orientation="Vertical"
                  HorizontalOptions="FillAndExpand"
                      VerticalOptions="Start"
@@ -33,6 +99,6 @@
                 HorizontalOptions="Center" />
             </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </StackLayout>-->
     
 </ContentPage>
