@@ -1,6 +1,6 @@
 ﻿using StoryTeller.Core.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
-using StoryTeller.CrossCutting.User.Preferences;
+using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +11,8 @@ namespace StoryTeller.ExternalData.FireBase.GameCulture
 {
     public class GameCultureWs : BaseFirebaseWs, IGameCultureRepository
     {
-        public GameCultureWs(UserPreferences userPreferences)
-            : base("GameCultures", userPreferences)
+        public GameCultureWs(IUserStatusLocalRepository userStatusLocalRepository)
+            : base("GameCultures", userStatusLocalRepository)
         {
         }
 

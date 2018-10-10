@@ -1,11 +1,7 @@
-﻿using StoryTeller.Core.Actions;
-using StoryTeller.Core.ContentTranslation;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
+﻿using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Pages;
-using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
 using StoryTeller.InternalData.Interfaces.Factories.Pages;
-using StoryTeller.InternalData.Interfaces.Repositories.Persistence.Pages;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,8 +10,6 @@ namespace StoryTeller.InternalData.Repositories.Persistence.Pages
 {
     public class PagePersistentRepository : BaseRepository, IPageLocalPersistentRepository
     {
-        private readonly IPageActionsPersistentRepository _pageActionPersistentRepository;
-        private readonly IPageContentPersistentRepository _pageContentPersistentRepository;
         private readonly IContentMarkupTranslatorService _contentMarkupTranslatorService;
 
         private readonly IPageDtoPersistenceFactory _pageDtoPersistenceFactory;
@@ -39,10 +33,6 @@ namespace StoryTeller.InternalData.Repositories.Persistence.Pages
                         var pageContentsDto = await _pageContentPersistenceFactory.MapPageContentToDtoAsync(pageContents, page.pageId);
 
                         var pageActionsDto = await _pageActionPersistenceFactory.MapPageActionToDtoAsync(page.actions);
-
-                        await _pageContentPersistentRepository.InsertPageContentsAsync(pageContents, page.pageId);
-                        await _pageActionPersistentRepository.InsertPageActionsAsync(page.actions, page.pageId);
-
 
                         conn.Insert(pageDto);
                         conn.InsertAll(pageActionsDto);

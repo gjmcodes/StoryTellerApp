@@ -18,10 +18,6 @@ namespace StoryTeller.ExternalData.FireBase
 
         private readonly IUserStatusLocalRepository _userStatusLocalRepository;
 
-        ChildQuery QueryableCollectionWithLanguage => _fireBaseClient
-            .Child(collection)
-            .Child(_userPreferences.CurrentLanguage);
-
         public BaseFirebaseWs(string collection, IUserStatusLocalRepository userStatusLocalRepository)
         {
             _userStatusLocalRepository = userStatusLocalRepository;
@@ -31,15 +27,20 @@ namespace StoryTeller.ExternalData.FireBase
             _fireBaseClient = new FirebaseClient(baseDatabaseUrl);
         }
 
-        Task<ChildQuery> QueryableCollectionWithLanguageAsync()
+        async Task<ChildQuery> QueryableCollectionWithLanguageAsync()
         {
-            var userCulture = await _userStatusLocalRepository.
+            var userCulture = await _userStatusLocalRepository.GetUserCurrentPageAsync();
+            return _fireBaseClient
+            .Child(collection)
+            .Child(userCulture);
         }
+
         protected async Task<IEnumerable<T>> GetByFieldWithLanguageAsync<T>(string keyName, string keyValue, string fieldName, string fieldValue)
         {
             var objects = new List<T>();
 
-            var request = await QueryableCollectionWithLanguage
+            var langQuery = await QueryableCollectionWithLanguageAsync();
+            var request = await langQuery
                 .OrderBy(keyName)
                 .EqualTo(keyValue)
                 .OnceAsync<T>();
@@ -68,22 +69,14 @@ namespace StoryTeller.ExternalData.FireBase
 
                 var objects = new List<T>();
 
-                //using (var http = new HttpClient())
-                //using (var request = new HttpRequestMessage(HttpMethod.Get,
-                //    new Uri($"{baseDatabaseUrl}/{collection}/.json?orderBy=\"{keyName}\"&equalTo=\"{keyValue}\"")))
-                //{
-                //    var data = await http.SendAsync(request);
 
-                //    var content = await data.Content.ReadAsJsonAsync<Dictionary<string, T>>();
-                //    return content.Select(x => x.Value).ToArray();
-                //}
-
-                var request = await _fireBaseClient
-                .Child(collection)
-                .Child(_userPreferences.CurrentLanguage)
+                var langQuery = await QueryableCollectionWithLanguageAsync();
+                var request = await langQuery
                     .OrderBy(keyName)
                     .EqualTo(keyValue)
                     .OnceAsync<T>();
+
+            
 
                 foreach (var item in request)
                 {

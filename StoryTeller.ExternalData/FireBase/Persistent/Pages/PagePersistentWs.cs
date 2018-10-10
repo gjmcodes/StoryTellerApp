@@ -1,14 +1,14 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.Persistence.Pages;
+using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
 using StoryTeller.Core.Pages;
-using StoryTeller.CrossCutting.User.Preferences;
 using System.Threading.Tasks;
 
 namespace StoryTeller.ExternalData.FireBase.Persistent.Pages
 {
     public class PagePersistentWs : BaseFirebaseWs, IPageExternalPersistentRepository
     {
-        public PagePersistentWs(UserPreferences userPreferences) 
-            : base("Pages", userPreferences)
+        public PagePersistentWs(IUserStatusLocalRepository userStatusLocalRepository) 
+            : base("Pages", userStatusLocalRepository)
         {
         }
 
