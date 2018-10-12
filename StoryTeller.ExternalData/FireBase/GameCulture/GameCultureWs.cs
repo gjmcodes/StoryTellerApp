@@ -1,10 +1,7 @@
 ﻿using StoryTeller.Core.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StoryTeller.ExternalData.FireBase.GameCulture
@@ -16,10 +13,17 @@ namespace StoryTeller.ExternalData.FireBase.GameCulture
         {
         }
 
-        public async Task<Cultures> GetGameCulturesAsync()
+        public async Task<IEnumerable<Culture>> GetGameCulturesAsync()
         {
-            var cultures = await _fireBaseClient
-                            .Child(collection).OnceSingleAsync<Cultures>();
+            var cultures = new List<Culture>();
+
+            var culturesRequest = await _fireBaseClient
+                            .Child(collection).OnceAsync<Culture>();
+
+            foreach (var item in culturesRequest)
+            {
+                cultures.Add(item.Object);
+            }
 
             return cultures;
         }

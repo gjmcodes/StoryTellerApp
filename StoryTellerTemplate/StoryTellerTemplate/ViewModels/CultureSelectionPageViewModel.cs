@@ -5,6 +5,7 @@ using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
 using StoryTeller.InternalData.Interfaces.Services;
 using StoryTellerTemplate.Interfaces.Services.CultureSelection;
 using StoryTellerTemplate.Models.GameContent;
+using StoryTellerTemplate.Models.GameCultures;
 using Xamarin.Forms;
 
 namespace StoryTellerTemplate.ViewModels
@@ -16,7 +17,7 @@ namespace StoryTellerTemplate.ViewModels
         private readonly IUserStatusLocalPersistentRepository _userStatusLocalPersistentRepository;
         private readonly ILocalDataManagerService _localDataManagerService;
 
-        public ObservableCollection<string> Cultures { get; }
+        public ObservableCollection<CultureVm> Cultures { get; }
 
         public CultureSelectionPageViewModel(INavigationService navigationService,
             ICultureSelectionAppService cultureSelectionAppService,
@@ -27,7 +28,7 @@ namespace StoryTellerTemplate.ViewModels
             _userStatusLocalPersistentRepository = userStatusLocalPersistentRepository;
             _localDataManagerService = localDataManagerService;
 
-            Cultures = new ObservableCollection<string>();
+            Cultures = new ObservableCollection<CultureVm>();
             SelectCultureCommand = new Command<string>(async (culture) => await SelectCultureAsync(culture));
         }
 
@@ -44,12 +45,12 @@ namespace StoryTellerTemplate.ViewModels
         {
             await _localDataManagerService.CreateLocalTablesAsync();
 
-            if (await _userStatusLocalPersistentRepository.HasSelectedCultureAsync())
-            {
-                //Navegar para próxima página
-            }
-            else
-            {
+            //if (await _userStatusLocalPersistentRepository.HasSelectedCultureAsync())
+            //{
+            //    //Navegar para próxima página
+            //}
+            //else
+            //{
                 var cultures = await _cultureSelectionAppService.GetCulturesAsync();
 
                 Cultures.Clear();
@@ -58,7 +59,7 @@ namespace StoryTellerTemplate.ViewModels
                 {
                     Cultures.Add(item);
                 }
-            }
+            //}
         }
     }
 }

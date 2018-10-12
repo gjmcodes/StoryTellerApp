@@ -24,7 +24,7 @@
                             <StackLayout 
                                 HorizontalOptions="CenterAndExpand"
                                 VerticalOptions="CenterAndExpand">
-                                <Label Text="{Binding .}" />
+                                <Label Text="{Binding CultureCode}" />
                             </StackLayout>
                             
                         </ViewCell.View>

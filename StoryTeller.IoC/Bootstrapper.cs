@@ -5,16 +5,19 @@ using StoryTeller.Core.ContentTranslation.FontAttributes;
 using StoryTeller.Core.ContentTranslation.NameCalls;
 using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
+using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.CharactersData;
 using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.NameCalls;
 using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
 using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
+using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
 using StoryTeller.Core.Interfaces.Services.Users;
 using StoryTeller.Core.Services.ContentTranslation;
 using StoryTeller.Core.Services.GameContentDownload;
 using StoryTeller.Core.Services.Users;
+using StoryTeller.ExternalData.FireBase.GameCulture;
 using StoryTeller.ExternalData.FireBase.Pages;
 using StoryTeller.InternalData.Factories.CharactersData;
 using StoryTeller.InternalData.Factories.NameCalls;
@@ -57,6 +60,9 @@ public static class Bootstrapper
 
     static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
     {
+        //Criação de repository readonly
+        containerRegistry.Register<IUserStatusLocalRepository, UserStatusLocalRepository>();
+
         containerRegistry.Register<IUserStatusLocalPersistentRepository, UserStatusPersistentRepository>();
         containerRegistry.Register<ICharacterDataLocalPersistentRepository, CharacterDataPersistentRepository>();
         containerRegistry.Register<IPronoumLocalPersistentRepository, PronoumPersistentRepository>();
@@ -79,6 +85,7 @@ public static class Bootstrapper
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)
     {
+        containerRegistry.Register<IGameCultureRepository, GameCultureWs>();
         containerRegistry.Register<IPageExternalRepository, PageWs>();
     }
 
