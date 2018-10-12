@@ -24,7 +24,7 @@ namespace StoryTellerTemplate.Factories
         {
             var pageVm = new PageVm();
             pageVm.Actions = _gameActionVmFactory.MapGameActionToVm(page.actions);
-            pageVm.Content = _textSpanFactory.MapStringToXamarinSpan(page.content.content);
+            //pageVm.Content = _textSpanFactory.MapStringToXamarinSpan(page.content.content);
 
             return pageVm;
         }

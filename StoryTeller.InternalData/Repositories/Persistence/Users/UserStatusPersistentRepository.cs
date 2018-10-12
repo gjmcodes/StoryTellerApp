@@ -1,9 +1,5 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
 using StoryTeller.InternalData.DTOs.PersistentObjects.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StoryTeller.InternalData.Repositories.Persistence.Users
@@ -12,8 +8,7 @@ namespace StoryTeller.InternalData.Repositories.Persistence.Users
     {
         async Task<UserStatusDto> GetUserStatusAsync()
         {
-            var query = await base.Conn.QueryAsync<UserStatusDto>("select * from");
-            var user = query.FirstOrDefault();
+            var user = await base.Conn.Table<UserStatusDto>().FirstOrDefaultAsync();
 
             if(user == null)
             {
@@ -26,14 +21,16 @@ namespace StoryTeller.InternalData.Repositories.Persistence.Users
 
         public async Task<bool> SetSelectedCultureAsync(string selectedCulture)
         {
-            var dto = new UserStatusDto() { SelectedCulture = selectedCulture};
+            var dto = await GetUserStatusAsync();
+            dto.SelectedCulture = selectedCulture;
 
-            return await base.AddAsync<UserStatusDto>(dto);
+            return await base.UpdateAsync<UserStatusDto>(dto);
         }
 
         public async Task<bool> UpdateUserCurrentPageAsync(string pageId)
         {
-            var dto = new UserStatusDto() { CurrentPageId = pageId };
+            var dto = await GetUserStatusAsync();
+            dto.CurrentPageId = pageId;
 
             return await base.AddAsync<UserStatusDto>(dto);
         }

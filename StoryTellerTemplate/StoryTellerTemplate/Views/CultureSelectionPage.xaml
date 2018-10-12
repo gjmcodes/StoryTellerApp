@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="StoryTellerTemplate.Views.CultureSelectionPage">
+             x:Class="StoryTellerTemplate.Views.CultureSelectionPage"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
 
     <StackLayout
         VerticalOptions="FillAndExpand">
@@ -11,12 +13,23 @@
         <ListView 
             ItemsSource="{Binding Cultures}"
             HorizontalOptions="CenterAndExpand"
-            Margin="10, 10">
+            SeparatorColor="Transparent"
+            Margin="10, 10"
+            ItemTapped="ListView_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Text="{Binding .}"
-                            Command="{Binding SelectCultureCommand}"
-                            CommandParameter="{Binding .}" />
+                    <ViewCell>
+                        <ViewCell.View>
+
+                            <StackLayout 
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding .}" />
+                            </StackLayout>
+                            
+                        </ViewCell.View>
+                    </ViewCell>
+                  
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

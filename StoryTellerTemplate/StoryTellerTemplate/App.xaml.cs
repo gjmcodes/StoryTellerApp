@@ -59,7 +59,6 @@ namespace StoryTellerTemplate
         void RegisterFactories(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ITextSpanFactory, TextSpanFactory>();
-            containerRegistry.Register<IRoomVmFactory, RoomVmFactory>();
             containerRegistry.Register<IGameActionVmFactory, GameActionVmFactory>();
             containerRegistry.Register<IPageVmFactory, PageVmFactory>();
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using StoryTeller.Core.ContentTranslation;
+using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Text;
 using StoryTeller.CrossCutting.Disposable;
 using StoryTellerTemplate.Interfaces.Factories;
@@ -9,24 +10,18 @@ namespace StoryTellerTemplate.Factories
 {
     public class TextSpanFactory : BaseFactory, ITextSpanFactory 
     {
-        private readonly ContentMarkupTranslator _contentMarkupTranslator;
 
-        public TextSpanFactory(ContentMarkupTranslator contentMarkupTranslator)
-        {
-            _contentMarkupTranslator = contentMarkupTranslator;
-        }
+        private readonly ICharacterDataTranslatorService _characterDataTranslatorService;
+        private readonly INameCallTranslatorService _nameCallTranslatorService;
 
-        public IEnumerable<Span> MapStringToXamarinSpan(string content)
-        {
-            var spans = _contentMarkupTranslator.Translate(content);
-            var xamarinSpans = MapTextSpanToXamarinSpan(spans);
-
-            return xamarinSpans;
-        }
         public Span MapTextSpanToXamarinSpan(TextSpan textSpan)
         {
             if (textSpan.lineBreak)
                 return new Span() { Text = textSpan.Content };
+
+            string filteredContent = string.Empty;
+
+            // Deverá tratar pronoum calls e character data aqui
 
             var span = new Span()
             {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Repositories.External.Pages
 {
-    public interface IPageExternalRepository : IBaseRepository
+    public interface IPageExternalRepository
     {
         Task<Page> GetPageByIdAsync(string pageId);
         Task<IEnumerable<Page>> GetPagesByCultureAsync(string culture);

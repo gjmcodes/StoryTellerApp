@@ -1,10 +1,7 @@
-﻿using SQLite;
-using StoryTeller.Core.Interfaces.Repositories;
-using StoryTeller.Core.Models;
+﻿using StoryTeller.Core.Interfaces.Repositories;
 using StoryTeller.CrossCutting.Disposable;
-using StoryTeller.InternalData.DTOs.PersistentObjects;
+using StoryTeller.InternalData.Infra;
 using StoryTeller.InternalData.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -13,8 +10,8 @@ namespace StoryTeller.InternalData.Repositories
 {
     public class BaseRepository : DisposableObject, IBaseRepository
     {
-        SQLiteAsyncConnection _conn;
-        protected SQLiteAsyncConnection Conn
+        InternalSQLiteConnection _conn;
+        protected InternalSQLiteConnection Conn
         {
             get
             {
@@ -33,9 +30,7 @@ namespace StoryTeller.InternalData.Repositories
            
         }
 
-        protected override void ReleaseResources()
-        {
-        }
+     
 
         public async Task<bool> AddAsync<T>(T entity) where T : class
         {
@@ -45,6 +40,16 @@ namespace StoryTeller.InternalData.Repositories
         public async Task<bool> AddAsync<T>(IEnumerable<T> entities) where T : class
         {
             return await Conn.InsertAllAsync(entities) > 0;
+        }
+
+        public async Task<bool> UpdateAsync<T>(T entity) where T : class
+        {
+            return await Conn.UpdateAsync(entity) > 0;
+        }
+
+        protected override void ReleaseResources()
+        {
+            _conn.Dispose();
         }
     }
 }

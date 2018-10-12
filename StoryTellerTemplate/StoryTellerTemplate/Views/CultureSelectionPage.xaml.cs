@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using StoryTellerTemplate.ViewModels;
+using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Views
 {
@@ -7,6 +8,13 @@ namespace StoryTellerTemplate.Views
         public CultureSelectionPage()
         {
             InitializeComponent();
+        }
+
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var vm = (CultureSelectionPageViewModel)BindingContext;
+
+            await vm.SelectCultureAsync(e.Item.ToString());
         }
     }
 }

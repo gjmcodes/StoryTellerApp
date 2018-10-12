@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Prism.Navigation;
 using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
+using StoryTeller.InternalData.Interfaces.Services;
 using StoryTellerTemplate.Interfaces.Services.CultureSelection;
 using StoryTellerTemplate.Models.GameContent;
 using Xamarin.Forms;
@@ -13,13 +14,20 @@ namespace StoryTellerTemplate.ViewModels
 
         private readonly ICultureSelectionAppService _cultureSelectionAppService;
         private readonly IUserStatusLocalPersistentRepository _userStatusLocalPersistentRepository;
+        private readonly ILocalDataManagerService _localDataManagerService;
 
         public ObservableCollection<string> Cultures { get; }
 
         public CultureSelectionPageViewModel(INavigationService navigationService,
-            ICultureSelectionAppService cultureSelectionAppService) : base(navigationService)
+            ICultureSelectionAppService cultureSelectionAppService,
+            IUserStatusLocalPersistentRepository userStatusLocalPersistentRepository,
+            ILocalDataManagerService localDataManagerService) : base(navigationService)
         {
             _cultureSelectionAppService = cultureSelectionAppService;
+            _userStatusLocalPersistentRepository = userStatusLocalPersistentRepository;
+            _localDataManagerService = localDataManagerService;
+
+            Cultures = new ObservableCollection<string>();
             SelectCultureCommand = new Command<string>(async (culture) => await SelectCultureAsync(culture));
         }
 
@@ -34,6 +42,8 @@ namespace StoryTellerTemplate.ViewModels
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {
+            await _localDataManagerService.CreateLocalTablesAsync();
+
             if (await _userStatusLocalPersistentRepository.HasSelectedCultureAsync())
             {
                 //Navegar para próxima página
@@ -41,6 +51,8 @@ namespace StoryTellerTemplate.ViewModels
             else
             {
                 var cultures = await _cultureSelectionAppService.GetCulturesAsync();
+
+                Cultures.Clear();
 
                 foreach (var item in cultures)
                 {

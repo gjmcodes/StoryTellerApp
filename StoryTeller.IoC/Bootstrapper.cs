@@ -11,21 +11,22 @@ using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
 using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
+using StoryTeller.Core.Interfaces.Services.Users;
 using StoryTeller.Core.Services.ContentTranslation;
 using StoryTeller.Core.Services.GameContentDownload;
-using StoryTeller.CrossCutting.User.Interfaces.Services;
-using StoryTeller.CrossCutting.User.Preferences;
-using StoryTeller.CrossCutting.User.Services.Status;
+using StoryTeller.Core.Services.Users;
 using StoryTeller.ExternalData.FireBase.Pages;
 using StoryTeller.InternalData.Factories.CharactersData;
 using StoryTeller.InternalData.Factories.NameCalls;
 using StoryTeller.InternalData.Interfaces.Factories.CharactersData;
 using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
 using StoryTeller.InternalData.Interfaces.Factories.Pages;
+using StoryTeller.InternalData.Interfaces.Services;
 using StoryTeller.InternalData.Repositories.Persistence.CharactersData;
 using StoryTeller.InternalData.Repositories.Persistence.NameCalls;
 using StoryTeller.InternalData.Repositories.Persistence.Pages;
 using StoryTeller.InternalData.Repositories.Persistence.Users;
+using StoryTeller.InternalData.Services;
 
 public static class Bootstrapper
 {
@@ -33,6 +34,9 @@ public static class Bootstrapper
     {
         RegisterDomainServices(containerRegistry);
         RegisterExternalRepositories(containerRegistry);
+        RegisterInternalRepositories(containerRegistry);
+        RegisterInternalDataServices(containerRegistry);
+        RegisterInternalFactories(containerRegistry);
         RegisterCrossCuttingServices(containerRegistry);
     }
 
@@ -59,6 +63,11 @@ public static class Bootstrapper
         containerRegistry.Register<IPageLocalPersistentRepository, PagePersistentRepository>();
     }
 
+    static void RegisterInternalDataServices(IContainerRegistry containerRegistry)
+    {
+        containerRegistry.Register<ILocalDataManagerService, LocalDataManagerService>();
+    }
+
     static void RegisterInternalFactories(IContainerRegistry containerRegistry)
     {
         containerRegistry.Register<ICharacterLocalDataFactory, CharacterLocalDataFactory>();
@@ -76,6 +85,5 @@ public static class Bootstrapper
     static void RegisterCrossCuttingServices(IContainerRegistry containerRegistry)
     {
         containerRegistry.Register<IUserStatusService, UserStatusService>();
-        containerRegistry.RegisterSingleton<UserPreferences>();
     }
 }

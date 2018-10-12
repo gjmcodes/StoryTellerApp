@@ -1,12 +1,9 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using StoryTeller.InternalData.Infra;
 
 namespace StoryTeller.InternalData.Interfaces
 {
     public interface ISQLiteDb
     {
-        SQLiteAsyncConnection GetConnection();
+        InternalSQLiteConnection GetConnection();
     }
 }

@@ -7,6 +7,8 @@ namespace StoryTellerTemplate.Views
 {
     public partial class CharacterCreationPage : ContentPage, IGameContentManager
     {
+        private FormattedString fortText;
+
         public CharacterCreationPage()
         {
             InitializeComponent();
