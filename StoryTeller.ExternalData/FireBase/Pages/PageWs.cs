@@ -1,5 +1,5 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.Pages;
-using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
+using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.Core.Pages;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace StoryTeller.ExternalData.FireBase.Pages
 {
     public class PageWs : BaseFirebaseWs, IPageExternalRepository
     {
-        public PageWs(IUserStatusLocalReadOnlyRepository userStatusLocalRepository) 
+        public PageWs(IUserStatusLocalRepository userStatusLocalRepository) 
             : base("Pages", userStatusLocalRepository)
         {
         }

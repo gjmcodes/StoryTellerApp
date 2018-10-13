@@ -1,10 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Prism.Navigation;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
+using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.InternalData.Interfaces.Services;
 using StoryTellerTemplate.Interfaces.Services.CultureSelection;
-using StoryTellerTemplate.Models.GameContent;
 using StoryTellerTemplate.Models.GameCultures;
 using Xamarin.Forms;
 

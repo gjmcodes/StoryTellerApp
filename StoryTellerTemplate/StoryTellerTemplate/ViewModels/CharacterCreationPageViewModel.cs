@@ -1,5 +1,5 @@
 ﻿using Prism.Navigation;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.CharactersData;
+using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
 using StoryTellerTemplate.Interfaces.Services.CharacterCreation;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Models.CharacterCreation;

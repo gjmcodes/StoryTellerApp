@@ -5,11 +5,16 @@ using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StoryTeller.InternalData.Repositories.Persistence.NameCalls
+namespace StoryTeller.InternalData.Repositories.NameCalls
 {
-    public class PronoumPersistentRepository : BaseRepository, IPronoumLocalRepository
+    public class PronoumRepository : BaseRepository, IPronoumLocalRepository
     {
         private readonly IPronoumLocalDataFactory _localDataPronoumFactory;
+
+        public async Task<PronoumNameCall> GetPronoumByIdAsync(string pronoumId)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public async Task<bool> PersistNameCallsAsync(IEnumerable<PronoumNameCall> nameCalls)
         {

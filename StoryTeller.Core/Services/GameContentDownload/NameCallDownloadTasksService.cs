@@ -1,10 +1,6 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.NameCalls;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.NameCalls;
+using StoryTeller.Core.Interfaces.Repositories.Local.NameCalls;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
-using StoryTeller.Core.Models.NameCalls;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Services.GameContentDownload

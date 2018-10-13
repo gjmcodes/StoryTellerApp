@@ -1,4 +1,5 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.GameCultures;
+using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.CultureSelection;
 using StoryTellerTemplate.Models.GameCultures;
 using System.Collections.Generic;
@@ -9,28 +10,20 @@ namespace StoryTellerTemplate.Services.CultureSelection
     public class CultureSelectionAppService : BaseAppService, ICultureSelectionAppService
     {
         private readonly IGameCultureRepository _gameCultureRepository;
+        private readonly ICultureVmFactory _cultureVmFactory;
 
-        public CultureSelectionAppService(IGameCultureRepository gameCultureRepository)
+
+        public CultureSelectionAppService(IGameCultureRepository gameCultureRepository,
+            ICultureVmFactory cultureVmFactory)
         {
             _gameCultureRepository = gameCultureRepository;
+            _cultureVmFactory = cultureVmFactory;
         }
 
         public async Task<IEnumerable<CultureVm>> GetCulturesAsync()
         {
             var cultures = await _gameCultureRepository.GetGameCulturesAsync();
-            var culturesVm = new List<CultureVm>();
-
-            // ToDo Transformar em factory
-            foreach (var item in cultures)
-            {
-                var vm = new CultureVm()
-                {
-                    CultureCode = item.cultureCode,
-                    ImagePath = item.imagePath
-                };
-
-                culturesVm.Add(vm);
-            }
+            var culturesVm = _cultureVmFactory.MapCultureToVm(cultures);
 
             return culturesVm;
         }

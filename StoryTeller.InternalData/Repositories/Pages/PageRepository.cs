@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StoryTeller.InternalData.Repositories.Persistence.Pages
+namespace StoryTeller.InternalData.Repositories.Pages
 {
-    public class PagePersistentRepository : BaseRepository, IPageLocalRepository
+    public class PageRepository : BaseRepository, IPageLocalRepository
     {
         private readonly IContentMarkupTranslatorService _contentMarkupTranslatorService;
 

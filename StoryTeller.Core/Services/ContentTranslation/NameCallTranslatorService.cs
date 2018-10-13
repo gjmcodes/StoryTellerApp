@@ -1,6 +1,5 @@
 ﻿using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.ContentTranslation.NameCalls;
-using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.NameCalls;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Models.NameCalls;
 using System.Collections.Generic;

@@ -22,10 +22,10 @@ using StoryTeller.InternalData.Factories.NameCalls;
 using StoryTeller.InternalData.Interfaces.Factories.CharactersData;
 using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
 using StoryTeller.InternalData.Interfaces.Services;
-using StoryTeller.InternalData.Repositories.Persistence.CharactersData;
-using StoryTeller.InternalData.Repositories.Persistence.NameCalls;
-using StoryTeller.InternalData.Repositories.Persistence.Pages;
-using StoryTeller.InternalData.Repositories.Persistence.Users;
+using StoryTeller.InternalData.Repositories.CharactersData;
+using StoryTeller.InternalData.Repositories.NameCalls;
+using StoryTeller.InternalData.Repositories.Pages;
+using StoryTeller.InternalData.Repositories.Users;
 using StoryTeller.InternalData.Services;
 
 public static class Bootstrapper
@@ -58,9 +58,9 @@ public static class Bootstrapper
     static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
     {
         containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
-        containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataPersistentRepository>();
-        containerRegistry.Register<IPronoumLocalRepository, PronoumPersistentRepository>();
-        containerRegistry.Register<IPageLocalRepository, PagePersistentRepository>();
+        containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataRepository>();
+        containerRegistry.Register<IPronoumLocalRepository, PronoumRepository>();
+        containerRegistry.Register<IPageLocalRepository, PageRepository>();
     }
 
     static void RegisterInternalDataServices(IContainerRegistry containerRegistry)

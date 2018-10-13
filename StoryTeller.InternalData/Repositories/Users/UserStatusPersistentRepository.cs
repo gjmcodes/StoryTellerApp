@@ -2,7 +2,7 @@
 using StoryTeller.InternalData.DTOs.PersistentObjects.Users;
 using System.Threading.Tasks;
 
-namespace StoryTeller.InternalData.Repositories.Persistence.Users
+namespace StoryTeller.InternalData.Repositories.Users
 {
     public class UserStatusPersistentRepository : BaseRepository, IUserStatusLocalRepository
     {
@@ -40,6 +40,20 @@ namespace StoryTeller.InternalData.Repositories.Persistence.Users
             var user = await GetUserStatusAsync();
 
             return !string.IsNullOrEmpty(user.SelectedCulture);
+        }
+
+        public async Task<string> GetCurrentPageAsync()
+        {
+            var user = await GetUserStatusAsync();
+
+            return user.CurrentPageId;
+        }
+
+        public async Task<string> GetSelectedCultureAsync()
+        {
+            var user = await GetUserStatusAsync();
+
+            return user.SelectedCulture;
         }
     }
 }

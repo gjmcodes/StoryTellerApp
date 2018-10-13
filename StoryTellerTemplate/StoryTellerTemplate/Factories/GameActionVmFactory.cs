@@ -1,9 +1,7 @@
 ﻿using StoryTeller.Core.Actions;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Models.GameContent;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StoryTellerTemplate.Factories
 {

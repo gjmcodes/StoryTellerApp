@@ -1,6 +1,6 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
-using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
+using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.CrossCutting.Disposable;
 using System;
 using System.Collections.Generic;
@@ -16,9 +16,9 @@ namespace StoryTeller.ExternalData.FireBase
         protected FirebaseClient _fireBaseClient;
         protected string collection;
 
-        private readonly IUserStatusLocalReadOnlyRepository _userStatusLocalRepository;
+        private readonly IUserStatusLocalRepository _userStatusLocalRepository;
 
-        public BaseFirebaseWs(string collection, IUserStatusLocalReadOnlyRepository userStatusLocalRepository)
+        public BaseFirebaseWs(string collection, IUserStatusLocalRepository userStatusLocalRepository)
         {
             _userStatusLocalRepository = userStatusLocalRepository;
 
@@ -29,7 +29,7 @@ namespace StoryTeller.ExternalData.FireBase
 
         async Task<ChildQuery> QueryableCollectionWithLanguageAsync()
         {
-            var userCulture = await _userStatusLocalRepository.GetUserCurrentPageAsync();
+            var userCulture = await _userStatusLocalRepository.GetCurrentPageAsync();
             return _fireBaseClient
             .Child(collection)
             .Child(userCulture);

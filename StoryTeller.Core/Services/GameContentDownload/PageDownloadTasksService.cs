@@ -1,5 +1,5 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.Pages;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
+using StoryTeller.Core.Interfaces.Repositories.Local.Pages;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
 using System.Threading.Tasks;
 
