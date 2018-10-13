@@ -10,7 +10,7 @@ namespace StoryTellerTemplate.ViewModels
     public class CharacterCreationPageViewModel : BindableContentBaseViewModel, IGameContentManagerViewModelBinder
     {
         private ICharacterCreationAppService _characterCreationAppService;
-        private ICharacterDataLocalPersistentRepository _characterDataLocalPersistentRepository;
+        private ICharacterDataLocalRepository _characterDataLocalPersistentRepository;
 
         public CharacterCreationPageViewModel(INavigationService navigationService) 
             : base(navigationService)

@@ -1,11 +1,8 @@
-﻿using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.CharactersData;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
 
 namespace StoryTeller.InternalData.Repositories.Persistence.CharactersData
 {
-    public class CharacterDataPersistentRepository : BaseRepository, ICharacterDataLocalPersistentRepository
+    public class CharacterDataPersistentRepository : BaseRepository, ICharacterDataLocalRepository
     {
     }
 }

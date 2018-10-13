@@ -12,7 +12,7 @@ namespace StoryTeller.Core.Services.GameContentDownload
     public class NameCallDownloadTasksService : BaseService, INameCallDownloadTasksService
     {
         private readonly IPronoumsNameCallsExternalRepository _pronoumsNameCallsExternalRepository;
-        private readonly IPronoumLocalPersistentRepository _nameCallLocalPersistentRepository;
+        private readonly IPronoumLocalRepository _nameCallLocalPersistentRepository;
 
         public async Task<bool> DownloadPronoumNameCallsByCultureAsync(string culture)
         {

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users
+namespace StoryTeller.Core.Interfaces.Repositories.Local.Users
 {
-    public interface IUserStatusLocalPersistentRepository : IBaseRepository
+    public interface IUserStatusLocalRepository : IBaseRepository
     {
         Task<bool> UpdateUserCurrentPageAsync(string pageId);
         Task<bool> SetSelectedCultureAsync(string selectedCulture);

@@ -1,10 +1,10 @@
-﻿using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
+﻿using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.InternalData.DTOs.PersistentObjects.Users;
 using System.Threading.Tasks;
 
 namespace StoryTeller.InternalData.Repositories.Persistence.Users
 {
-    public class UserStatusPersistentRepository : BaseRepository, IUserStatusLocalPersistentRepository
+    public class UserStatusPersistentRepository : BaseRepository, IUserStatusLocalRepository
     {
         async Task<UserStatusDto> GetUserStatusAsync()
         {

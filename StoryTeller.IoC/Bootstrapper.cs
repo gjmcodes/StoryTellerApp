@@ -3,14 +3,12 @@ using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.ContentTranslation.CharactersData;
 using StoryTeller.Core.ContentTranslation.FontAttributes;
 using StoryTeller.Core.ContentTranslation.NameCalls;
-using StoryTeller.Core.Interfaces.Repositories.External;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.CharactersData;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.NameCalls;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
-using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Users;
-using StoryTeller.Core.Interfaces.Repositories.Local.ReadOnly.Users;
+using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
+using StoryTeller.Core.Interfaces.Repositories.Local.NameCalls;
+using StoryTeller.Core.Interfaces.Repositories.Local.Pages;
+using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
 using StoryTeller.Core.Interfaces.Services.Users;
@@ -23,7 +21,6 @@ using StoryTeller.InternalData.Factories.CharactersData;
 using StoryTeller.InternalData.Factories.NameCalls;
 using StoryTeller.InternalData.Interfaces.Factories.CharactersData;
 using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
-using StoryTeller.InternalData.Interfaces.Factories.Pages;
 using StoryTeller.InternalData.Interfaces.Services;
 using StoryTeller.InternalData.Repositories.Persistence.CharactersData;
 using StoryTeller.InternalData.Repositories.Persistence.NameCalls;
@@ -60,13 +57,10 @@ public static class Bootstrapper
 
     static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
     {
-        //Criação de repository readonly
-        containerRegistry.Register<IUserStatusLocalRepository, UserStatusLocalRepository>();
-
-        containerRegistry.Register<IUserStatusLocalPersistentRepository, UserStatusPersistentRepository>();
-        containerRegistry.Register<ICharacterDataLocalPersistentRepository, CharacterDataPersistentRepository>();
-        containerRegistry.Register<IPronoumLocalPersistentRepository, PronoumPersistentRepository>();
-        containerRegistry.Register<IPageLocalPersistentRepository, PagePersistentRepository>();
+        containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
+        containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataPersistentRepository>();
+        containerRegistry.Register<IPronoumLocalRepository, PronoumPersistentRepository>();
+        containerRegistry.Register<IPageLocalRepository, PagePersistentRepository>();
     }
 
     static void RegisterInternalDataServices(IContainerRegistry containerRegistry)

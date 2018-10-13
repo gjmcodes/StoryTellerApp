@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Interfaces.Repositories.Local.Persistence.Pages;
+﻿using StoryTeller.Core.Interfaces.Repositories.Local.Pages;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Pages;
 using StoryTeller.InternalData.Interfaces.Factories.Pages;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.InternalData.Repositories.Persistence.Pages
 {
-    public class PagePersistentRepository : BaseRepository, IPageLocalPersistentRepository
+    public class PagePersistentRepository : BaseRepository, IPageLocalRepository
     {
         private readonly IContentMarkupTranslatorService _contentMarkupTranslatorService;
 

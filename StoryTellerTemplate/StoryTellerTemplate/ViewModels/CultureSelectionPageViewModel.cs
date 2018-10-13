@@ -14,14 +14,14 @@ namespace StoryTellerTemplate.ViewModels
     {
 
         private readonly ICultureSelectionAppService _cultureSelectionAppService;
-        private readonly IUserStatusLocalPersistentRepository _userStatusLocalPersistentRepository;
+        private readonly IUserStatusLocalRepository _userStatusLocalPersistentRepository;
         private readonly ILocalDataManagerService _localDataManagerService;
 
         public ObservableCollection<CultureVm> Cultures { get; }
 
         public CultureSelectionPageViewModel(INavigationService navigationService,
             ICultureSelectionAppService cultureSelectionAppService,
-            IUserStatusLocalPersistentRepository userStatusLocalPersistentRepository,
+            IUserStatusLocalRepository userStatusLocalPersistentRepository,
             ILocalDataManagerService localDataManagerService) : base(navigationService)
         {
             _cultureSelectionAppService = cultureSelectionAppService;

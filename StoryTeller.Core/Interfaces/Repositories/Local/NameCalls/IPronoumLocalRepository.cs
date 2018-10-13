@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StoryTeller.Core.Interfaces.Repositories.Local.Persistence.NameCalls
+namespace StoryTeller.Core.Interfaces.Repositories.Local.NameCalls
 {
-    public interface IPronoumLocalPersistentRepository : IBaseRepository
+    public interface IPronoumLocalRepository : IBaseRepository
     {
         Task<bool> PersistNameCallsAsync(IEnumerable<PronoumNameCall> nameCalls);
     }

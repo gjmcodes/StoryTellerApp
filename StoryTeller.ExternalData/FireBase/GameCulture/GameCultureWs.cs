@@ -8,7 +8,7 @@ namespace StoryTeller.ExternalData.FireBase.GameCulture
 {
     public class GameCultureWs : BaseFirebaseWs, IGameCultureRepository
     {
-        public GameCultureWs(IUserStatusLocalRepository userStatusLocalRepository)
+        public GameCultureWs(IUserStatusLocalReadOnlyRepository userStatusLocalRepository)
             : base("GameCultures", userStatusLocalRepository)
         {
         }

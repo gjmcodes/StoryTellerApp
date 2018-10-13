@@ -7,10 +7,10 @@ namespace StoryTeller.Core.Services.GameContentDownload
 {
     public class PageDownloadTasksService : BaseService, IPageDownloadTasksService
     {
-        private readonly IPageLocalPersistentRepository _pageLocalPersistentRepository;
+        private readonly IPageLocalRepository _pageLocalPersistentRepository;
         private readonly IPageExternalRepository _pageExternalRepository;
 
-        public PageDownloadTasksService(IPageLocalPersistentRepository pageLocalPersistentRepository, 
+        public PageDownloadTasksService(IPageLocalRepository pageLocalPersistentRepository, 
             IPageExternalRepository pageExternalRepository)
         {
             _pageLocalPersistentRepository = pageLocalPersistentRepository;
