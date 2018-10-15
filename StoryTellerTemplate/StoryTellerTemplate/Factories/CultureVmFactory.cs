@@ -16,6 +16,8 @@ namespace StoryTellerTemplate.Factories
                 var vm = new CultureVm();
                 vm.CultureCode = item.cultureCode;
                 vm.ImagePath = item.imagePath;
+
+                cultureVms.Add(vm);
             }
 
             return cultureVms;

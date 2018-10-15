@@ -14,7 +14,7 @@ namespace StoryTellerTemplate.Views
         {
             var vm = (CultureSelectionPageViewModel)BindingContext;
 
-            await vm.SelectCultureAsync(e.Item.ToString());
+            await vm.SelectCultureAsync(e.Item);
         }
     }
 }

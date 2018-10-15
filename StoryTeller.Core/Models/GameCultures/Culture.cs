@@ -2,7 +2,7 @@
 
 namespace StoryTeller.Core.GameCultures
 {
-    public class Culture : BaseExternalEntity
+    public struct Culture
     {
         public string imagePath;
         public string cultureCode;

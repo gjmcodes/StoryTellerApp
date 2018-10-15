@@ -28,14 +28,14 @@ namespace StoryTellerTemplate.ViewModels
             _localDataManagerService = localDataManagerService;
 
             Cultures = new ObservableCollection<CultureVm>();
-            SelectCultureCommand = new Command<string>(async (culture) => await SelectCultureAsync(culture));
+            SelectCultureCommand = new Command<CultureVm>(async (culture) => await SelectCultureAsync(culture));
         }
 
-        public Command<string> SelectCultureCommand { get; }
+        public Command<CultureVm> SelectCultureCommand { get; }
 
-        public async Task SelectCultureAsync(string selectedCulture)
+        public async Task SelectCultureAsync(CultureVm selectedCulture)
         {
-            await _userStatusLocalPersistentRepository.SetSelectedCultureAsync(selectedCulture);
+            await _userStatusLocalPersistentRepository.SetSelectedCultureAsync(selectedCulture.CultureCode);
 
             //Navegar para próxima página
         }
