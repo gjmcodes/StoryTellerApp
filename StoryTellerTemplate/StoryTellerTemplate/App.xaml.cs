@@ -54,6 +54,7 @@ namespace StoryTellerTemplate
             containerRegistry.Register<ICharacterCreationAppService, CharacterCreationAppService>();
             containerRegistry.Register<IGameContentAppService, GameContentAppService>();
             containerRegistry.Register<ICultureSelectionAppService, CultureSelectionAppService>();
+            containerRegistry.Register<IGameContentDownloadAppService, GameContentDownloadAppService>();
         }
 
         void RegisterFactories(IContainerRegistry containerRegistry)

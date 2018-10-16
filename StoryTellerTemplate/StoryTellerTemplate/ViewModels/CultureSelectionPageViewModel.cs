@@ -33,23 +33,31 @@ namespace StoryTellerTemplate.ViewModels
 
         public Command<CultureVm> SelectCultureCommand { get; }
 
+        async Task NavigateToContentDownloadPageAsync()
+        {
+            await NavigationService.NavigateAsync("NavigationPage/GameContentLoaderPage");
+        }
+
         public async Task SelectCultureAsync(CultureVm selectedCulture)
         {
-            await _userStatusLocalPersistentRepository.SetSelectedCultureAsync(selectedCulture.CultureCode);
+            if (await _userStatusLocalPersistentRepository.SetSelectedCultureAsync(selectedCulture.CultureCode))
+            {
+                await NavigateToContentDownloadPageAsync();
+            }
 
-            //Navegar para próxima página
+
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {
             await _localDataManagerService.CreateLocalTablesAsync();
 
-            //if (await _userStatusLocalPersistentRepository.HasSelectedCultureAsync())
-            //{
-            //    //Navegar para próxima página
-            //}
-            //else
-            //{
+            if (await _userStatusLocalPersistentRepository.HasSelectedCultureAsync())
+            {
+                await NavigateToContentDownloadPageAsync();
+            }
+            else
+            {
                 var cultures = await _cultureSelectionAppService.GetCulturesAsync();
 
                 Cultures.Clear();
@@ -58,7 +66,7 @@ namespace StoryTellerTemplate.ViewModels
                 {
                     Cultures.Add(item);
                 }
-            //}
+            }
         }
     }
 }

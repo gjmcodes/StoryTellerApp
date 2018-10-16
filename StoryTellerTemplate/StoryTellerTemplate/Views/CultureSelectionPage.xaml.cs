@@ -1,4 +1,5 @@
-﻿using StoryTellerTemplate.ViewModels;
+﻿using StoryTellerTemplate.Models.GameCultures;
+using StoryTellerTemplate.ViewModels;
 using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Views
@@ -14,7 +15,7 @@ namespace StoryTellerTemplate.Views
         {
             var vm = (CultureSelectionPageViewModel)BindingContext;
 
-            await vm.SelectCultureAsync(e.Item);
+            await vm.SelectCultureAsync((CultureVm)e.Item);
         }
     }
 }

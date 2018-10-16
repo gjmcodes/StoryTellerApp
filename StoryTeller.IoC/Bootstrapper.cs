@@ -3,6 +3,7 @@ using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.ContentTranslation.CharactersData;
 using StoryTeller.Core.ContentTranslation.FontAttributes;
 using StoryTeller.Core.ContentTranslation.NameCalls;
+using StoryTeller.Core.Interfaces.Repositories.External.NameCalls;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
@@ -16,11 +17,14 @@ using StoryTeller.Core.Services.ContentTranslation;
 using StoryTeller.Core.Services.GameContentDownload;
 using StoryTeller.Core.Services.Users;
 using StoryTeller.ExternalData.FireBase.GameCulture;
+using StoryTeller.ExternalData.FireBase.NameCalls;
 using StoryTeller.ExternalData.FireBase.Pages;
 using StoryTeller.InternalData.Factories.CharactersData;
 using StoryTeller.InternalData.Factories.NameCalls;
+using StoryTeller.InternalData.Factories.Pages;
 using StoryTeller.InternalData.Interfaces.Factories.CharactersData;
 using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
+using StoryTeller.InternalData.Interfaces.Factories.Pages;
 using StoryTeller.InternalData.Interfaces.Services;
 using StoryTeller.InternalData.Repositories.CharactersData;
 using StoryTeller.InternalData.Repositories.NameCalls;
@@ -47,6 +51,12 @@ public static class Bootstrapper
         containerRegistry.Register<ICharacterDataTranslatorService, CharacterDataTranslatorService>();
         containerRegistry.Register<IContentMarkupTranslatorService, ContentMarkupTranslatorService>();
 
+        containerRegistry.Register<IFontAttributeTranslatorService, FontAttributeTranslatorService>();
+        containerRegistry.Register<ICharacterDataTranslatorService, CharacterDataTranslatorService>();
+        containerRegistry.Register<INameCallTranslatorService, NameCallTranslatorService>();
+        containerRegistry.Register<IParagraphTranslatorService, ParagraphTranslatorService>();
+
+
         containerRegistry.Register<NameCallContentFormatter>();
         containerRegistry.Register<FontAttributeContentFormatter>();
         containerRegistry.Register<CharacterDataFormatter>();
@@ -72,15 +82,17 @@ public static class Bootstrapper
     {
         containerRegistry.Register<ICharacterLocalDataFactory, CharacterLocalDataFactory>();
         containerRegistry.Register<IPronoumLocalDataFactory, PronoumLocalDataFactory>();
-    //    containerRegistry.Register<IPageActionPersistenceFactory, PageActionPersistenceFactory>();
-    //    containerRegistry.Register<IPageContentPersistenceFactory, PageActionPersistenceFactory>();
-    //    containerRegistry.Register<IPageDtoPersistenceFactory, PageActionPersistenceFactory>();
+
+        containerRegistry.Register<IPageDtoPersistenceFactory, PageDtoPersistenceFactory>();
+        containerRegistry.Register<IPageActionPersistenceFactory, PageActionPersistenceFactory>();
+        containerRegistry.Register<IPageContentPersistenceFactory, PageContentPersistenceFactory>();
     }
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)
     {
         containerRegistry.Register<IGameCultureRepository, GameCultureWs>();
         containerRegistry.Register<IPageExternalRepository, PageWs>();
+        containerRegistry.Register<IPronoumsNameCallsExternalRepository, PronoumNameCallWs>();
     }
 
     static void RegisterCrossCuttingServices(IContainerRegistry containerRegistry)

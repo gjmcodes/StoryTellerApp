@@ -20,7 +20,7 @@ namespace StoryTeller.Core.Services.GameContentDownload
         public async Task<bool> DownloadPagesByCultureAsync(string culture)
         {
             var pages = await _pageExternalRepository.GetPagesByCultureAsync(culture);
-            var result = await _pageLocalPersistentRepository.AddAsync(pages);
+            var result = await _pageLocalPersistentRepository.AddPagesFromExternalDownloadAsync(pages);
 
             return result;
         }

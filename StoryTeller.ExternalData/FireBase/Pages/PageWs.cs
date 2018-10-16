@@ -32,9 +32,11 @@ namespace StoryTeller.ExternalData.FireBase.Pages
             return page.First();
         }
 
-        public Task<IEnumerable<Page>> GetPagesByCultureAsync(string culture)
+        public async Task<IEnumerable<Page>> GetPagesByCultureAsync(string culture)
         {
-            throw new NotImplementedException();
+            var pages = await base.GetAllByCultureAsync<Page>();
+
+            return pages;
         }
 
         protected override void ReleaseResources()

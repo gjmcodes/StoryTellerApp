@@ -11,6 +11,11 @@ namespace StoryTeller.InternalData.Repositories.NameCalls
     {
         private readonly IPronoumLocalDataFactory _localDataPronoumFactory;
 
+        public PronoumRepository(IPronoumLocalDataFactory localDataPronoumFactory)
+        {
+            _localDataPronoumFactory = localDataPronoumFactory;
+        }
+
         public async Task<PronoumNameCall> GetPronoumByIdAsync(string pronoumId)
         {
             throw new System.NotImplementedException();
@@ -20,7 +25,9 @@ namespace StoryTeller.InternalData.Repositories.NameCalls
         {
             var dtos = await _localDataPronoumFactory.MapPronoumNameCallToDtoAsync(nameCalls);
 
-            return await base.AddAsync<PronoumNameCallDto>(dtos);
+            await base.Conn.DeleteAllAsync<PronoumNameCallDto>();
+
+            return await base.AddAsync(dtos);
         }
     }
 }

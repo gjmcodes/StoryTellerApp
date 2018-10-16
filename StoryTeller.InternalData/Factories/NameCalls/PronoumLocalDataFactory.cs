@@ -10,7 +10,22 @@ namespace StoryTeller.InternalData.Factories.NameCalls
     {
         public async Task<IEnumerable<PronoumNameCallDto>> MapPronoumNameCallToDtoAsync(IEnumerable<PronoumNameCall> models)
         {
-            throw new System.NotImplementedException();
+            return await Task.Run(() =>
+            {
+                var dtos = new List<PronoumNameCallDto>();
+
+                foreach (var item in models)
+                {
+                    var dto = new PronoumNameCallDto();
+                    dto.PronoumId = item.pronoumId;
+                    dto.ForFemale = item.forFemale;
+                    dto.ForMale = item.forMale;
+
+                    dtos.Add(dto);
+                }
+
+                return dtos;
+            });
         }
 
         protected override void ReleaseResources()

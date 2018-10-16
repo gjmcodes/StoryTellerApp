@@ -6,5 +6,6 @@ namespace StoryTeller.Core.Interfaces.Repositories.Local.Pages
 {
     public interface IPageLocalRepository : IBaseRepository
     {
+        Task<bool> AddPagesFromExternalDownloadAsync(IEnumerable<Page> entities);
     }
 }

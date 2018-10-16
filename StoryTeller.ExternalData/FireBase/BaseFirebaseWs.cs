@@ -27,9 +27,9 @@ namespace StoryTeller.ExternalData.FireBase
             _fireBaseClient = new FirebaseClient(baseDatabaseUrl);
         }
 
-        async Task<ChildQuery> QueryableCollectionWithLanguageAsync()
+        protected async Task<ChildQuery> QueryableCollectionWithLanguageAsync()
         {
-            var userCulture = await _userStatusLocalRepository.GetCurrentPageAsync();
+            var userCulture = await _userStatusLocalRepository.GetSelectedCultureAsync();
             return _fireBaseClient
             .Child(collection)
             .Child(userCulture);
@@ -61,6 +61,22 @@ namespace StoryTeller.ExternalData.FireBase
             return objects;
         }
 
+        protected async Task<IEnumerable<T>> GetAllByCultureAsync<T>()
+        {
+            try
+            {
+                var langQuery = await QueryableCollectionWithLanguageAsync();
+                var request = await langQuery.OnceSingleAsync<Dictionary<string, T>>();
+
+                return request.Select(x => x.Value);
+            }
+            catch (Exception e)
+            {
+                e = e;
+                throw;
+            }
+           
+        }
         protected async Task<IEnumerable<T>> GetByKeyWithLanguageAsync<T>(string keyName, string keyValue)
         {
             try

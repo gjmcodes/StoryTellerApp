@@ -21,7 +21,7 @@ namespace StoryTeller.Core.ContentTranslation.NameCalls
             var pronoum = await _pronoumLocalRepository.GetPronoumByIdAsync(contentBetweenMarkers);
             var charData = await _characterDataLocalRepository.GetCharacterDataAsync();
 
-            return charData.IsFemale ? pronoum.ForFemale : pronoum.ForMale; 
+            return charData.IsFemale ? pronoum.forFemale : pronoum.forMale; 
         }
 
         protected override void ReleaseResources()

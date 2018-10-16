@@ -1,6 +1,7 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.Local.Pages;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Pages;
+using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
 using StoryTeller.InternalData.Interfaces.Factories.Pages;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,27 @@ namespace StoryTeller.InternalData.Repositories.Pages
         private readonly IPageActionPersistenceFactory _pageActionPersistenceFactory;
         private readonly IPageContentPersistenceFactory _pageContentPersistenceFactory;
 
-        public async Task<bool> AddAsync(IEnumerable<Page> entities)
+        public PageRepository(
+            IContentMarkupTranslatorService contentMarkupTranslatorService, 
+            IPageDtoPersistenceFactory pageDtoPersistenceFactory, 
+            IPageActionPersistenceFactory pageActionPersistenceFactory, 
+            IPageContentPersistenceFactory pageContentPersistenceFactory)
+        {
+            _contentMarkupTranslatorService = contentMarkupTranslatorService;
+            _pageDtoPersistenceFactory = pageDtoPersistenceFactory;
+            _pageActionPersistenceFactory = pageActionPersistenceFactory;
+            _pageContentPersistenceFactory = pageContentPersistenceFactory;
+        }
+
+        public async Task<bool> AddPagesFromExternalDownloadAsync(IEnumerable<Page> entities)
         {
             try
             {
                 await Conn.RunInTransactionAsync(async (conn) =>
                 {
-                    conn.BeginTransaction();
+                    conn.DeleteAll<PageDto>();
+                    conn.DeleteAll<PageActionDto>();
+                    conn.DeleteAll<PageContentDto>();
 
                     foreach (var page in entities)
                     {
@@ -32,7 +47,7 @@ namespace StoryTeller.InternalData.Repositories.Pages
                         var pageContents = await _contentMarkupTranslatorService.TranslateAsync(page.content.content);
                         var pageContentsDto = await _pageContentPersistenceFactory.MapPageContentToDtoAsync(pageContents, page.pageId);
 
-                        var pageActionsDto = await _pageActionPersistenceFactory.MapPageActionToDtoAsync(page.actions);
+                        var pageActionsDto = await _pageActionPersistenceFactory.MapPageActionToDtoAsync(page.actions, page.pageId);
 
                         conn.Insert(pageDto);
                         conn.InsertAll(pageActionsDto);
@@ -46,6 +61,8 @@ namespace StoryTeller.InternalData.Repositories.Pages
             }
             catch (Exception e)
             {
+                e = e;
+
                 return false;
             }
 
