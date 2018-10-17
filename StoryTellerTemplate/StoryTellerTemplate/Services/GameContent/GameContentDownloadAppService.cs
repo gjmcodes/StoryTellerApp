@@ -2,6 +2,7 @@
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
+using StoryTellerTemplate.Interfaces.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,18 +24,32 @@ namespace StoryTellerTemplate.Services.GameContent
             _userStatusLocalRepository = userStatusLocalRepository;
         }
 
-        public async Task<bool> DownloadGameContentForCultureAsync()
+        public async Task<bool> DownloadGameContentForCultureAsync(IContentDownloader contentDownloader)
         {
-            var tasks = new List<Task>();
+            var tasks = new List<Task<bool>>();
+
+
             var selectedCulture = await _userStatusLocalRepository.GetSelectedCultureAsync();
 
-            var pagesTask = _pageDownloadTasksService.DownloadPagesByCultureAsync(selectedCulture);
+            tasks.Add(_pageDownloadTasksService.DownloadPagesByCultureAsync(selectedCulture)
+                .ContinueWith((result) =>
+                {
+                    contentDownloader.UpdateProgress();
+                    return true;
+                }));
 
-            var pronoumNameCallsTask = _nameCallDownloadTasksService.DownloadPronoumNameCallsByCultureAsync(selectedCulture);
+            tasks.Add(_nameCallDownloadTasksService.DownloadPronoumNameCallsByCultureAsync(selectedCulture)
+                .ContinueWith((result) =>
+                {
+                    contentDownloader.UpdateProgress();
+                    return true;
+                }));
 
-            var awaitAllTask = await Task.WhenAll(pagesTask, pronoumNameCallsTask);
+            contentDownloader.SetAmountOfTasks(tasks.Count);
 
-            return awaitAllTask.All(x => x);
+            await Task.WhenAll(tasks);
+
+            return tasks.All(x => x.Result);
         }
 
         public async Task<bool> HasLocalContentAsync()
