@@ -10,9 +10,9 @@ namespace StoryTellerTemplate.Factories
 
         public GameActionVm MapGameActionToVm(GameAction action)
         {
-            var gameActionVm = new GameActionVm(
-            action.description,
-            action.pageIdToNavigate);
+            var gameActionVm = new GameActionVm();
+            gameActionVm.Description = action.description;
+            gameActionVm.PageIdToFetch = action.pageIdToNavigate;
 
             return gameActionVm;
         }

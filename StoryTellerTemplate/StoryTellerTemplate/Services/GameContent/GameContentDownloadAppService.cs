@@ -28,6 +28,7 @@ namespace StoryTellerTemplate.Services.GameContent
         {
             var tasks = new List<Task<bool>>();
 
+            contentDownloader.SetAmountOfTasks(2);
 
             var selectedCulture = await _userStatusLocalRepository.GetSelectedCultureAsync();
 
@@ -45,7 +46,6 @@ namespace StoryTellerTemplate.Services.GameContent
                     return true;
                 }));
 
-            contentDownloader.SetAmountOfTasks(tasks.Count);
 
             await Task.WhenAll(tasks);
 

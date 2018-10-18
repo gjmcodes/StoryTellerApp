@@ -33,11 +33,10 @@ namespace StoryTeller.InternalData.Repositories.Pages
         {
             try
             {
-                await Conn.RunInTransactionAsync(async (conn) =>
-                {
-                    conn.DeleteAll<PageDto>();
-                    conn.DeleteAll<PageActionDto>();
-                    conn.DeleteAll<PageContentDto>();
+
+                    await Conn.DeleteAllAsync<PageDto>();
+                    await Conn.DeleteAllAsync<PageActionDto>();
+                    await Conn.DeleteAllAsync<PageContentDto>();
 
                     foreach (var page in entities)
                     {
@@ -49,13 +48,11 @@ namespace StoryTeller.InternalData.Repositories.Pages
 
                         var pageActionsDto = await _pageActionPersistenceFactory.MapPageActionToDtoAsync(page.actions, page.pageId);
 
-                        conn.Insert(pageDto);
-                        conn.InsertAll(pageActionsDto);
-                        conn.InsertAll(pageContentsDto);
+                        await Conn.InsertAsync(pageDto);
+                        await Conn.InsertAllAsync(pageActionsDto);
+                        await Conn.InsertAllAsync(pageContentsDto);
                     }
 
-                    conn.Commit();
-                });
 
                 return true;
             }

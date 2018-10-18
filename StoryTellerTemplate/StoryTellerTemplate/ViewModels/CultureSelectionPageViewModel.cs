@@ -35,7 +35,7 @@ namespace StoryTellerTemplate.ViewModels
 
         async Task NavigateToContentDownloadPageAsync()
         {
-            await NavigationService.NavigateAsync("NavigationPage/GameContentLoaderPage");
+            await NavigationService.NavigateAsync("GameContentLoaderPage");
         }
 
         public async Task SelectCultureAsync(CultureVm selectedCulture)

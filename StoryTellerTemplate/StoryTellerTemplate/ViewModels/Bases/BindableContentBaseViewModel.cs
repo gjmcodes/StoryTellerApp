@@ -18,6 +18,7 @@ namespace StoryTellerTemplate.ViewModels.Bases
         public BindableContentBaseViewModel(INavigationService navigationService) 
             : base(navigationService)
         {
+            Actions = new ObservableCollection<GameActionVm>();
         }
 
 

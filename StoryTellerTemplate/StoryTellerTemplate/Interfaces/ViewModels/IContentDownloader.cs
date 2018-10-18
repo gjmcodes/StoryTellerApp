@@ -5,7 +5,6 @@ namespace StoryTellerTemplate.Interfaces.ViewModels
 {
     public interface IContentDownloader
     {
-        DownloadProgress DownloadProgress {get; set;}
         void SetAmountOfTasks(int amount);
         void UpdateProgress();
     }

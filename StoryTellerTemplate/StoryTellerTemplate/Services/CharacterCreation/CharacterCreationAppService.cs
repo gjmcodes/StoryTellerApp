@@ -15,7 +15,7 @@ namespace StoryTellerTemplate.Services.CharacterCreation
             {
                 Actions = new List<GameActionVm>()
                 {
-                   new GameActionVm("Ok", "page-1")
+                   new GameActionVm(){Description= "Ok", PageIdToFetch= "page-1" }
                 },
                 Content = new List<Span>()
                 {

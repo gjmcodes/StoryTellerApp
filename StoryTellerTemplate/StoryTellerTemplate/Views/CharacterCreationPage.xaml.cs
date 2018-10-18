@@ -12,6 +12,10 @@ namespace StoryTellerTemplate.Views
         public CharacterCreationPage()
         {
             InitializeComponent();
+
+            fortText = new FormattedString();
+
+            BindToViewModel();
         }
 
         public void BindContentText(IEnumerable<Span> textSpans)

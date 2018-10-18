@@ -2,10 +2,11 @@
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Models.ContentDownload;
+using System.Threading.Tasks;
 
 namespace StoryTellerTemplate.ViewModels
 {
-    public class GameContentLoaderPageViewModel : ViewModelBase, IContentDownloader
+    public class GameContentLoaderPageViewModel : ViewModelBase
 	{
         private readonly IGameContentDownloadAppService _gameContentDownloadAppService;
         public GameContentLoaderPageViewModel(INavigationService navigationService,
@@ -13,7 +14,7 @@ namespace StoryTellerTemplate.ViewModels
             : base(navigationService)
         {
             _gameContentDownloadAppService = gameContentDownloadAppService;
-            _downloadProgress = new DownloadProgress();
+            DownloadProgress = new DownloadProgress();
         }
 
         DownloadProgress _downloadProgress;
@@ -23,11 +24,13 @@ namespace StoryTellerTemplate.ViewModels
             set => SetProperty(ref _downloadProgress, value);
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async void OnNavigatedTo(NavigationParameters parameters)
         {
-            _gameContentDownloadAppService.DownloadGameContentForCultureAsync();
+            var result = await _gameContentDownloadAppService.DownloadGameContentForCultureAsync(DownloadProgress);
 
-            base.OnNavigatedTo(parameters);
+            await Task.Delay(2000);
+
+            await NavigationService.NavigateAsync("CharacterCreationPage");
         }
     }
 }

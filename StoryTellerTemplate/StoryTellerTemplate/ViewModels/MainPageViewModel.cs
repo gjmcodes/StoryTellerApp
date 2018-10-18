@@ -26,11 +26,8 @@ namespace StoryTellerTemplate.ViewModels
 
             _gameContentAppService = gameContentAppService;
 
-            Actions = new ObservableCollection<GameActionVm>();
             ExecuteActionCommand = new Command<GameActionVm>(async (action) => await ExecuteAction(action));
         }
-
-        public ObservableCollection<GameActionVm> Actions { get; }
 
         public DelegateCommand NextPageCommand { get; }
         public Command<GameActionVm> ExecuteActionCommand { get; }
