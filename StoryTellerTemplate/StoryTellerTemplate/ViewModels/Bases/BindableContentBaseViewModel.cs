@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace StoryTellerTemplate.ViewModels.Bases
 {
@@ -15,12 +17,20 @@ namespace StoryTellerTemplate.ViewModels.Bases
         public ObservableCollection<GameActionVm> Actions { get; }
         protected IGameContentManager _gameContentManager;
 
-        public BindableContentBaseViewModel(INavigationService navigationService) 
+        public BindableContentBaseViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             Actions = new ObservableCollection<GameActionVm>();
+
+            ExecuteActionCommand = new Command<GameActionVm>(async (action) => await ExecuteActionAsync(action));
         }
 
+        public Command<GameActionVm> ExecuteActionCommand { get; }
+
+        protected virtual async Task ExecuteActionAsync(GameActionVm action)
+        {
+            await Task.Delay(1000);
+        }
 
         protected void BindContentData(PageVm pageVm)
         {

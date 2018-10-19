@@ -50,7 +50,7 @@
                 HorizontalOptions="Center">
 
                 <Label Grid.Column="1" Text="Male" />
-                <Switch Grid.Column="2"  />
+                <Switch Grid.Column="2"  Toggled="Switch_Toggled" />
                 <Label Grid.Column="3" Text="Female" />
 
             </StackLayout>
@@ -71,7 +71,9 @@
                                  VerticalOptions="Start">
 
                         <Button Text="{Binding Description}"
-                               HorizontalOptions="Center"  />
+                               HorizontalOptions="Center"  
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.ExecuteActionCommand}"
+                                CommandParameter="{Binding .}" />
                     </StackLayout>
 
                 </DataTemplate>

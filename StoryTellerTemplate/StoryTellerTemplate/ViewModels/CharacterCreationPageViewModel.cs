@@ -1,9 +1,11 @@
-﻿using Prism.Navigation;
+﻿using System.Threading.Tasks;
+using Prism.Navigation;
 using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
 using StoryTellerTemplate.Interfaces.Services.CharacterCreation;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.CharacterCreation;
+using StoryTellerTemplate.Models.GameContent;
 using StoryTellerTemplate.ViewModels.Bases;
 
 namespace StoryTellerTemplate.ViewModels
@@ -28,6 +30,13 @@ namespace StoryTellerTemplate.ViewModels
         {
             get => characterCreation;
             set => SetProperty(ref characterCreation, value);
+        }
+
+        protected override async Task ExecuteActionAsync(GameActionVm action)
+        {
+            var t = action;
+
+            await base.ExecuteActionAsync(action);
         }
 
         public override async void OnNavigatingTo(NavigationParameters parameters)

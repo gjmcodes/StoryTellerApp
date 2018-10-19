@@ -35,5 +35,11 @@ namespace StoryTellerTemplate.Views
             var vm = BindingContext as CharacterCreationPageViewModel;
             vm.BindCustomTextBindingPage(this);
         }
+
+        private void Switch_Toggled(object sender, ToggledEventArgs e)
+        {
+            var vm = BindingContext as CharacterCreationPageViewModel;
+            vm.CharacterCreation.Gender = !vm.CharacterCreation.Gender;
+        }
     }
 }

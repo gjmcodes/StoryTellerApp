@@ -26,13 +26,11 @@ namespace StoryTellerTemplate.ViewModels
 
             _gameContentAppService = gameContentAppService;
 
-            ExecuteActionCommand = new Command<GameActionVm>(async (action) => await ExecuteAction(action));
         }
 
         public DelegateCommand NextPageCommand { get; }
-        public Command<GameActionVm> ExecuteActionCommand { get; }
 
-        async Task ExecuteAction(GameActionVm action)
+        protected override async Task ExecuteActionAsync(GameActionVm action)
         {
             var page = await _gameContentAppService.GetPageByIdAsync(action.PageIdToFetch);
 

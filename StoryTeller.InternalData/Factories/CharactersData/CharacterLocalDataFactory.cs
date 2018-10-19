@@ -13,9 +13,13 @@ namespace StoryTeller.InternalData.Factories.CharactersData
 
         public async Task<CharacterDto> MapCharacterToDtoAsync(Character model)
         {
-            var dto = new CharacterDto(model.Name, model.Gender);
+            return await Task.Run(() =>
+            {
+
+                var dto = new CharacterDto() { Name = model.Name, Gender = model.Gender };
 
                 return dto;
+            });
         }
 
         protected override void ReleaseResources()
