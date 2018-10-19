@@ -8,10 +8,10 @@
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid>
+    <Grid Padding="10, 10">
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*" />
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="7*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -21,25 +21,10 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackLayout
-        Grid.Row="0"
-            Grid.RowSpan="3"
-        Grid.Column="1"
-        VerticalOptions="FillAndExpand"
-        HorizontalOptions="FillAndExpand">
-
-            <Label Text="| | Título | |" 
-               VerticalOptions="FillAndExpand"
-               HorizontalOptions="CenterAndExpand" />
-
-
-
-        </StackLayout>
 
         <ScrollView
-            BackgroundColor="Red"
         x:Name="contentScrollView"
-        Grid.Row="1"
+        Grid.Row="0"
         Grid.ColumnSpan="3"
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
@@ -49,8 +34,28 @@
             <Label 
                 x:Name="contentLbl" />
 
-
         </ScrollView>
+
+        <StackLayout
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Orientation="Vertical"
+            HorizontalOptions="FillAndExpand"  >
+
+            <Entry  Placeholder="Name" HorizontalOptions="FillAndExpand" Text="{Binding CharacterCreation.Name}" />
+
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Center">
+
+                <Label Grid.Column="1" Text="Male" />
+                <Switch Grid.Column="2"  />
+                <Label Grid.Column="3" Text="Female" />
+
+            </StackLayout>
+
+        </StackLayout>
 
         <cv:CarouselView 
             HorizontalOptions="FillAndExpand" 
@@ -62,50 +67,17 @@
             <cv:CarouselView.ItemTemplate>
                 <DataTemplate>
 
-                    <Label Text="{Binding Description}" />
-                    
-                    <!--<Button Text="{Binding Description}" 
-                            FontSize="Micro" 
-                            HorizontalOptions="FillAndExpand"  
-                            VerticalOptions="Center"
-                            Command="{Binding Source={x:Reference Page}, Path=BindingContext.ExecuteActionCommand}"
-                            CommandParameter="{Binding .}" 
-                            />-->
-                    
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Start">
+
+                        <Button Text="{Binding Description}"
+                               HorizontalOptions="Center"  />
+                    </StackLayout>
+
                 </DataTemplate>
             </cv:CarouselView.ItemTemplate>
         </cv:CarouselView>
 
     </Grid>
-    
-    <!--<StackLayout>
-        <StackLayout Orientation="Vertical"
-                 HorizontalOptions="FillAndExpand"
-                     VerticalOptions="Start"
-                 BackgroundColor="Red"
-                     Padding="5">
-            <Entry Placeholder="Name" HorizontalOptions="FillAndExpand"/>
 
-            <StackLayout Orientation="Horizontal"
-                     HorizontalOptions="CenterAndExpand" Padding="5">
-                <Label Text="Male" />
-                <Switch />
-                <Label Text="Female" />
-            </StackLayout>
-        </StackLayout>
-
-        <StackLayout VerticalOptions="CenterAndExpand">
-
-        </StackLayout>
-
-        <StackLayout VerticalOptions="End" Padding="5, 10">
-            <StackLayout VerticalOptions="End">
-                <Button 
-                BackgroundColor="Green" 
-                Text="OK" 
-                HorizontalOptions="Center" />
-            </StackLayout>
-        </StackLayout>
-    </StackLayout>-->
-    
 </ContentPage>
