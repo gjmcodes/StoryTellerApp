@@ -65,5 +65,16 @@ namespace StoryTeller.InternalData.Repositories.Pages
 
         }
 
+        public async Task<PageDto> GetPageDtoByIdAsync(string pageId)
+        {
+            var pageData = await base.Conn.GetAsync<PageDto>(x => x.PageId == pageId);
+            var pageActions = await base.Conn.Table<PageActionDto>().Where(x => x.PageId == pageId).ToArrayAsync();
+            var pageContent = await base.Conn.Table<PageContentDto>().Where(x => x.PageId == pageId).ToArrayAsync();
+
+            pageData.PageActionsDtos = pageActions;
+            pageData.PageContentDtos = pageContent;
+
+            return pageData;
+        }
     }
 }

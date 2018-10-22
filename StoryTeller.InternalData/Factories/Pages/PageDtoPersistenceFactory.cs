@@ -10,6 +10,7 @@ namespace StoryTeller.InternalData.Factories.Pages
 {
     public class PageDtoPersistenceFactory : BaseLocalDataFactory, IPageDtoPersistenceFactory
     {
+
         public async Task<PageDto> MapPageToDtoAsync(Page page)
         {
             return await Task.Run(() =>

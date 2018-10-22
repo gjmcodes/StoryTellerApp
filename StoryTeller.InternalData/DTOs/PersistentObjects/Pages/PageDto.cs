@@ -10,5 +10,11 @@ namespace StoryTeller.InternalData.DTOs.PersistentObjects.Pages
     {
         public string PageId { get; set; }
         public string Content { get; set; }
+
+        [Ignore]
+        public IEnumerable<PageActionDto> PageActionsDtos { get; set; }
+
+        [Ignore]
+        public IEnumerable<PageContentDto> PageContentDtos { get; set; }
     }
 }

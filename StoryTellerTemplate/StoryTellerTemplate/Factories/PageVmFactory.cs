@@ -1,9 +1,8 @@
 ﻿using StoryTeller.Core.Pages;
+using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Models.MainPage;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StoryTellerTemplate.Factories
@@ -20,11 +19,21 @@ namespace StoryTellerTemplate.Factories
             _textSpanFactory = textSpanFactory;
         }
 
+        public async Task<PageVm> MapDtoToPageVmAsync(PageDto dto,
+            IEnumerable<PageActionDto> pageActions,
+            IEnumerable<PageContentDto> pageContent)
+        {
+            var pagevm = new PageVm();
+            pagevm.Actions = await _gameActionVmFactory.MapGameActionDtoToVmAsync(pageActions);
+            pagevm.Content = await _textSpanFactory.MapContentDtoToSpanAsync(pageContent);
+
+            return pagevm;
+        }
+
         public PageVm MapPageToPageVm(Page page)
         {
             var pageVm = new PageVm();
             pageVm.Actions = _gameActionVmFactory.MapGameActionToVm(page.actions);
-            //pageVm.Content = _textSpanFactory.MapStringToXamarinSpan(page.content.content);
 
             return pageVm;
         }

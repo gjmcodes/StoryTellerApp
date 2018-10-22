@@ -64,6 +64,7 @@ namespace StoryTellerTemplate
             containerRegistry.Register<IGameActionVmFactory, GameActionVmFactory>();
             containerRegistry.Register<IPageVmFactory, PageVmFactory>();
             containerRegistry.Register<ICultureVmFactory, CultureVmFactory>();
+            containerRegistry.Register<ICharacterCreationVmFactory, CharacterCreationVmFactory>();
         }
     }
 }
