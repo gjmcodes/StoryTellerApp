@@ -19,10 +19,13 @@ namespace StoryTellerTemplate.Services.CharacterCreation
         private readonly ICharacterCreationVmFactory _characterCreationVmFactory;
         private readonly IPageVmFactory _pageVmFactory;
 
-        public CharacterCreationAppService(ICharacterDataLocalRepository characterDataLocalRepository,
+        public CharacterCreationAppService(
+            IPageLocalRepository pageLocalRepository,
+            ICharacterDataLocalRepository characterDataLocalRepository,
             ICharacterCreationVmFactory characterCreationVmFactory,
             IPageVmFactory pageVmFactory)
         {
+            _pageLocalRepository = pageLocalRepository;
             _characterDataLocalRepository = characterDataLocalRepository;
             _characterCreationVmFactory = characterCreationVmFactory;
             _pageVmFactory = pageVmFactory;
@@ -38,9 +41,10 @@ namespace StoryTellerTemplate.Services.CharacterCreation
 
         public async Task<PageVm> GetCharacterCreationPageAsync()
         {
-            var creationPage = await _pageLocalRepository.GetPageDtoByIdAsync("char-creation");
-            var creationPageVm = _pageVmFactory.MapDtoToPageVmAsync(creationPage);
-            return creationPage;
+            var creationTranslatedPage = await _pageLocalRepository.GetPageByIdAsync("char-creation");
+            var creationPageVm = await _pageVmFactory.MapTranslatedPageDtoToPageVmAsync(creationTranslatedPage);
+
+            return creationPageVm;
         }
     }
 }

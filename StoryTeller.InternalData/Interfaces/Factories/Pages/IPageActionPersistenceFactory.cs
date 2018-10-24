@@ -8,5 +8,6 @@ namespace StoryTeller.InternalData.Interfaces.Factories.Pages
     public interface IPageActionPersistenceFactory : IBaseLocalDataFactory
     {
         Task<IEnumerable<PageActionDto>> MapPageActionToDtoAsync(IEnumerable<GameAction> pageActions, string pageId);
+        Task<IEnumerable<GameAction>> MapDtoToGameActionAsync(IEnumerable<PageActionDto> pageActions);
     }
 }

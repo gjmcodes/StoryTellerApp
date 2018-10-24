@@ -34,7 +34,6 @@ namespace StoryTeller.Core.ContentTranslation
                 hexBackgroundColor = originalContent.hexBackgroundColor,
                 hexForegroundColor = originalContent.hexForegroundColor,
                 lineBreak = originalContent.lineBreak,
-                paragraphId = originalContent.paragraphId
             };
 
             return dto;

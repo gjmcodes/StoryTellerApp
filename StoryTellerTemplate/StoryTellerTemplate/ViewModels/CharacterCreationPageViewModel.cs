@@ -13,13 +13,13 @@ namespace StoryTellerTemplate.ViewModels
     public class CharacterCreationPageViewModel : BindableContentBaseViewModel, IGameContentManagerViewModelBinder
     {
         private ICharacterCreationAppService _characterCreationAppService;
-        private ICharacterDataLocalRepository _characterDataLocalPersistentRepository;
 
         public CharacterCreationPageViewModel(INavigationService navigationService,
             ICharacterCreationAppService characterCreationAppService) 
             : base(navigationService)
         {
             _characterCreationAppService = characterCreationAppService;
+            CharacterCreation = new CharacterCreationVm();
         }
 
 
@@ -32,8 +32,6 @@ namespace StoryTellerTemplate.ViewModels
 
         protected override async Task ExecuteActionAsync(GameActionVm action)
         {
-            var t = action;
-
             await _characterCreationAppService.CreateCharacterAsync(CharacterCreation);
 
             await base.ExecuteActionAsync(action);

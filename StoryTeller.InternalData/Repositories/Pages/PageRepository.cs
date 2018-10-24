@@ -1,5 +1,6 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.Local.Pages;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
+using StoryTeller.Core.Models.Pages.DTOs;
 using StoryTeller.Core.Pages;
 using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
 using StoryTeller.InternalData.Interfaces.Factories.Pages;
@@ -56,13 +57,25 @@ namespace StoryTeller.InternalData.Repositories.Pages
 
                 return true;
             }
-            catch (Exception e)
+            catch
             {
-                e = e;
-
                 return false;
             }
 
+        }
+
+        public async Task<TranslatedPageDto> GetPageByIdAsync(string pageId)
+        {
+            var pageData = await base.Conn.GetAsync<PageDto>(x => x.PageId == pageId);
+            var pageActions = await base.Conn.Table<PageActionDto>().Where(x => x.PageId == pageId).ToArrayAsync();
+            var pageContent = await base.Conn.Table<PageContentDto>().Where(x => x.PageId == pageId).ToArrayAsync();
+
+            pageData.PageActionsDtos = pageActions;
+            pageData.PageContentDtos = pageContent;
+
+            var translatedPage = await _pageDtoPersistenceFactory.MapPageDtoToTranslatedAsync(pageData, pageActions, pageContent);
+
+            return translatedPage;
         }
 
         public async Task<PageDto> GetPageDtoByIdAsync(string pageId)

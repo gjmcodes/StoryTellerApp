@@ -1,9 +1,13 @@
-﻿using StoryTeller.Core.Pages;
+﻿using StoryTeller.Core.Models.Pages.DTOs;
+using StoryTeller.Core.Pages;
 using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
 using StoryTellerTemplate.Interfaces.Factories;
+using StoryTellerTemplate.Models.GameContent;
 using StoryTellerTemplate.Models.MainPage;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Factories
 {
@@ -24,18 +28,42 @@ namespace StoryTellerTemplate.Factories
             IEnumerable<PageContentDto> pageContent)
         {
             var pagevm = new PageVm();
-            pagevm.Actions = await _gameActionVmFactory.MapGameActionDtoToVmAsync(pageActions);
-            pagevm.Content = await _textSpanFactory.MapContentDtoToSpanAsync(pageContent);
+
+            var pgActionsTask = await _gameActionVmFactory.MapGameActionDtoToVmAsync(pageActions);
+            pagevm.Actions = pgActionsTask.ToList();
+
+            var pgContentTask = await _textSpanFactory.MapContentDtoToSpanAsync(pageContent);
+            pagevm.Content = pgContentTask.ToList();
 
             return pagevm;
         }
 
-        public PageVm MapPageToPageVm(Page page)
+        public PageVm MapPageToPageVm(StoryTeller.Core.Pages.Page page)
         {
             var pageVm = new PageVm();
-            pageVm.Actions = _gameActionVmFactory.MapGameActionToVm(page.actions);
+
+            var pgActionTask = _gameActionVmFactory.MapGameActionToVm(page.actions);
+            pageVm.Actions = pgActionTask.ToList();
 
             return pageVm;
+        }
+
+        public async Task<PageVm> MapTranslatedPageDtoToPageVmAsync(TranslatedPageDto translatedPageDto)
+        {
+            return await Task.Run(() =>
+            {
+
+                var pageVm = new PageVm();
+                pageVm.Content = new List<Span>();
+
+                var pageActions = _gameActionVmFactory.MapGameActionToVm(translatedPageDto.PageActions);
+                pageVm.Actions = pageActions.ToList();
+
+                var pageContents = _textSpanFactory.MapTextSpanToXamarinSpan(translatedPageDto.TranslatedContent);
+                pageVm.Content = pageContents.ToList();
+
+                return pageVm;
+            });
         }
 
         protected override void ReleaseResources()

@@ -10,6 +10,24 @@ namespace StoryTeller.InternalData.Factories.Pages
 {
     public class PageActionPersistenceFactory : BaseLocalDataFactory, IPageActionPersistenceFactory
     {
+        public async Task<IEnumerable<GameAction>> MapDtoToGameActionAsync(IEnumerable<PageActionDto> pageActions)
+        {
+            return await Task.Run(() =>
+            {
+                var gameActions = new List<GameAction>();
+
+                foreach (var item in pageActions)
+                {
+                    var pageAction = new GameAction();
+                    pageAction.description = item.Description;
+                    pageAction.pageIdToNavigate = item.PageIdToNagivate;
+                    gameActions.Add(pageAction);
+                }
+
+                return gameActions;
+            });
+        }
+
         public async Task<IEnumerable<PageActionDto>> MapPageActionToDtoAsync(IEnumerable<GameAction> pageActions, string pageId)
         {
             return await Task.Run(() =>

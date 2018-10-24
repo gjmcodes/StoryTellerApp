@@ -4,7 +4,6 @@ namespace StoryTeller.Core.ContentTranslation
 {
     public struct ContentTranslationDto
     {
-        public string paragraphId;
         public string content;
         public string hexForegroundColor;
         public string hexBackgroundColor;
