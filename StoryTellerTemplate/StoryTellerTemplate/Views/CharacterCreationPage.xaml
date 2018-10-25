@@ -9,10 +9,12 @@
              NavigationPage.HasNavigationBar="False"
              x:Name="Page">
 
-    <Grid Padding="10, 10">
+    <Grid Padding="10, 10"
+          BackgroundColor="DimGray">
         <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height=".1*" />
             <RowDefinition Height="4*" />
-            <RowDefinition Height="7*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -26,6 +28,7 @@
 
         <ScrollView
         x:Name="contentScrollView"
+            BackgroundColor="LightGray"
         Grid.Row="0"
         Grid.ColumnSpan="3"
         VerticalOptions="FillAndExpand"
@@ -34,16 +37,26 @@
             Padding="5, 0, 0, 0">
 
             <Label 
+                HorizontalTextAlignment="Start"
                 x:Name="contentLbl" />
 
         </ScrollView>
 
-        <StackLayout
+
+        <BoxView 
             Grid.Row="1"
+            Grid.ColumnSpan="3"
+            BackgroundColor="Gray"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"/>
+        
+        <StackLayout
+            Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Orientation="Vertical"
-            HorizontalOptions="FillAndExpand"  >
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="Gray">
 
             <Entry  Placeholder="Name" HorizontalOptions="FillAndExpand" Text="{Binding CharacterCreation.Name}" />
 
@@ -59,31 +72,31 @@
 
         </StackLayout>
 
-        <cv:CarouselView 
-            HorizontalOptions="FillAndExpand" 
-            VerticalOptions="CenterAndExpand" 
-            x:Name="gameActions"
-            Grid.Row="2"
+        <ListView
+            Grid.Row="3"
             Grid.RowSpan="2"
-            Grid.Column="1"
-            ItemsSource="{Binding Actions}">
-            <cv:CarouselView.ItemTemplate>
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            ItemsSource="{Binding Actions}"
+            BackgroundColor="LightGray">
+
+            <ListView.ItemTemplate>
                 <DataTemplate>
-
-                    <StackLayout HorizontalOptions="FillAndExpand"
-                                 VerticalOptions="Start">
-
-                        <!--  Binding Source está causando crash no app-->
-
-                        <Button Text="{Binding Description}"
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Button Text="{Binding Description}"
                             HorizontalOptions="Center"  
                         Command="{Binding Source={x:Reference Page}, Path=BindingContext.ExecuteActionCommand}"
                             CommandParameter="{Binding .}"/>
-                    </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
 
                 </DataTemplate>
-            </cv:CarouselView.ItemTemplate>
-        </cv:CarouselView>
+            </ListView.ItemTemplate>
+
+        </ListView>
 
     </Grid>
 
