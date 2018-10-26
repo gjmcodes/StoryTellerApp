@@ -5,6 +5,6 @@ namespace StoryTeller.InternalData.Interfaces.Services
 {
     public interface ILocalDataManagerService : IDisposableObject
     {
-        Task CreateLocalTablesAsync();
+        Task UpdateCreateLocalTablesAsync();
     }
 }

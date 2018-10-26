@@ -1,4 +1,6 @@
-﻿using StoryTeller.CrossCutting.Disposable;
+﻿using SQLite;
+using StoryTeller.CrossCutting.Disposable;
+using StoryTeller.InternalData.DTOs.PersistentObjects;
 using StoryTeller.InternalData.DTOs.PersistentObjects.CharactersData;
 using StoryTeller.InternalData.DTOs.PersistentObjects.NameCalls;
 using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
@@ -7,6 +9,8 @@ using StoryTeller.InternalData.Infra;
 using StoryTeller.InternalData.Interfaces;
 using StoryTeller.InternalData.Interfaces.Services;
 using System;
+using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -21,8 +25,18 @@ namespace StoryTeller.InternalData.Services
             _conn = DependencyService.Get<ISQLiteDb>().GetConnection();
         }
 
-        public async Task CreateLocalTablesAsync()
+        async Task<bool> TableExists(string tableName)
         {
+            var sql = $@"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'";
+            var tableMapping = new TableMapping(typeof(SqlDbType));
+            var query = await _conn.QueryAsync(tableMapping, sql);
+
+            return query.Any();
+        }
+
+        public async Task UpdateCreateLocalTablesAsync()
+        {
+            var characterTableExists = await TableExists("TB_CHARACTER");
             await _conn.CreateTableAsync<CharacterDto>();
             await _conn.CreateTableAsync<PronoumNameCallDto>();
             await _conn.CreateTableAsync<PageDto>();

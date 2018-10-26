@@ -33,7 +33,7 @@ namespace StoryTellerTemplate.Services.CharacterCreation
 
         public async Task<bool> CreateCharacterAsync(CharacterCreationVm characterCreationVm)
         {
-            var character = _characterCreationVmFactory.MapVmToCharacter(characterCreationVm);
+            var character = await _characterCreationVmFactory.MapVmToCharacterDtoAsync(characterCreationVm);
             var persistence = await _characterDataLocalRepository.AddAsync(character);
 
             return persistence;

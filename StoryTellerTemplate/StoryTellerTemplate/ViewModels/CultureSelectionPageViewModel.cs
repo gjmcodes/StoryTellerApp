@@ -33,6 +33,11 @@ namespace StoryTellerTemplate.ViewModels
 
         public Command<CultureVm> SelectCultureCommand { get; }
 
+        async Task NavigateToGameMasterPageAsync()
+        {
+            await NavigationService.NavigateAsync("GameMasterPage/NavigationPage/GamePage");
+        }
+
         async Task NavigateToContentDownloadPageAsync()
         {
             await NavigationService.NavigateAsync("GameContentLoaderPage");
@@ -42,7 +47,7 @@ namespace StoryTellerTemplate.ViewModels
         {
             if (await _userStatusLocalPersistentRepository.SetSelectedCultureAsync(selectedCulture.CultureCode))
             {
-                await NavigateToContentDownloadPageAsync();
+                await NavigateToGameMasterPageAsync();
             }
 
 
@@ -50,11 +55,13 @@ namespace StoryTellerTemplate.ViewModels
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {
-            await _localDataManagerService.CreateLocalTablesAsync();
+            // ToDo: Deverá verificar se é necessário atualizar estrutura das tabelas
+            // e/ou criar novas
+            await _localDataManagerService.UpdateCreateLocalTablesAsync();
 
             if (await _userStatusLocalPersistentRepository.HasSelectedCultureAsync())
             {
-                await NavigateToContentDownloadPageAsync();
+                await NavigateToGameMasterPageAsync();
             }
             else
             {

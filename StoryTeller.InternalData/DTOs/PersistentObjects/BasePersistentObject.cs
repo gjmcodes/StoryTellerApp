@@ -8,7 +8,10 @@ namespace StoryTeller.InternalData.DTOs.PersistentObjects
         {
 
         }
+
         [PrimaryKey, AutoIncrement]
         public int LocalPk { get; set; }
+
+        public int ExternalTableVersion { get; set; }
     }
 }
