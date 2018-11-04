@@ -18,6 +18,13 @@ namespace StoryTellerTemplate.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        private bool _pageIsBusy;
+        public bool PageIsBusy
+        {
+            get { return _pageIsBusy; }
+            set { SetProperty(ref _pageIsBusy, value); }
+        }
+
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
@@ -25,22 +32,22 @@ namespace StoryTellerTemplate.ViewModels
 
         public virtual void OnNavigatedFrom(NavigationParameters parameters)
         {
-            
+
         }
 
         public virtual void OnNavigatedTo(NavigationParameters parameters)
         {
-            
+
         }
 
         public virtual void OnNavigatingTo(NavigationParameters parameters)
         {
-            
+
         }
 
         public virtual void Destroy()
         {
-            
+
         }
     }
 }

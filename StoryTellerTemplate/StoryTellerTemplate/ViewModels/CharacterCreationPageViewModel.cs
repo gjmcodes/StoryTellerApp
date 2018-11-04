@@ -30,11 +30,16 @@ namespace StoryTellerTemplate.ViewModels
             set => SetProperty(ref characterCreation, value);
         }
 
+        async Task NavigateToGameMasterPageAsync()
+        {
+            await NavigationService.NavigateAsync("GameMasterPage/NavigationPage/GamePage");
+        }
+
         protected override async Task ExecuteActionAsync(GameActionVm action)
         {
             await _characterCreationAppService.CreateCharacterAsync(CharacterCreation);
 
-            await base.ExecuteActionAsync(action);
+            await NavigateToGameMasterPageAsync();
         }
 
         public override async void OnNavigatingTo(NavigationParameters parameters)

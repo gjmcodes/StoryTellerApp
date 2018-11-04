@@ -10,9 +10,7 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <StackLayout Padding="20">
-                <!-- TODO: // Update the Layout and add some real menu items  -->
-                <Button Text="Journal" />
-                <Button Text="Options" />
+                <Button Text="Language" Command="{Binding SelectMenuOptionCommand}" CommandParameter="CultureSelectionPage" />
                 <Button Text="Exit" />
             </StackLayout>
         </ContentPage>

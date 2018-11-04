@@ -4,10 +4,78 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="StoryTellerTemplate.Views.GamePage"
-             Title="CharName - Chapter I">
+             Title="{Binding Title}"
+             x:Name="Page">
 
-    <StackLayout>
-        <Label Text="Teste" />
-    </StackLayout>
-    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout
+        Grid.Row="0"
+        Grid.RowSpan="3"
+        Grid.Column="1"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+
+            <Label Text="| | Título | |" 
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="CenterAndExpand" />
+
+        </StackLayout>
+
+        <ScrollView
+        x:Name="contentScrollView"
+        Grid.Row="1"
+        Grid.ColumnSpan="3"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            Padding="5, 0, 0, 0">
+
+            <Label 
+                x:Name="contentLbl" />
+
+        </ScrollView>
+
+        <ListView
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            ItemsSource="{Binding Actions}"
+            BackgroundColor="LightGray">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Button Text="{Binding Description}"
+                                    FontAttributes="Italic"
+                                    FontSize="Small"
+                            HorizontalOptions="Center"  
+                            Command="{Binding Source={x:Reference Page}, Path=BindingContext.ExecuteActionCommand}"
+                            CommandParameter="{Binding .}"/>
+                        </ViewCell.View>
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+    </Grid>
+
+
 </ContentPage>

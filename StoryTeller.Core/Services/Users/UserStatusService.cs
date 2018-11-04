@@ -22,7 +22,7 @@ namespace StoryTeller.Core.Services.Users
         {
             var currentPage = await _userStatusLocalRepository.GetCurrentPageAsync();
             if (string.IsNullOrEmpty(currentPage))
-                return "intro";
+                return "page-1";
 
             return currentPage;
         }

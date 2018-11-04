@@ -8,6 +8,7 @@ using StoryTeller.InternalData.DTOs.PersistentObjects.Users;
 using StoryTeller.InternalData.Infra;
 using StoryTeller.InternalData.Interfaces;
 using StoryTeller.InternalData.Interfaces.Services;
+using StoryTeller.InternalData.Tools;
 using System;
 using System.Data;
 using System.Linq;
@@ -25,8 +26,10 @@ namespace StoryTeller.InternalData.Services
             _conn = DependencyService.Get<ISQLiteDb>().GetConnection();
         }
 
-        async Task<bool> TableExists(string tableName)
+        async Task<bool> TableExists<T>() where T : BasePersistentObject
         {
+            var tableName = SQLiteAnnotationTools.GetTableName<T>();
+
             var sql = $@"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'";
             var tableMapping = new TableMapping(typeof(SqlDbType));
             var query = await _conn.QueryAsync(tableMapping, sql);
@@ -36,7 +39,7 @@ namespace StoryTeller.InternalData.Services
 
         public async Task UpdateCreateLocalTablesAsync()
         {
-            var characterTableExists = await TableExists("TB_CHARACTER");
+            var characterTableExists = await TableExists<CharacterDto>();
             await _conn.CreateTableAsync<CharacterDto>();
             await _conn.CreateTableAsync<PronoumNameCallDto>();
             await _conn.CreateTableAsync<PageDto>();
@@ -45,6 +48,13 @@ namespace StoryTeller.InternalData.Services
             await _conn.CreateTableAsync<UserStatusDto>();
         }
 
+        public async Task ClearLocalDataForCulctureChangeAsync()
+        {
+            await _conn.DeleteAllAsync<PronoumNameCallDto>();
+            await _conn.DeleteAllAsync<PageDto>();
+            await _conn.DeleteAllAsync<PageContentDto>();
+            await _conn.DeleteAllAsync<PageActionDto>();
+        }
         protected override void ReleaseResources()
         {
             _conn.Dispose();
