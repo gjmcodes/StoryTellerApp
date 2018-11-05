@@ -11,14 +11,18 @@ using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Factories
 {
-    public class TextSpanFactory : BaseFactory, ITextSpanFactory 
+    public class TextSpanFactory : BaseFactory, ITextSpanFactory
     {
-        private readonly ICharacterDataTranslatorService _characterDataTranslatorService;
-        private readonly INameCallTranslatorService _nameCallTranslatorService;
+        private readonly IPronoumTranslatorService _pronoumTranslatorService;
+
+        public TextSpanFactory(IPronoumTranslatorService pronoumTranslatorService)
+        {
+            _pronoumTranslatorService = pronoumTranslatorService;
+        }
 
         public async Task<IEnumerable<Span>> MapContentDtoToSpanAsync(IEnumerable<PageContentDto> pageContentDtos)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 var spans = new List<Span>();
 
@@ -26,9 +30,14 @@ namespace StoryTellerTemplate.Factories
 
                 foreach (var item in pageContentDtos)
                 {
+                    var content = item.Content;
+
+                    if (_pronoumTranslatorService.HasPronoumMarkers(item.Content))
+                        content = await _pronoumTranslatorService.TranslatePronoumAsync(item.Content);
+
                     var textSpan = new TextSpan();
                     textSpan.amountLineBreaks = item.AmountLineBreaks;
-                    textSpan.content = item.Content;
+                    textSpan.content = content;
                     textSpan.fontAttribute = (FontAttribute)item.FontAttribute;
                     textSpan.fontFamily = item.FontFamily;
                     textSpan.fontSize = (FontNamedSize)item.FontSize;
@@ -63,10 +72,10 @@ namespace StoryTellerTemplate.Factories
                 FontSize = Device.GetNamedSize((NamedSize)textSpan.fontSize.GetHashCode(), typeof(Label)),
                 BackgroundColor = Color.FromHex(textSpan.HexBackgroundColor),
                 ForegroundColor = Color.FromHex(textSpan.HexForegroundColor),
-                FontFamily =  textSpan.fontFamily,
+                FontFamily = textSpan.fontFamily,
                 FontAttributes = (FontAttributes)textSpan.fontAttribute.GetHashCode()
             };
-    
+
 
             return span;
         }

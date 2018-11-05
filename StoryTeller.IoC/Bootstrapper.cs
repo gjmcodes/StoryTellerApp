@@ -46,14 +46,14 @@ public static class Bootstrapper
 
     static void RegisterDomainServices(IContainerRegistry containerRegistry)
     {
-        containerRegistry.Register<INameCallTranslatorService, NameCallTranslatorService>();
+        containerRegistry.Register<IPronoumTranslatorService, PronoumTranslatorService>();
         containerRegistry.Register<IFontAttributeTranslatorService, FontAttributeTranslatorService>();
         containerRegistry.Register<ICharacterDataTranslatorService, CharacterDataTranslatorService>();
         containerRegistry.Register<IContentMarkupTranslatorService, ContentMarkupTranslatorService>();
 
         containerRegistry.Register<IFontAttributeTranslatorService, FontAttributeTranslatorService>();
         containerRegistry.Register<ICharacterDataTranslatorService, CharacterDataTranslatorService>();
-        containerRegistry.Register<INameCallTranslatorService, NameCallTranslatorService>();
+        containerRegistry.Register<IPronoumTranslatorService, PronoumTranslatorService>();
         containerRegistry.Register<IParagraphTranslatorService, ParagraphTranslatorService>();
 
 

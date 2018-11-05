@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Services.ContentTranslation
 {
-    public interface INameCallTranslatorService : IBaseService
+    public interface IPronoumTranslatorService : IBaseService
     {
+        Task<string> TranslatePronoumAsync(string content);
+        bool HasPronoumMarkers(string content);
         Task<IEnumerable<ContentTranslationDto>> BreakNameCallsAsync(IEnumerable<ContentTranslationDto> paragraphedContents);
     }
 }

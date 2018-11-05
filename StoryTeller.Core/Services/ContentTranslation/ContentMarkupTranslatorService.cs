@@ -13,13 +13,13 @@ namespace StoryTeller.Core.Services.ContentTranslation
     {
         private readonly IFontAttributeTranslatorService _fontAttributeTranslatorService;
         private readonly ICharacterDataTranslatorService _characterDataTranslatorService;
-        private readonly INameCallTranslatorService _nameCallTranslatorService;
+        private readonly IPronoumTranslatorService _nameCallTranslatorService;
         private readonly IParagraphTranslatorService _paragraphTranslatorService;
 
         public ContentMarkupTranslatorService(
             IFontAttributeTranslatorService fontAttributeTranslatorService, 
             ICharacterDataTranslatorService characterDataTranslatorService, 
-            INameCallTranslatorService nameCallTranslatorService, 
+            IPronoumTranslatorService nameCallTranslatorService, 
             IParagraphTranslatorService paragraphTranslatorService)
         {
             _fontAttributeTranslatorService = fontAttributeTranslatorService;

@@ -26,6 +26,8 @@ namespace StoryTeller.Core.ContentTranslation.NameCalls
 
         protected override void ReleaseResources()
         {
+            _pronoumLocalRepository.Dispose();
+            _characterDataLocalRepository.Dispose();
         }
     }
 }
