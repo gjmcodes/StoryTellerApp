@@ -4,12 +4,13 @@ using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Models.NameCalls;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Services.ContentTranslation
 {
 
-    public class NameCallTranslatorService : BaseService, INameCallTranslatorService
+    public class PronoumTranslatorService : BaseService, IPronoumTranslatorService
     {
 
         const string pronoumRegexPattern = @"(<pronoum>[\s\S]+?<\/pronoum>)";
@@ -19,7 +20,7 @@ namespace StoryTeller.Core.Services.ContentTranslation
         public IEnumerable<PronoumNameCall> pronoums;
         NameCallContentFormatter _nameCallContentFormatter;
 
-        public NameCallTranslatorService(NameCallContentFormatter nameCallContentFormatter)
+        public PronoumTranslatorService(NameCallContentFormatter nameCallContentFormatter)
         {
             _nameCallContentFormatter = nameCallContentFormatter;
         }
@@ -48,6 +49,26 @@ namespace StoryTeller.Core.Services.ContentTranslation
             return contents;
         }
 
-        
+        public async Task<string> TranslatePronoumAsync(string content)
+        {
+            var contents = RegexSplitter.Split(content, pronoumRegexPattern);
+
+            var sb = new StringBuilder();
+
+            foreach (var item in contents)
+            {
+                var translanted = await _nameCallContentFormatter.GetFormattedContentAsync(item);
+
+                sb.Append(translanted);
+            }
+
+            return sb.ToString();
+
+        }
+
+        public bool HasPronoumMarkers(string content)
+        {
+            return content.Contains(pronoumStart);
+        }
     }
 }
