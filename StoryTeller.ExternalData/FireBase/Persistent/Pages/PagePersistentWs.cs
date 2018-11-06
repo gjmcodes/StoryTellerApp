@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.ExternalData.FireBase.Persistent.Pages
 {
-    public class PagePersistentWs : BaseFirebaseWs, IPageExternalPersistentRepository
+    public class PagePersistentWs : BaseFirebaseWs, IPageExternalRepository
     {
         public PagePersistentWs(IUserStatusLocalRepository userStatusLocalRepository) 
             : base("Pages", userStatusLocalRepository)

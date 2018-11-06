@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Prism.Navigation;
+using StoryTeller.Core.Interfaces.Repositories.Local.App;
 using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
 using StoryTellerTemplate.Interfaces.Services.CharacterCreation;
 using StoryTellerTemplate.Interfaces.ViewModels;
@@ -13,6 +14,7 @@ namespace StoryTellerTemplate.ViewModels
     public class CharacterCreationPageViewModel : BindableContentBaseViewModel, IGameContentManagerViewModelBinder
     {
         private ICharacterCreationAppService _characterCreationAppService;
+        private IAppDictionaryConsumer _appDictionaryConsumer;
 
         public CharacterCreationPageViewModel(INavigationService navigationService,
             ICharacterCreationAppService characterCreationAppService) 
@@ -42,8 +44,14 @@ namespace StoryTellerTemplate.ViewModels
             await NavigateToGameMasterPageAsync();
         }
 
+        public void BindDictionaryConsumer(IAppDictionaryConsumer appDictionaryConsumer)
+        {
+            _appDictionaryConsumer = appDictionaryConsumer;
+        }
+
         public override async void OnNavigatingTo(NavigationParameters parameters)
         {
+            var dictionaryData = _appDictionaryConsumer.
             var content = await _characterCreationAppService.GetCharacterCreationPageAsync();
 
             BindContentData(content);

@@ -58,15 +58,15 @@
             HorizontalOptions="FillAndExpand"
             BackgroundColor="Gray">
 
-            <Entry  Placeholder="Name" HorizontalOptions="FillAndExpand" Text="{Binding CharacterCreation.Name}" />
+            <Entry  x:Name="plcName" HorizontalOptions="FillAndExpand" Text="{Binding CharacterCreation.Name}" />
 
             <StackLayout
                 Orientation="Horizontal"
                 HorizontalOptions="Center">
 
-                <Label Grid.Column="1" Text="Male" />
+                <Label Grid.Column="1" x:Name="lblMale" />
                 <Switch Grid.Column="2"  Toggled="Switch_Toggled" />
-                <Label Grid.Column="3" Text="Female" />
+                <Label Grid.Column="3" x:Name="lblFemale" />
 
             </StackLayout>
 

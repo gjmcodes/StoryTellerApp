@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Interfaces.Repositories.External.NameCalls;
+﻿using StoryTeller.Core.Interfaces.Repositories.External.Pronoums;
 using StoryTeller.Core.Interfaces.Repositories.Local.NameCalls;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
 using System.Threading.Tasks;

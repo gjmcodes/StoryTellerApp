@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using StoryTeller.Core.Models.App;
 using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.ViewModels;
 using Xamarin.Forms;
 
 namespace StoryTellerTemplate.Views
 {
-    public partial class CharacterCreationPage : ContentPage, IGameContentManager
+    public partial class CharacterCreationPage : ContentPage, IGameContentManager, IAppDictionaryConsumer
     {
         private FormattedString fortText;
 
@@ -15,7 +16,7 @@ namespace StoryTellerTemplate.Views
 
             fortText = new FormattedString();
 
-            BindToViewModel();
+            BindContentManagerToViewModel();
         }
 
         public void BindContentText(IEnumerable<Span> textSpans)
@@ -30,10 +31,20 @@ namespace StoryTellerTemplate.Views
             contentLbl.FormattedText = fortText;
         }
 
-        public void BindToViewModel()
+        public void BindDictionaryData(AppDictionary appDictionary)
+        {
+        }
+
+        public void BindContentManagerToViewModel()
         {
             var vm = BindingContext as CharacterCreationPageViewModel;
             vm.BindCustomTextBindingPage(this);
+        }
+
+        public void BindAppDictionaryConsumerToViewModel()
+        {
+            var vm = BindingContext as CharacterCreationPageViewModel;
+            vm.BindDictionaryConsumer(this);
         }
 
         private void Switch_Toggled(object sender, ToggledEventArgs e)

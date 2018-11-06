@@ -13,14 +13,19 @@ namespace StoryTellerTemplate.Services.GameContent
     {
         private readonly IPageDownloadTasksService _pageDownloadTasksService;
         private readonly INameCallDownloadTasksService _nameCallDownloadTasksService;
+        private readonly IAppDictionaryDownloadTasksService _appDictionaryDownloadTasksService;
+
         private readonly IUserStatusLocalRepository _userStatusLocalRepository;
 
         public GameContentDownloadAppService(IPageDownloadTasksService pageDownloadTasksService,
-            INameCallDownloadTasksService nameCallDownloadTasksService, 
+            INameCallDownloadTasksService nameCallDownloadTasksService,
+            IAppDictionaryDownloadTasksService appDictionaryDownloadTasksService,
             IUserStatusLocalRepository userStatusLocalRepository)
         {
             _pageDownloadTasksService = pageDownloadTasksService;
             _nameCallDownloadTasksService = nameCallDownloadTasksService;
+            _appDictionaryDownloadTasksService = appDictionaryDownloadTasksService;
+
             _userStatusLocalRepository = userStatusLocalRepository;
         }
 
@@ -28,7 +33,7 @@ namespace StoryTellerTemplate.Services.GameContent
         {
             var tasks = new List<Task<bool>>();
 
-            contentDownloader.SetAmountOfTasks(2);
+            contentDownloader.SetAmountOfTasks(3);
 
             var selectedCulture = await _userStatusLocalRepository.GetSelectedCultureAsync();
 
@@ -46,6 +51,12 @@ namespace StoryTellerTemplate.Services.GameContent
                     return true;
                 }));
 
+            tasks.Add(_appDictionaryDownloadTasksService.DownloadAppDictionaryByCultureAsync()
+              .ContinueWith((result) =>
+              {
+                  contentDownloader.UpdateProgress();
+                  return true;
+              }));
 
             await Task.WhenAll(tasks);
 

@@ -15,7 +15,7 @@ namespace StoryTellerTemplate.Views
 
             fortText = new FormattedString();
 
-            BindToViewModel();
+            BindContentManagerToViewModel();
         }
 
 
@@ -31,7 +31,7 @@ namespace StoryTellerTemplate.Views
             contentLbl.FormattedText = fortText;
         }
 
-        public void BindToViewModel()
+        public void BindContentManagerToViewModel()
         {
             var vm = BindingContext as MainPageViewModel;
             vm.BindCustomTextBindingPage(this);

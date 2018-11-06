@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using StoryTeller.Core.Interfaces.Repositories.External.NameCalls;
+using StoryTeller.Core.Interfaces.Repositories.External.Pronoums;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.Core.Models.NameCalls;
 

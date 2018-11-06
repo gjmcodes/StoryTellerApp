@@ -2,6 +2,6 @@
 {
     public interface IGameContentManager : IContentBinding
     {
-        void BindToViewModel();
+        void BindContentManagerToViewModel();
     }
 }

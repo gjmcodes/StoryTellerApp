@@ -14,7 +14,7 @@ namespace StoryTellerTemplate.Views
 
             fortText = new FormattedString();
 
-            BindToViewModel();
+            BindContentManagerToViewModel();
         }
 
         public void BindContentText(IEnumerable<Span> textSpans)
@@ -29,7 +29,7 @@ namespace StoryTellerTemplate.Views
             contentLbl.FormattedText = fortText;
         }
 
-        public void BindToViewModel()
+        public void BindContentManagerToViewModel()
         {
             var vm = BindingContext as GamePageViewModel;
             vm.BindCustomTextBindingPage(this);

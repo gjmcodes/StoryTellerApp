@@ -3,7 +3,7 @@ using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.ContentTranslation.CharactersData;
 using StoryTeller.Core.ContentTranslation.FontAttributes;
 using StoryTeller.Core.ContentTranslation.NameCalls;
-using StoryTeller.Core.Interfaces.Repositories.External.NameCalls;
+using StoryTeller.Core.Interfaces.Repositories.External.Pronoums;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
@@ -31,6 +31,10 @@ using StoryTeller.InternalData.Repositories.NameCalls;
 using StoryTeller.InternalData.Repositories.Pages;
 using StoryTeller.InternalData.Repositories.Users;
 using StoryTeller.InternalData.Services;
+using StoryTeller.ExternalData.FireBase.App;
+using StoryTeller.Core.Interfaces.Repositories.External.App;
+using StoryTeller.InternalData.Factories.App;
+using StoryTeller.InternalData.Interfaces.Factories.App;
 
 public static class Bootstrapper
 {
@@ -86,6 +90,7 @@ public static class Bootstrapper
         containerRegistry.Register<IPageDtoPersistenceFactory, PageDtoPersistenceFactory>();
         containerRegistry.Register<IPageActionPersistenceFactory, PageActionPersistenceFactory>();
         containerRegistry.Register<IPageContentPersistenceFactory, PageContentPersistenceFactory>();
+        containerRegistry.Register<IAppDictionaryFactory, AppDictionaryFactory>();
     }
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)
@@ -93,6 +98,7 @@ public static class Bootstrapper
         containerRegistry.Register<IGameCultureRepository, GameCultureWs>();
         containerRegistry.Register<IPageExternalRepository, PageWs>();
         containerRegistry.Register<IPronoumsNameCallsExternalRepository, PronoumNameCallWs>();
+        containerRegistry.Register<IAppDictionaryExternalRepository, AppDictionaryWs>();
     }
 
     static void RegisterCrossCuttingServices(IContainerRegistry containerRegistry)

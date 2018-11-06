@@ -1,7 +1,9 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories;
 using StoryTeller.CrossCutting.Disposable;
+using StoryTeller.InternalData.DTOs.PersistentObjects;
 using StoryTeller.InternalData.Infra;
 using StoryTeller.InternalData.Interfaces;
+using StoryTeller.InternalData.Tools;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -23,7 +25,9 @@ namespace StoryTeller.InternalData.Repositories
                 return _conn;
             }
         }
-      
+
+        protected string TableName<T>() where T : BasePersistentObject 
+            => SQLiteAnnotationTools.GetTableName<T>();
 
         public BaseRepository()
         {

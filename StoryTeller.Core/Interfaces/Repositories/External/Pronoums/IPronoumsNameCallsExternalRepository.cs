@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StoryTeller.Core.Interfaces.Repositories.External.NameCalls
+namespace StoryTeller.Core.Interfaces.Repositories.External.Pronoums
 {
     public interface IPronoumsNameCallsExternalRepository
     {
