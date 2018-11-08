@@ -56,5 +56,13 @@ namespace StoryTellerTemplate.Views
             var vm = BindingContext as CharacterCreationPageViewModel;
             vm.CharacterCreation.Gender = !vm.CharacterCreation.Gender;
         }
+
+        public void BindTitle(string title)
+        {
+        }
+
+        public void BindImage(string image)
+        {
+        }
     }
 }

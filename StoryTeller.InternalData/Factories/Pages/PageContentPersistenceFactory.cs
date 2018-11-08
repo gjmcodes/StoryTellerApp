@@ -46,6 +46,8 @@ namespace StoryTeller.InternalData.Factories.Pages
                 foreach (var item in pageContents)
                 {
                     var dto = new PageContentDto();
+
+                    dto.LineBreak = item.lineBreak;
                     dto.AmountLineBreaks = item.amountLineBreaks;
                     dto.Content = item.content;
                     dto.FontAttribute = item.fontAttribute.GetHashCode();

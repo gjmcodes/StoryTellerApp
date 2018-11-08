@@ -1,5 +1,6 @@
 ﻿using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.ViewModels;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -33,6 +34,17 @@ namespace StoryTellerTemplate.Views
         {
             var vm = BindingContext as GamePageViewModel;
             vm.BindCustomTextBindingPage(this);
+        }
+
+        public void BindTitle(string title)
+        {
+            titleLbl.Text = title;
+        }
+
+        public void BindImage(string image)
+        {
+            if (!string.IsNullOrWhiteSpace(image))
+                pageImg.Source = ImageSource.FromUri(new Uri(image));
         }
     }
 }

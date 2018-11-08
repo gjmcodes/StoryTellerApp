@@ -36,5 +36,15 @@ namespace StoryTellerTemplate.Views
             var vm = BindingContext as MainPageViewModel;
             vm.BindCustomTextBindingPage(this);
         }
+
+        public void BindTitle(string title)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void BindImage(string image)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

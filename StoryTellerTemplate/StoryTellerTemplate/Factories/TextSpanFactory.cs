@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.Enums.Text;
@@ -60,7 +61,7 @@ namespace StoryTellerTemplate.Factories
         public Span MapTextSpanToXamarinSpan(TextSpan textSpan)
         {
             if (textSpan.lineBreak)
-                return new Span() { Text = textSpan.Content };
+                return new Span() { Text = Environment.NewLine + " " + Environment.NewLine};
 
             string filteredContent = string.Empty;
 

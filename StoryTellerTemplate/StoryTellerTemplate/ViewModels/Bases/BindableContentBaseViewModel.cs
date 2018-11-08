@@ -39,6 +39,9 @@ namespace StoryTellerTemplate.ViewModels.Bases
 
         protected void BindContentData(PageVm pageVm)
         {
+            _gameContentManager.BindImage(pageVm.Image);
+            _gameContentManager.BindTitle(pageVm.Title);
+
             _gameContentManager.BindContentText(pageVm.Content);
 
             Actions.Clear();

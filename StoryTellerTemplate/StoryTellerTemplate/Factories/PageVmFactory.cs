@@ -54,6 +54,9 @@ namespace StoryTellerTemplate.Factories
             {
 
                 var pageVm = new PageVm();
+                pageVm.Title = translatedPageDto.Title;
+                pageVm.Image = translatedPageDto.Image;
+
                 pageVm.Content = new List<Span>();
 
                 var pageActions = _gameActionVmFactory.MapGameActionToVm(translatedPageDto.PageActions);

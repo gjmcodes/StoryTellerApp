@@ -24,6 +24,8 @@ namespace StoryTeller.InternalData.Factories.Pages
         {
             var translatedPage = new TranslatedPageDto();
             translatedPage.PageId = pageDto.PageId;
+            translatedPage.Image = pageDto.Image;
+            translatedPage.Title = pageDto.Title;
 
             var gameActions = await _pageActionPersistenceFactory.MapDtoToGameActionAsync(pageActions);
             var translatedContents = await _pageContentPersistenceFactory.MapPageContentDtoToTextSpanAsync(pageContents);
@@ -38,8 +40,9 @@ namespace StoryTeller.InternalData.Factories.Pages
         {
             return await Task.Run(() =>
             {
-
                 var pageDto = new PageDto();
+                pageDto.Title = page.title;
+                pageDto.Image = page.image;
                 pageDto.Content = page.content.content;
                 pageDto.PageId = page.pageId;
 
