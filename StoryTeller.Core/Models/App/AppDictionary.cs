@@ -3,8 +3,9 @@
     public struct AppDictionary
     {
         public string exit;
-        public string gender;
-        public string language;
+        public string male;
+        public string female;
+        public string languages;
         public string namePlaceholder;
     }
 }

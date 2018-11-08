@@ -35,6 +35,8 @@ using StoryTeller.ExternalData.FireBase.App;
 using StoryTeller.Core.Interfaces.Repositories.External.App;
 using StoryTeller.InternalData.Factories.App;
 using StoryTeller.InternalData.Interfaces.Factories.App;
+using StoryTeller.Core.Interfaces.Repositories.Local.App;
+using StoryTeller.InternalData.Repositories.App;
 
 public static class Bootstrapper
 {
@@ -67,6 +69,7 @@ public static class Bootstrapper
 
         containerRegistry.Register<IPageDownloadTasksService, PageDownloadTasksService>();
         containerRegistry.Register<INameCallDownloadTasksService, NameCallDownloadTasksService>();
+        containerRegistry.Register<IAppDictionaryDownloadTasksService, AppDictionaryDownloadTasksService>();
     }
 
     static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
@@ -75,6 +78,7 @@ public static class Bootstrapper
         containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataRepository>();
         containerRegistry.Register<IPronoumLocalRepository, PronoumRepository>();
         containerRegistry.Register<IPageLocalRepository, PageRepository>();
+        containerRegistry.Register<IAppDictionaryLocalRepository, AppDictionaryRepository>();
     }
 
     static void RegisterInternalDataServices(IContainerRegistry containerRegistry)

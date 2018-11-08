@@ -15,7 +15,7 @@ namespace StoryTeller.InternalData.Repositories.App
             _appDictionaryFactory = appDictionaryFactory;
         }
 
-        public async Task<AppDictionary> GetAppDictionary()
+        public async Task<AppDictionary> GetAppDictionaryAsync()
         {
             var dto = await base.Conn.Table<AppDictionaryDto>().FirstAsync();
 

@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
+using StoryTeller.Core.Interfaces.Repositories.Local.App;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Models.GameContent;
@@ -13,8 +14,9 @@ namespace StoryTellerTemplate.ViewModels
         private readonly IGameContentAppService _gameContentAppService;
 
         public GamePageViewModel(INavigationService navigationService,
+            IAppDictionaryLocalRepository appDictionaryLocalRepository,
             IGameContentAppService gameContentAppService)
-            : base(navigationService)
+            : base(navigationService, appDictionaryLocalRepository)
         {
             _gameContentAppService = gameContentAppService;
         }

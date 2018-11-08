@@ -17,6 +17,7 @@ namespace StoryTellerTemplate.Views
             fortText = new FormattedString();
 
             BindContentManagerToViewModel();
+            BindAppDictionaryConsumerToViewModel();
         }
 
         public void BindContentText(IEnumerable<Span> textSpans)
@@ -33,6 +34,9 @@ namespace StoryTellerTemplate.Views
 
         public void BindDictionaryData(AppDictionary appDictionary)
         {
+            lblMale.Text = appDictionary.male;
+            lblFemale.Text = appDictionary.female;
+            plcName.Placeholder = appDictionary.namePlaceholder;
         }
 
         public void BindContentManagerToViewModel()

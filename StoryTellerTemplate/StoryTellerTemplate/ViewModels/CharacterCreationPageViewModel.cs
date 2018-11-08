@@ -14,11 +14,11 @@ namespace StoryTellerTemplate.ViewModels
     public class CharacterCreationPageViewModel : BindableContentBaseViewModel, IGameContentManagerViewModelBinder
     {
         private ICharacterCreationAppService _characterCreationAppService;
-        private IAppDictionaryConsumer _appDictionaryConsumer;
 
         public CharacterCreationPageViewModel(INavigationService navigationService,
-            ICharacterCreationAppService characterCreationAppService) 
-            : base(navigationService)
+            IAppDictionaryLocalRepository appDictionaryLocalRepository,
+            ICharacterCreationAppService characterCreationAppService)
+            : base(navigationService, appDictionaryLocalRepository)
         {
             _characterCreationAppService = characterCreationAppService;
             CharacterCreation = new CharacterCreationVm();
@@ -51,7 +51,9 @@ namespace StoryTellerTemplate.ViewModels
 
         public override async void OnNavigatingTo(NavigationParameters parameters)
         {
-            var dictionaryData = _appDictionaryConsumer.
+            var dictionaryData = await _appDictionaryLocalRepository.GetAppDictionaryAsync();
+            _appDictionaryConsumer.BindDictionaryData(dictionaryData);
+
             var content = await _characterCreationAppService.GetCharacterCreationPageAsync();
 
             BindContentData(content);

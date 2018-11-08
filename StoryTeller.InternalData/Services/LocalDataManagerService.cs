@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using StoryTeller.CrossCutting.Disposable;
 using StoryTeller.InternalData.DTOs.PersistentObjects;
+using StoryTeller.InternalData.DTOs.PersistentObjects.App;
 using StoryTeller.InternalData.DTOs.PersistentObjects.CharactersData;
 using StoryTeller.InternalData.DTOs.PersistentObjects.NameCalls;
 using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
@@ -46,6 +47,7 @@ namespace StoryTeller.InternalData.Services
             await _conn.CreateTableAsync<PageContentDto>();
             await _conn.CreateTableAsync<PageActionDto>();
             await _conn.CreateTableAsync<UserStatusDto>();
+            await _conn.CreateTableAsync<AppDictionaryDto>();
         }
 
         public async Task ClearLocalDataForCulctureChangeAsync()

@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
+using StoryTeller.Core.Interfaces.Repositories.Local.App;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
@@ -19,8 +20,9 @@ namespace StoryTellerTemplate.ViewModels
         
 
         public MainPageViewModel(INavigationService navigationService,
-            IGameContentAppService gameContentAppService)
-            : base(navigationService)
+            IGameContentAppService gameContentAppService,
+            IAppDictionaryLocalRepository appDictionaryLocalRepository)
+            : base(navigationService, appDictionaryLocalRepository)
         {
             Title = "Main Page";
 

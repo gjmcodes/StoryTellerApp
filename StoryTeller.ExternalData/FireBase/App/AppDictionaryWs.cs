@@ -16,9 +16,11 @@ namespace StoryTeller.ExternalData.FireBase.App
 
         public async Task<AppDictionary> GetAppDictionaryByCultureAsync()
         {
-            var data = await base.GetAllByCultureAsync<AppDictionary>();
+            var langQuery = await base.QueryableCollectionWithLanguageAsync();
 
-            return data.FirstOrDefault();
+            var data = await langQuery.OnceSingleAsync<AppDictionary>();
+
+            return data;
         }
 
         protected override void ReleaseResources()

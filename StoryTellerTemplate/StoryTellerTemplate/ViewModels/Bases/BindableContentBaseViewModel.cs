@@ -1,4 +1,5 @@
 ﻿using Prism.Navigation;
+using StoryTeller.Core.Interfaces.Repositories.Local.App;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.GameContent;
@@ -15,13 +16,17 @@ namespace StoryTellerTemplate.ViewModels.Bases
     public class BindableContentBaseViewModel : ViewModelBase, IGameContentManagerViewModelBinder
     {
         public ObservableCollection<GameActionVm> Actions { get; }
+        protected IAppDictionaryConsumer _appDictionaryConsumer;
         protected IGameContentManager _gameContentManager;
 
-        public BindableContentBaseViewModel(INavigationService navigationService)
+        protected readonly IAppDictionaryLocalRepository _appDictionaryLocalRepository;
+
+        public BindableContentBaseViewModel(INavigationService navigationService,
+            IAppDictionaryLocalRepository appDictionaryLocalRepository)
             : base(navigationService)
         {
             Actions = new ObservableCollection<GameActionVm>();
-
+            _appDictionaryLocalRepository = appDictionaryLocalRepository;
             ExecuteActionCommand = new Command<GameActionVm>(async (action) => await ExecuteActionAsync(action));
         }
 

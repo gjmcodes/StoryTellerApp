@@ -1,9 +1,6 @@
 ﻿using StoryTeller.Core.Models.App;
 using StoryTeller.InternalData.DTOs.PersistentObjects.App;
 using StoryTeller.InternalData.Interfaces.Factories.App;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StoryTeller.InternalData.Factories.App
@@ -16,8 +13,9 @@ namespace StoryTeller.InternalData.Factories.App
             {
                 var dto = new AppDictionaryDto();
                 dto.Exit = appDictionary.exit;
-                dto.Gender = appDictionary.gender;
-                dto.Language = appDictionary.language;
+                dto.Male = appDictionary.male;
+                dto.Female = appDictionary.female;
+                dto.Languages = appDictionary.languages;
                 dto.NamePlaceholder = appDictionary.namePlaceholder;
 
                 return dto;
@@ -30,8 +28,9 @@ namespace StoryTeller.InternalData.Factories.App
             {
                 var obj = new AppDictionary();
                 obj.namePlaceholder = dto.NamePlaceholder;
-                obj.language = dto.Language;
-                obj.gender = dto.Gender;
+                obj.languages = dto.Languages;
+                obj.male = dto.Male;
+                obj.female= dto.Female;
                 obj.exit = dto.Exit;
 
                 return obj;
