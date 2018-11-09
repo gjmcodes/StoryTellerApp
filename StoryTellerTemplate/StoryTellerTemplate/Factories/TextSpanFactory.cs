@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.Enums.Text;
@@ -37,6 +38,7 @@ namespace StoryTellerTemplate.Factories
                         content = await _pronoumTranslatorService.TranslatePronoumAsync(item.Content);
 
                     var textSpan = new TextSpan();
+
                     textSpan.amountLineBreaks = item.AmountLineBreaks;
                     textSpan.content = content;
                     textSpan.fontAttribute = (FontAttribute)item.FontAttribute;
@@ -61,12 +63,20 @@ namespace StoryTellerTemplate.Factories
         public Span MapTextSpanToXamarinSpan(TextSpan textSpan)
         {
             if (textSpan.lineBreak)
-                return new Span() { Text = Environment.NewLine + " " + Environment.NewLine};
+            {
+                var spanText = new StringBuilder();
+
+                for (int i = 0; i < textSpan.amountLineBreaks; i++)
+                {
+                    spanText.Append(Environment.NewLine);
+                    spanText.Append(" ");
+                }
+                return new Span() { Text = spanText.ToString() };
+            };
 
             string filteredContent = string.Empty;
 
             // Deverá tratar pronoum calls e character data aqui
-
             var span = new Span()
             {
                 Text = textSpan.Content,
