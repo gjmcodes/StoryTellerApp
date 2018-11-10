@@ -7,11 +7,11 @@ namespace StoryTeller.Core.Services.GameContentDownload
 {
     public class NameCallDownloadTasksService : BaseService, INameCallDownloadTasksService
     {
-        private readonly IPronoumsNameCallsExternalRepository _pronoumsNameCallsExternalRepository;
+        private readonly IPronoumExternalRepository _pronoumsNameCallsExternalRepository;
         private readonly IPronoumLocalRepository _nameCallLocalPersistentRepository;
 
         public NameCallDownloadTasksService(
-            IPronoumsNameCallsExternalRepository pronoumsNameCallsExternalRepository,
+            IPronoumExternalRepository pronoumsNameCallsExternalRepository,
             IPronoumLocalRepository nameCallLocalPersistentRepository)
         {
             _pronoumsNameCallsExternalRepository = pronoumsNameCallsExternalRepository;

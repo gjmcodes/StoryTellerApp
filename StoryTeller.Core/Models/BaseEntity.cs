@@ -1,6 +1,6 @@
 ﻿namespace StoryTeller.Core.Models
 {
-    public class BaseExternalEntity
+    public class BaseEntity
     {
         public string Version { get; private set; }
     }

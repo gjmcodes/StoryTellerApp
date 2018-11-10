@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Autofac.Forms" Version="7.0.0.396" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StoryTeller.Core\StoryTeller.Core.csproj" />
+    <ProjectReference Include="..\StoryTeller.ExternalData\StoryTeller.ExternalData.csproj" />
+    <ProjectReference Include="..\StoryTeller.InternalData\StoryTeller.InternalData.csproj" />
+    <ProjectReference Include="..\StoryTeller.Xamarin.Domain\StoryTeller.Xamarin.Domain.csproj" />
+    <ProjectReference Include="..\StoryTeller.Xamarin.LocalData\StoryTeller.Xamarin.LocalData.csproj" />
+  </ItemGroup>
+
+</Project>

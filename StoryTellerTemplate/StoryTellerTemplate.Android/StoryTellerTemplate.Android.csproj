@@ -113,9 +113,9 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\StoryTeller.InternalData\StoryTeller.InternalData.csproj">
-      <Project>{2B3048A5-8E65-4587-85EF-FAB9F62F1793}</Project>
-      <Name>StoryTeller.InternalData</Name>
+    <ProjectReference Include="..\..\StoryTeller.Xamarin.LocalData\StoryTeller.Xamarin.LocalData.csproj">
+      <Project>{B1CCDE93-7500-4C04-8837-F33F6CACB689}</Project>
+      <Name>StoryTeller.Xamarin.LocalData</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTellerTemplate\StoryTellerTemplate.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>

@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.Interfaces.Repositories.External.Pronoums
 {
-    public interface IPronoumsNameCallsExternalRepository
+    public interface IPronoumExternalRepository
     {
-        Task<IEnumerable<PronoumNameCall>> GetPronoumNameCallsByCultureAsync(string culture);
+        Task<IEnumerable<PronoumNameCall>> GetPronoumNameCallsByCultureAsync();
     }
 }

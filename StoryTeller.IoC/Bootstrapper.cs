@@ -6,9 +6,6 @@ using StoryTeller.Core.ContentTranslation.NameCalls;
 using StoryTeller.Core.Interfaces.Repositories.External.Pronoums;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
-using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
-using StoryTeller.Core.Interfaces.Repositories.Local.NameCalls;
-using StoryTeller.Core.Interfaces.Repositories.Local.Pages;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
@@ -26,17 +23,27 @@ using StoryTeller.InternalData.Interfaces.Factories.CharactersData;
 using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
 using StoryTeller.InternalData.Interfaces.Factories.Pages;
 using StoryTeller.InternalData.Interfaces.Services;
-using StoryTeller.InternalData.Repositories.CharactersData;
-using StoryTeller.InternalData.Repositories.NameCalls;
-using StoryTeller.InternalData.Repositories.Pages;
 using StoryTeller.InternalData.Repositories.Users;
 using StoryTeller.InternalData.Services;
 using StoryTeller.ExternalData.FireBase.App;
 using StoryTeller.Core.Interfaces.Repositories.External.App;
 using StoryTeller.InternalData.Factories.App;
 using StoryTeller.InternalData.Interfaces.Factories.App;
-using StoryTeller.Core.Interfaces.Repositories.Local.App;
-using StoryTeller.InternalData.Repositories.App;
+using StoryTeller.Xamarin.Domain.Entities.Pronoums.Repositories;
+using StoryTeller.Xamarin.LocalData.Repositories.Pronoums;
+using StoryTeller.Xamarin.LocalData.Repositories.Pages;
+using StoryTeller.Xamarin.Domain.Entities.Pages.Repositories;
+using StoryTeller.Xamarin.Domain.Entities.App.Repositories;
+using StoryTeller.Xamarin.LocalData.Repositories.App;
+using StoryTeller.Xamarin.Domain.Services;
+using StoryTeller.Xamarin.Domain.Entities.App.Factories.Interfaces;
+using StoryTeller.Xamarin.Domain.Entities.App.Factories;
+using StoryTeller.Xamarin.Domain.Entities.Pages.Factories.Interfaces;
+using StoryTeller.Xamarin.Domain.Factories.Pages;
+using StoryTeller.Xamarin.Domain.Entities.Pronoums.Interfaces;
+using StoryTeller.Xamarin.Domain.Entities.Pronoums.Factories;
+using StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories.Interfaces;
+using StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories;
 
 public static class Bootstrapper
 {
@@ -52,6 +59,7 @@ public static class Bootstrapper
 
     static void RegisterDomainServices(IContainerRegistry containerRegistry)
     {
+        // CORE
         containerRegistry.Register<IPronoumTranslatorService, PronoumTranslatorService>();
         containerRegistry.Register<IFontAttributeTranslatorService, FontAttributeTranslatorService>();
         containerRegistry.Register<ICharacterDataTranslatorService, CharacterDataTranslatorService>();
@@ -67,18 +75,22 @@ public static class Bootstrapper
         containerRegistry.Register<FontAttributeContentFormatter>();
         containerRegistry.Register<CharacterDataFormatter>();
 
-        containerRegistry.Register<IPageDownloadTasksService, PageDownloadTasksService>();
-        containerRegistry.Register<INameCallDownloadTasksService, NameCallDownloadTasksService>();
-        containerRegistry.Register<IAppDictionaryDownloadTasksService, AppDictionaryDownloadTasksService>();
+        //containerRegistry.Register<IPageDownloadTasksService, PageDownloadTasksService>();
+        //containerRegistry.Register<INameCallDownloadTasksService, NameCallDownloadTasksService>();
+        //containerRegistry.Register<IAppDictionaryDownloadTasksService, AppDictionaryDownloadTasksService>();
+
+        // XAMARIN
+        containerRegistry.Register<IGameContentDownloadService, GameContentDownloadService>();
+
     }
 
     static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
     {
         containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
-        containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataRepository>();
-        containerRegistry.Register<IPronoumLocalRepository, PronoumRepository>();
-        containerRegistry.Register<IPageLocalRepository, PageRepository>();
-        containerRegistry.Register<IAppDictionaryLocalRepository, AppDictionaryRepository>();
+        //containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataRepository>();
+        containerRegistry.Register<IPronoumLocalRepository, PronoumLocalRepository>();
+        containerRegistry.Register<IPageLocalRepository, PageLocalRepository>();
+        containerRegistry.Register<IAppDictionaryLocalRepository, AppDictionaryLocalRepository>();
     }
 
     static void RegisterInternalDataServices(IContainerRegistry containerRegistry)
@@ -88,20 +100,29 @@ public static class Bootstrapper
 
     static void RegisterInternalFactories(IContainerRegistry containerRegistry)
     {
-        containerRegistry.Register<ICharacterLocalDataFactory, CharacterLocalDataFactory>();
-        containerRegistry.Register<IPronoumLocalDataFactory, PronoumLocalDataFactory>();
+        //containerRegistry.Register<ICharacterLocalDataFactory, CharacterLocalDataFactory>();
+        //containerRegistry.Register<IPronoumLocalDataFactory, PronoumLocalDataFactory>();
 
-        containerRegistry.Register<IPageDtoPersistenceFactory, PageDtoPersistenceFactory>();
-        containerRegistry.Register<IPageActionPersistenceFactory, PageActionPersistenceFactory>();
-        containerRegistry.Register<IPageContentPersistenceFactory, PageContentPersistenceFactory>();
-        containerRegistry.Register<IAppDictionaryFactory, AppDictionaryFactory>();
+        //containerRegistry.Register<IPageDtoPersistenceFactory, PageDtoPersistenceFactory>();
+        //containerRegistry.Register<IPageActionPersistenceFactory, PageActionPersistenceFactory>();
+        //containerRegistry.Register<IPageContentPersistenceFactory, PageContentPersistenceFactory>();
+        //containerRegistry.Register<IAppDictionaryFactory, AppDictionaryFactory>();
+
+        containerRegistry.Register<IXamarinPageActionFactory, XamarinPageActionFactory>();
+        containerRegistry.Register<IXamarinPageContentFactory, XamarinPageContentFactory>();
+        containerRegistry.Register<IXamarinPageFactory, XamarinPageFactory>();
+
+        containerRegistry.Register<IXamarinAppDictionaryFactory, XamarinAppDictionaryFactory>();
+
+        containerRegistry.Register<IXamarinPronoumFactory, XamarinPronoumFactory>();
+        containerRegistry.Register<IXamarinCharacterFactory, XamarinCharacterFactory>();
     }
 
     static void RegisterExternalRepositories(IContainerRegistry containerRegistry)
     {
         containerRegistry.Register<IGameCultureRepository, GameCultureWs>();
         containerRegistry.Register<IPageExternalRepository, PageWs>();
-        containerRegistry.Register<IPronoumsNameCallsExternalRepository, PronoumNameCallWs>();
+        containerRegistry.Register<IPronoumExternalRepository, PronoumNameCallWs>();
         containerRegistry.Register<IAppDictionaryExternalRepository, AppDictionaryWs>();
     }
 

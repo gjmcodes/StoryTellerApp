@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 using SQLite;
-using StoryTeller.InternalData.Infra;
-using StoryTeller.InternalData.Interfaces;
+using StoryTeller.Xamarin.LocalData.SQLite;
 using StoryTellerTemplate.Droid.SQLite;
 using Xamarin.Forms;
 
@@ -11,12 +10,12 @@ namespace StoryTellerTemplate.Droid.SQLite
 {
     public class SQLiteDb : ISQLiteDb
     {
-        public InternalSQLiteConnection GetConnection()
+        public LocalSQLiteConnection GetConnection()
         {
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var path = Path.Combine(documentsPath, "StoryTellerTemplateDB.db3");
 
-            return new InternalSQLiteConnection(path);
+            return new LocalSQLiteConnection(path);
         }
     }
 }
