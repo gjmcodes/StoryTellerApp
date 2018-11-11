@@ -1,6 +1,7 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.Core.Interfaces.Services.GameContentDownload;
+using StoryTeller.Core.Services.GameContentDownload;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using System.Collections.Generic;
@@ -11,52 +12,36 @@ namespace StoryTellerTemplate.Services.GameContent
 {
     public class GameContentDownloadAppService : BaseAppService, IGameContentDownloadAppService
     {
-        private readonly IPageDownloadTasksService _pageDownloadTasksService;
-        private readonly INameCallDownloadTasksService _nameCallDownloadTasksService;
-        private readonly IAppDictionaryDownloadTasksService _appDictionaryDownloadTasksService;
+        private readonly IGameContentDownloadService _gameContentDownloadService;
 
-        private readonly IUserStatusLocalRepository _userStatusLocalRepository;
-
-        public GameContentDownloadAppService(IPageDownloadTasksService pageDownloadTasksService,
-            INameCallDownloadTasksService nameCallDownloadTasksService,
-            IAppDictionaryDownloadTasksService appDictionaryDownloadTasksService,
-            IUserStatusLocalRepository userStatusLocalRepository)
+        public GameContentDownloadAppService(IGameContentDownloadService gameContentDownloadService)
         {
-            _pageDownloadTasksService = pageDownloadTasksService;
-            _nameCallDownloadTasksService = nameCallDownloadTasksService;
-            _appDictionaryDownloadTasksService = appDictionaryDownloadTasksService;
-
-            _userStatusLocalRepository = userStatusLocalRepository;
+            _gameContentDownloadService = gameContentDownloadService;
         }
 
         public async Task<bool> DownloadGameContentForCultureAsync(IContentDownloader contentDownloader)
         {
             var tasks = new List<Task<bool>>();
 
-            contentDownloader.SetAmountOfTasks(3);
+            contentDownloader.SetAmountOfTasks(_gameContentDownloadService.GetAmountOfTasks());
 
-            var selectedCulture = await _userStatusLocalRepository.GetSelectedCultureAsync();
-
-            tasks.Add(_pageDownloadTasksService.DownloadPagesByCultureAsync(selectedCulture)
-                .ContinueWith((result) =>
-                {
-                    contentDownloader.UpdateProgress();
-                    return true;
-                }));
-
-            tasks.Add(_nameCallDownloadTasksService.DownloadPronoumNameCallsByCultureAsync(selectedCulture)
-                .ContinueWith((result) =>
-                {
-                    contentDownloader.UpdateProgress();
-                    return true;
-                }));
-
-            tasks.Add(_appDictionaryDownloadTasksService.DownloadAppDictionaryByCultureAsync()
-              .ContinueWith((result) =>
-              {
-                  contentDownloader.UpdateProgress();
-                  return true;
-              }));
+            tasks.Add(_gameContentDownloadService.DownloadAppDictionaryAsync()
+               .ContinueWith((result) =>
+               {
+                   contentDownloader.UpdateProgress();
+                   return true;
+               }));
+            tasks.Add(_gameContentDownloadService.DownloadGamePagesAsync().ContinueWith((result) =>
+            {
+                contentDownloader.UpdateProgress();
+                return true;
+            }));
+            tasks.Add(_gameContentDownloadService.DownloadPronoumsAsync()
+               .ContinueWith((result) =>
+               {
+                   contentDownloader.UpdateProgress();
+                   return true;
+               }));
 
             await Task.WhenAll(tasks);
 

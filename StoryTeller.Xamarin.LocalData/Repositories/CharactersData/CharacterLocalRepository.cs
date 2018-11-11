@@ -1,4 +1,5 @@
 ﻿using StoryTeller.Core.CharactersData;
+using StoryTeller.Xamarin.Domain.Entities.CharactersData;
 using StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.CharactersData.Repositories;
 using System.Threading.Tasks;
@@ -21,6 +22,19 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.CharactersData
             await Conn.InsertAsync(xamChar);
 
             return true;
+        }
+
+        public async Task<Character> GetCharacterDataAsync()
+        {
+            var data = await Conn.Table<XamarinCharacter>().FirstOrDefaultAsync();
+            var character = await _xamarinCharacterFactory.MapXamarinToCharacterAsync(data);
+
+            return character;
+        }
+
+        public Task<string> GetCharacterDataByColumnAsync(string column)
+        {
+            throw new System.NotImplementedException();
         }
 
         protected override void ReleaseResources()

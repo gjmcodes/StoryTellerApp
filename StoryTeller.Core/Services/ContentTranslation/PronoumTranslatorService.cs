@@ -1,7 +1,7 @@
 ﻿using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.ContentTranslation.NameCalls;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
-using StoryTeller.Core.Models.NameCalls;
+using StoryTeller.Core.Models.Pronoums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,7 @@ namespace StoryTeller.Core.Services.ContentTranslation
         const string pronoumStart = "<pronoum>";
         const string pronoumEnd = "</pronoum>";
 
-        public IEnumerable<PronoumNameCall> pronoums;
+        public IEnumerable<Pronoum> pronoums;
         NameCallContentFormatter _nameCallContentFormatter;
 
         public PronoumTranslatorService(NameCallContentFormatter nameCallContentFormatter)

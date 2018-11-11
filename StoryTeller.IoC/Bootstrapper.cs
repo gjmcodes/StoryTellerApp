@@ -8,7 +8,6 @@ using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
-using StoryTeller.Core.Interfaces.Services.GameContentDownload;
 using StoryTeller.Core.Interfaces.Services.Users;
 using StoryTeller.Core.Services.ContentTranslation;
 using StoryTeller.Core.Services.GameContentDownload;
@@ -16,19 +15,8 @@ using StoryTeller.Core.Services.Users;
 using StoryTeller.ExternalData.FireBase.GameCulture;
 using StoryTeller.ExternalData.FireBase.NameCalls;
 using StoryTeller.ExternalData.FireBase.Pages;
-using StoryTeller.InternalData.Factories.CharactersData;
-using StoryTeller.InternalData.Factories.NameCalls;
-using StoryTeller.InternalData.Factories.Pages;
-using StoryTeller.InternalData.Interfaces.Factories.CharactersData;
-using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
-using StoryTeller.InternalData.Interfaces.Factories.Pages;
-using StoryTeller.InternalData.Interfaces.Services;
-using StoryTeller.InternalData.Repositories.Users;
-using StoryTeller.InternalData.Services;
 using StoryTeller.ExternalData.FireBase.App;
 using StoryTeller.Core.Interfaces.Repositories.External.App;
-using StoryTeller.InternalData.Factories.App;
-using StoryTeller.InternalData.Interfaces.Factories.App;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Repositories;
 using StoryTeller.Xamarin.LocalData.Repositories.Pronoums;
 using StoryTeller.Xamarin.LocalData.Repositories.Pages;
@@ -86,7 +74,7 @@ public static class Bootstrapper
 
     static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
     {
-        containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
+        //containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
         //containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataRepository>();
         containerRegistry.Register<IPronoumLocalRepository, PronoumLocalRepository>();
         containerRegistry.Register<IPageLocalRepository, PageLocalRepository>();
@@ -95,7 +83,7 @@ public static class Bootstrapper
 
     static void RegisterInternalDataServices(IContainerRegistry containerRegistry)
     {
-        containerRegistry.Register<ILocalDataManagerService, LocalDataManagerService>();
+        //containerRegistry.Register<ILocalDataManagerService, LocalDataManagerService>();
     }
 
     static void RegisterInternalFactories(IContainerRegistry containerRegistry)

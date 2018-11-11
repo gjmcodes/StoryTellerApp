@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using StoryTeller.Core.Interfaces.Repositories.Local.App;
 using StoryTeller.Core.Models.App;
 using StoryTeller.InternalData.DTOs.PersistentObjects.App;
 using StoryTeller.InternalData.Interfaces.Factories.App;

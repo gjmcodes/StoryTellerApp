@@ -36,7 +36,8 @@ namespace StoryTeller.Xamarin.Domain.Factories.Pages
                         item.fontSize.GetHashCode(),
                         item.fontAttribute.GetHashCode(),
                         item.lineBreak,
-                        item.amountLineBreaks
+                        item.amountLineBreaks,
+                        pageVersion
                     );
 
                     contents.Add(xamPageContent);

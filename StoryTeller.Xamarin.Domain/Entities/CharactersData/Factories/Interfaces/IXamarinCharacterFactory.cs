@@ -7,5 +7,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories.Interface
     public interface IXamarinCharacterFactory : IDisposableObject
     {
         Task<XamarinCharacter> MapCharacterToXamarinAsync(Character character);
+        Task<Character> MapXamarinToCharacterAsync(XamarinCharacter character);
+
     }
 }

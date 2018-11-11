@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Models.NameCalls;
+﻿using StoryTeller.Core.Models.Pronoums;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Repositories;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.Pronoums
             _xamarinPronoumFactory = xamarinPronoumFactory;
         }
 
-        public async Task<bool> AddPronoumsAsync(IEnumerable<PronoumNameCall> pronoums)
+        public async Task<bool> AddPronoumsAsync(IEnumerable<Pronoum> pronoums)
         {
             var xamPronoums = await _xamarinPronoumFactory.MapPronoumToXamarin(pronoums);
 

@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
+﻿using StoryTeller.Core.Interfaces.Repositories.CharactersData;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation.CharactersData
@@ -6,7 +6,7 @@ namespace StoryTeller.Core.ContentTranslation.CharactersData
     public class CharacterDataFormatter : ContentFormatter
     {
         //ToDo: Injetar repository de character data
-        ICharacterDataLocalRepository _characterDataLocalRepository;
+        ICharacterDataRepository _characterDataRepository;
 
         public CharacterDataFormatter()
         {
@@ -15,7 +15,7 @@ namespace StoryTeller.Core.ContentTranslation.CharactersData
         public async Task<string> GetCharacterDataAsync(string dataToGet)
         {
             // Realizer um Select do repository de characterData baseado no parâmetro
-            var value = await _characterDataLocalRepository.GetCharacterDataColumnValueAsync(dataToGet);
+            var value = await _characterDataRepository.GetCharacterDataByColumnAsync(dataToGet);
 
             return "C_DATA";
         }

@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StoryTeller.Core.Interfaces.Repositories.External.Pronoums;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
-using StoryTeller.Core.Models.NameCalls;
+using StoryTeller.Core.Models.Pronoums;
 
 namespace StoryTeller.ExternalData.FireBase.NameCalls
 {
@@ -15,9 +15,9 @@ namespace StoryTeller.ExternalData.FireBase.NameCalls
         {
         }
 
-        public async Task<IEnumerable<PronoumNameCall>> GetPronoumNameCallsByCultureAsync()
+        public async Task<IEnumerable<Pronoum>> GetPronoumNameCallsByCultureAsync()
         {
-            var pronoums = await base.GetAllByCultureAsync<PronoumNameCall>();
+            var pronoums = await base.GetAllByCultureAsync<Pronoum>();
 
             return pronoums;
         }

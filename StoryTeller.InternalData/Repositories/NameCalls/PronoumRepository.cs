@@ -1,5 +1,5 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.Local.NameCalls;
-using StoryTeller.Core.Models.NameCalls;
+using StoryTeller.Core.Models.Pronoums;
 using StoryTeller.InternalData.DTOs.PersistentObjects.NameCalls;
 using StoryTeller.InternalData.Interfaces.Factories.NameCalls;
 using System.Collections.Generic;
@@ -16,12 +16,12 @@ namespace StoryTeller.InternalData.Repositories.NameCalls
             _localDataPronoumFactory = localDataPronoumFactory;
         }
 
-        public async Task<PronoumNameCall> GetPronoumByIdAsync(string pronoumId)
+        public async Task<Pronoum> GetPronoumByIdAsync(string pronoumId)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<bool> PersistNameCallsAsync(IEnumerable<PronoumNameCall> nameCalls)
+        public async Task<bool> PersistNameCallsAsync(IEnumerable<Pronoum> nameCalls)
         {
             var dtos = await _localDataPronoumFactory.MapPronoumNameCallToDtoAsync(nameCalls);
 

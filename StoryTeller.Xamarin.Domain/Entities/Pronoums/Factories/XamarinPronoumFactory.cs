@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Models.NameCalls;
+﻿using StoryTeller.Core.Models.Pronoums;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Interfaces;
 using StoryTeller.Xamarin.Domain.Factories;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums.Factories
 {
     public class XamarinPronoumFactory : BaseFactory, IXamarinPronoumFactory
     {
-        public async Task<XamarinPronoum> MapPronoumToXamarin(PronoumNameCall pronoum)
+        public async Task<XamarinPronoum> MapPronoumToXamarin(Pronoum pronoum)
         {
             return await Task.Run(() =>
             {
@@ -18,7 +18,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums.Factories
             });
         }
 
-        public async Task<IEnumerable<XamarinPronoum>> MapPronoumToXamarin(IEnumerable<PronoumNameCall> pronoums)
+        public async Task<IEnumerable<XamarinPronoum>> MapPronoumToXamarin(IEnumerable<Pronoum> pronoums)
         {
             return await Task.Run(async () =>
             {

@@ -6,6 +6,10 @@ namespace StoryTeller.Xamarin.Domain.Entities.CharactersData
     [Table("TB_CHARACTER")]
     public class XamarinCharacter : BaseXamarinModel
     {
+        public XamarinCharacter()
+        {
+        }
+
         public XamarinCharacter(string name, bool gender)
         {
             Name = name;

@@ -1,5 +1,5 @@
 ﻿using StoryTeller.Core.CharactersData;
-using StoryTeller.InternalData.DTOs.PersistentObjects.CharactersData;
+using StoryTeller.Xamarin.Domain.Entities.CharactersData;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Models.CharacterCreation;
 using System.Threading.Tasks;
@@ -18,11 +18,11 @@ namespace StoryTellerTemplate.Factories
             });
         }
 
-        public async Task<CharacterDto> MapVmToCharacterDtoAsync(CharacterCreationVm characterCreationVm)
+        public async Task<XamarinCharacter> MapVmToCharacterDtoAsync(CharacterCreationVm characterCreationVm)
         {
             return await Task.Run(() =>
             {
-                var character = new CharacterDto()
+                var character = new XamarinCharacter()
                 {
                     Name = characterCreationVm.Name,
                     Gender = characterCreationVm.Gender

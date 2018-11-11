@@ -1,6 +1,6 @@
-﻿namespace StoryTeller.Core.Models.NameCalls
+﻿namespace StoryTeller.Core.Models.Pronoums
 {
-    public struct PronoumNameCall
+    public struct Pronoum
     {
         public string pronoumId;
         public string forMale;

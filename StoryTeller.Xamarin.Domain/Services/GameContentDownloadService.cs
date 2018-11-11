@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using StoryTeller.Core.Interfaces.Repositories.External.App;
 using StoryTeller.Core.Interfaces.Repositories.External.Pages;
 using StoryTeller.Core.Interfaces.Repositories.External.Pronoums;
@@ -67,6 +68,17 @@ namespace StoryTeller.Xamarin.Domain.Services
             int amountLocalPersistence = 3;
 
             return amountExternalCalls + amountLocalPersistence;
+        }
+
+        public IEnumerable<Task<bool>> GetDownloadTasks()
+        {
+            var tasks = new List<Task<bool>>();
+
+            tasks.Add(DownloadAppDictionaryAsync());
+            tasks.Add(DownloadGamePagesAsync());
+            tasks.Add(DownloadPronoumsAsync());
+
+            return tasks;
         }
     }
 }

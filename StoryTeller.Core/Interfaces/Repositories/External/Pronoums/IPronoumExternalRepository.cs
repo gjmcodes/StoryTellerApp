@@ -1,4 +1,4 @@
-﻿using StoryTeller.Core.Models.NameCalls;
+﻿using StoryTeller.Core.Models.Pronoums;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,6 +6,6 @@ namespace StoryTeller.Core.Interfaces.Repositories.External.Pronoums
 {
     public interface IPronoumExternalRepository
     {
-        Task<IEnumerable<PronoumNameCall>> GetPronoumNameCallsByCultureAsync();
+        Task<IEnumerable<Pronoum>> GetPronoumNameCallsByCultureAsync();
     }
 }

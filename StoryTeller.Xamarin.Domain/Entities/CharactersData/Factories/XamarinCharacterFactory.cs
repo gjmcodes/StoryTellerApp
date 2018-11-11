@@ -16,5 +16,15 @@ namespace StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories
                 return xamChar;
             });
         }
+
+        public async Task<Character> MapXamarinToCharacterAsync(XamarinCharacter xamChar)
+        {
+            return await Task.Run(() =>
+            {
+                var character = new Character(xamChar.Name, xamChar.Gender);
+
+                return character;
+            });
+        }
     }
 }

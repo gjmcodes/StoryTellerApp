@@ -1,33 +1,33 @@
-﻿using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
-using StoryTeller.Core.Interfaces.Repositories.Local.NameCalls;
+﻿using StoryTeller.Core.Interfaces.Repositories.CharactersData;
+using StoryTeller.Core.Interfaces.Repositories.Pronoums;
 using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation.NameCalls
 {
     public class NameCallContentFormatter : ContentFormatter
     {
-        readonly IPronoumLocalRepository _pronoumLocalRepository;
-        readonly ICharacterDataLocalRepository _characterDataLocalRepository;
+        readonly IPronoumRepository _pronoumRepository;
+        readonly ICharacterDataRepository _characterDataRepository;
 
-        public NameCallContentFormatter(IPronoumLocalRepository nameCallLocalRepository, 
-            ICharacterDataLocalRepository characterDataLocalRepository)
+        public NameCallContentFormatter(IPronoumRepository pronoumRepository,
+            ICharacterDataRepository characterDataRepository)
         {
-            _pronoumLocalRepository = nameCallLocalRepository;
-            _characterDataLocalRepository = characterDataLocalRepository;
+            _pronoumRepository = pronoumRepository;
+            _characterDataRepository = characterDataRepository;
         }
 
         public override async Task<string> GetFormattedContentAsync(string contentBetweenMarkers)
         {
-            var pronoum = await _pronoumLocalRepository.GetPronoumByIdAsync(contentBetweenMarkers);
-            var charData = await _characterDataLocalRepository.GetCharacterDataAsync();
+            var pronoum = await _pronoumRepository.GetPronoumByIdAsync(contentBetweenMarkers);
+            var charData = await _characterDataRepository.GetCharacterDataAsync();
 
             return charData.IsFemale ? pronoum.forFemale : pronoum.forMale; 
         }
 
         protected override void ReleaseResources()
         {
-            _pronoumLocalRepository.Dispose();
-            _characterDataLocalRepository.Dispose();
+            _pronoumRepository.Dispose();
+            _characterDataRepository.Dispose();
         }
     }
 }
