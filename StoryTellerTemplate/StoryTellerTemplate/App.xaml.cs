@@ -32,7 +32,7 @@ namespace StoryTellerTemplate
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/CultureSelectionPage");
+            await NavigationService.NavigateAsync("NavigationPage/StartPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

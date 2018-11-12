@@ -1,4 +1,5 @@
 ﻿using StoryTeller.Core.Models.App;
+using StoryTeller.Xamarin.Domain.Entities.App;
 using StoryTeller.Xamarin.Domain.Entities.App.Factories.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.App.Repositories;
 using System;
@@ -24,6 +25,13 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.App
             await Conn.InsertAsync(xamAppDic);
 
             return true;
+        }
+
+        public async Task<XamarinAppDictionary> GetAppDictionaryAsync()
+        {
+            var xamAppDic = await Conn.Table<XamarinAppDictionary>().FirstAsync();
+
+            return xamAppDic;
         }
 
         protected override void ReleaseResources()

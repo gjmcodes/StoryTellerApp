@@ -1,6 +1,5 @@
-﻿using Prism.Commands;
-using Prism.Navigation;
-using StoryTeller.Core.Interfaces.Repositories.Local.App;
+﻿using Prism.Navigation;
+using StoryTeller.Xamarin.Domain.Entities.App.Repositories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Models.GameContent;

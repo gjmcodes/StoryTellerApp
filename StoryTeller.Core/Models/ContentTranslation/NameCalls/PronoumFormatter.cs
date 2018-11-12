@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.Core.ContentTranslation.NameCalls
 {
-    public class NameCallContentFormatter : ContentFormatter
+    public class PronoumFormatter : ContentFormatter
     {
         readonly IPronoumRepository _pronoumRepository;
         readonly ICharacterDataRepository _characterDataRepository;
 
-        public NameCallContentFormatter(IPronoumRepository pronoumRepository,
+        public PronoumFormatter(IPronoumRepository pronoumRepository,
             ICharacterDataRepository characterDataRepository)
         {
             _pronoumRepository = pronoumRepository;

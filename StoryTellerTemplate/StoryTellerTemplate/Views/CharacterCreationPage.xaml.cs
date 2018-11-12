@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using StoryTeller.Core.Models.App;
+using StoryTeller.Xamarin.Domain.Entities.App;
 using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.ViewModels;
 using Xamarin.Forms;
@@ -32,11 +33,11 @@ namespace StoryTellerTemplate.Views
             contentLbl.FormattedText = fortText;
         }
 
-        public void BindDictionaryData(AppDictionary appDictionary)
+        public void BindDictionaryData(XamarinAppDictionary appDictionary)
         {
-            lblMale.Text = appDictionary.male;
-            lblFemale.Text = appDictionary.female;
-            plcName.Placeholder = appDictionary.namePlaceholder;
+            lblMale.Text = appDictionary.Male;
+            lblFemale.Text = appDictionary.Female;
+            plcName.Placeholder = appDictionary.NamePlaceholder;
         }
 
         public void BindContentManagerToViewModel()

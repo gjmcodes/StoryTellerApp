@@ -34,6 +34,11 @@ using StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories;
 using StoryTeller.Xamarin.Domain.Interfaces.Services.LocalData;
 using StoryTeller.Xamarin.LocalData.Services;
+using StoryTeller.Xamarin.LocalData.Repositories.Users;
+using StoryTeller.Core.Interfaces.Repositories.Pronoums;
+using StoryTeller.Xamarin.Domain.Entities.CharactersData.Repositories;
+using StoryTeller.Xamarin.LocalData.Repositories.CharactersData;
+using StoryTeller.Core.Interfaces.Repositories.CharactersData;
 
 public static class Bootstrapper
 {
@@ -41,7 +46,7 @@ public static class Bootstrapper
     {
         RegisterDomainServices(containerRegistry);
         RegisterExternalRepositories(containerRegistry);
-        RegisterInternalRepositories(containerRegistry);
+        RegisterLocalRepositories(containerRegistry);
         RegisterInternalDataServices(containerRegistry);
         RegisterInternalFactories(containerRegistry);
         RegisterCrossCuttingServices(containerRegistry);
@@ -61,7 +66,7 @@ public static class Bootstrapper
         containerRegistry.Register<IParagraphTranslatorService, ParagraphTranslatorService>();
 
 
-        containerRegistry.Register<NameCallContentFormatter>();
+        containerRegistry.Register<PronoumFormatter>();
         containerRegistry.Register<FontAttributeContentFormatter>();
         containerRegistry.Register<CharacterDataFormatter>();
 
@@ -74,13 +79,18 @@ public static class Bootstrapper
         containerRegistry.Register<ILocalDataManagementService, LocalDataManagementService>();
     }
 
-    static void RegisterInternalRepositories(IContainerRegistry containerRegistry)
+    static void RegisterLocalRepositories(IContainerRegistry containerRegistry)
     {
         //containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
-        //containerRegistry.Register<ICharacterDataLocalRepository, CharacterDataRepository>();
+        containerRegistry.Register<ICharacterLocalRepository, CharacterLocalRepository>();
+        containerRegistry.Register<ICharacterDataRepository, CharacterLocalRepository>();
+
         containerRegistry.Register<IPronoumLocalRepository, PronoumLocalRepository>();
+        containerRegistry.Register<IPronoumRepository, PronoumLocalRepository>();
+
         containerRegistry.Register<IPageLocalRepository, PageLocalRepository>();
         containerRegistry.Register<IAppDictionaryLocalRepository, AppDictionaryLocalRepository>();
+        containerRegistry.Register<IUserLocalRepository, UserLocalRepository>();
     }
 
     static void RegisterInternalDataServices(IContainerRegistry containerRegistry)

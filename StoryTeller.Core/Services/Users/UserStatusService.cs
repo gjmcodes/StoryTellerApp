@@ -6,9 +6,9 @@ namespace StoryTeller.Core.Services.Users
 {
     public class UserStatusService : BaseService, IUserStatusService
     {
-        private readonly IUserStatusLocalRepository _userStatusLocalRepository;
+        private readonly IUserLocalRepository _userStatusLocalRepository;
 
-        public UserStatusService(IUserStatusLocalRepository userStatusLocalRepository)
+        public UserStatusService(IUserLocalRepository userStatusLocalRepository)
         {
             _userStatusLocalRepository = userStatusLocalRepository;
         }

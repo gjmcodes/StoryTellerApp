@@ -1,6 +1,6 @@
 ﻿using StoryTeller.Core.Models.Pages.DTOs;
 using StoryTeller.Core.Pages;
-using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
+using StoryTeller.Xamarin.Domain.Entities.Pages;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Models.GameContent;
 using StoryTellerTemplate.Models.MainPage;
@@ -23,50 +23,46 @@ namespace StoryTellerTemplate.Factories
             _textSpanFactory = textSpanFactory;
         }
 
-        public async Task<PageVm> MapDtoToPageVmAsync(PageDto dto,
-            IEnumerable<PageActionDto> pageActions,
-            IEnumerable<PageContentDto> pageContent)
+        public async Task<PageVm> MapPageToPageVmAsync(XamarinPage page,
+            IEnumerable<XamarinPageAction> pageActions,
+            IEnumerable<XamarinPageContent> pageContent)
         {
             var pagevm = new PageVm();
 
             var pgActionsTask = await _gameActionVmFactory.MapGameActionDtoToVmAsync(pageActions);
             pagevm.Actions = pgActionsTask.ToList();
 
-            var pgContentTask = await _textSpanFactory.MapContentDtoToSpanAsync(pageContent);
+            var pgContentTask = await _textSpanFactory.MapContentToSpanAsync(pageContent);
             pagevm.Content = pgContentTask.ToList();
 
             return pagevm;
         }
 
-        public PageVm MapPageToPageVm(StoryTeller.Core.Pages.Page page)
+        public PageVm MapPageToPageVm(XamarinPage page)
         {
             var pageVm = new PageVm();
 
-            var pgActionTask = _gameActionVmFactory.MapGameActionToVm(page.actions);
+            var pgActionTask = _gameActionVmFactory.MapGameActionToVm(page.PageActions);
             pageVm.Actions = pgActionTask.ToList();
 
             return pageVm;
         }
 
-        public async Task<PageVm> MapTranslatedPageDtoToPageVmAsync(TranslatedPageDto translatedPageDto)
+        public async Task<PageVm> MapTranslatedPageDtoToPageVmAsync(XamarinPage page)
         {
-            return await Task.Run(() =>
-            {
+            var pageVm = new PageVm();
+            pageVm.Title = page.Title;
+            pageVm.Image = page.Image;
 
-                var pageVm = new PageVm();
-                pageVm.Title = translatedPageDto.Title;
-                pageVm.Image = translatedPageDto.Image;
+            pageVm.Content = new List<Span>();
 
-                pageVm.Content = new List<Span>();
+            var pageActions = _gameActionVmFactory.MapGameActionToVm(page.PageActions);
+            pageVm.Actions = pageActions.ToList();
 
-                var pageActions = _gameActionVmFactory.MapGameActionToVm(translatedPageDto.PageActions);
-                pageVm.Actions = pageActions.ToList();
+            var pageContents = await _textSpanFactory.MapContentToSpanAsync(page.PageContent);
+            pageVm.Content = pageContents.ToList();
 
-                var pageContents = _textSpanFactory.MapTextSpanToXamarinSpan(translatedPageDto.TranslatedContent);
-                pageVm.Content = pageContents.ToList();
-
-                return pageVm;
-            });
+            return pageVm;
         }
 
         protected override void ReleaseResources()

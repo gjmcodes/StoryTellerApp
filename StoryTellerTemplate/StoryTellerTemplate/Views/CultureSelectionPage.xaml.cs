@@ -8,6 +8,7 @@ namespace StoryTellerTemplate.Views
     {
         public CultureSelectionPage()
         {
+
             InitializeComponent();
         }
 

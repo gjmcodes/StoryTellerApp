@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Prism.Navigation;
-using StoryTeller.Core.Interfaces.Repositories.Local.App;
-using StoryTeller.Core.Interfaces.Repositories.Local.CharactersData;
+using StoryTeller.Xamarin.Domain.Entities.App.Repositories;
 using StoryTellerTemplate.Interfaces.Services.CharacterCreation;
 using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;

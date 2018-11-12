@@ -9,7 +9,7 @@ namespace StoryTeller.ExternalData.FireBase.App
 {
     public class AppDictionaryWs : BaseFirebaseWs, IAppDictionaryExternalRepository
     {
-        public AppDictionaryWs(IUserStatusLocalRepository userStatusLocalRepository) 
+        public AppDictionaryWs(IUserLocalRepository userStatusLocalRepository) 
             : base("AppDictionary", userStatusLocalRepository)
         {
         }

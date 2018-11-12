@@ -1,15 +1,11 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using StoryTeller.Core.Interfaces.Repositories.Local.App;
+using StoryTeller.Xamarin.Domain.Entities.App.Repositories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Interfaces.ViewModels;
-using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.GameContent;
-using StoryTellerTemplate.Models.MainPage;
 using StoryTellerTemplate.ViewModels.Bases;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace StoryTellerTemplate.ViewModels
 {

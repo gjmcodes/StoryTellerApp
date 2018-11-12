@@ -1,4 +1,5 @@
 ﻿using StoryTeller.Core.Models.Pronoums;
+using StoryTeller.Xamarin.Domain.Entities.Pronoums;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Repositories;
 using System.Collections.Generic;
@@ -22,6 +23,18 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.Pronoums
             await Conn.InsertAllAsync(xamPronoums);
 
             return true;
+        }
+
+        public async Task<Pronoum> GetPronoumByIdAsync(string pronoumId)
+        {
+            var xamPronoum = await Conn.Table<XamarinPronoum>().FirstAsync(x => x.PronoumId == pronoumId);
+            var pronoum = new Pronoum();
+
+            pronoum.forFemale = xamPronoum.ForFemale;
+            pronoum.forMale = xamPronoum.ForMale;
+            pronoum.pronoumId = xamPronoum.PronoumId;
+
+            return pronoum;
         }
     }
 }

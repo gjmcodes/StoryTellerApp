@@ -49,6 +49,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
 
         public string HexForegroundColor => string.IsNullOrEmpty(hexForegroundColor) ? "#000" : hexForegroundColor;
         public string HexBackgroundColor => string.IsNullOrEmpty(hexBackgroundColor) ? "#FF" : hexBackgroundColor;
+        public bool LineBreak => lineBreak;
         public string Content => lineBreak ? GetAmountNewLines() : content;
 
         string GetAmountNewLines()

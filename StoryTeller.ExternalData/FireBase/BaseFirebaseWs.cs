@@ -16,9 +16,9 @@ namespace StoryTeller.ExternalData.FireBase
         protected FirebaseClient _fireBaseClient;
         protected string collection;
 
-        private readonly IUserStatusLocalRepository _userStatusLocalRepository;
+        private readonly IUserLocalRepository _userStatusLocalRepository;
 
-        public BaseFirebaseWs(string collection, IUserStatusLocalRepository userStatusLocalRepository)
+        public BaseFirebaseWs(string collection, IUserLocalRepository userStatusLocalRepository)
         {
             _userStatusLocalRepository = userStatusLocalRepository;
 

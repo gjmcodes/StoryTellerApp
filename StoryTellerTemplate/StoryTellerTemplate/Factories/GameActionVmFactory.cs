@@ -1,5 +1,5 @@
 ﻿using StoryTeller.Core.Actions;
-using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
+using StoryTeller.Xamarin.Domain.Entities.Pages;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Models.GameContent;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace StoryTellerTemplate.Factories
 {
     public class GameActionVmFactory : BaseFactory, IGameActionVmFactory
     {
-        public async Task<IEnumerable<GameActionVm>> MapGameActionDtoToVmAsync(IEnumerable<PageActionDto> actions)
+        public async Task<IEnumerable<GameActionVm>> MapGameActionDtoToVmAsync(IEnumerable<XamarinPageAction> actions)
         {
             return await Task.Run(() =>
             {
@@ -28,16 +28,16 @@ namespace StoryTellerTemplate.Factories
             });
         }
 
-        public GameActionVm MapGameActionToVm(GameAction action)
+        public GameActionVm MapGameActionToVm(XamarinPageAction action)
         {
             var gameActionVm = new GameActionVm();
-            gameActionVm.Description = action.description;
-            gameActionVm.PageIdToFetch = action.pageIdToNavigate;
+            gameActionVm.Description = action.Description;
+            gameActionVm.PageIdToFetch = action.PageIdToNagivate;
 
             return gameActionVm;
         }
 
-        public IEnumerable<GameActionVm> MapGameActionToVm(IEnumerable<GameAction> actions)
+        public IEnumerable<GameActionVm> MapGameActionToVm(IEnumerable<XamarinPageAction> actions)
         {
             var gameActionsVms = new List<GameActionVm>();
 

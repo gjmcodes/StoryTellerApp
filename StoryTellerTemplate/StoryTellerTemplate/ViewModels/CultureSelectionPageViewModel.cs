@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Prism.Navigation;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
@@ -7,6 +8,7 @@ using StoryTellerTemplate.Interfaces.Services.CultureSelection;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Models.ContentDownload;
 using StoryTellerTemplate.Models.GameCultures;
+using StoryTellerTemplate.Navigations;
 using StoryTellerTemplate.ViewsParameters;
 using Xamarin.Forms;
 
@@ -14,10 +16,9 @@ namespace StoryTellerTemplate.ViewModels
 {
     public class CultureSelectionPageViewModel : ViewModelBase
     {
-        private bool _isActiveForFirstTime;
+        private bool _isCalledAsMenuOption;
 
         private readonly ICultureSelectionAppService _cultureSelectionAppService;
-        private readonly IUserStatusLocalRepository _userStatusLocalPersistentRepository;
         private readonly ILocalDataManagementService _localDataManagementService;
         private readonly IGameContentDownloadAppService _gameContentDownloadAppService;
 
@@ -25,19 +26,16 @@ namespace StoryTellerTemplate.ViewModels
 
         public CultureSelectionPageViewModel(INavigationService navigationService,
             ICultureSelectionAppService cultureSelectionAppService,
-            IUserStatusLocalRepository userStatusLocalPersistentRepository,
             ILocalDataManagementService localDataManagementService,
             IGameContentDownloadAppService gameContentDownloadAppService) : base(navigationService)
         {
             _cultureSelectionAppService = cultureSelectionAppService;
-            _userStatusLocalPersistentRepository = userStatusLocalPersistentRepository;
             _localDataManagementService = localDataManagementService;
             _gameContentDownloadAppService = gameContentDownloadAppService;
 
             DownloadProgress = new DownloadProgress();
             Cultures = new ObservableCollection<CultureVm>();
             SelectCultureCommand = new Command<CultureVm>(async (culture) => await SelectCultureAsync(culture));
-            _isActiveForFirstTime = true;
         }
 
         public Command<CultureVm> SelectCultureCommand { get; }
@@ -50,37 +48,29 @@ namespace StoryTellerTemplate.ViewModels
 
         async Task NavigateToGameMasterPageAsync()
         {
-            await NavigationService.NavigateAsync("GameMasterPage/NavigationPage/GamePage");
+            await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "GameMasterPage/NavigationPage/GamePage"));
         }
 
         async Task NavigateToCharacterCreationPage()
         {
-            await NavigationService.NavigateAsync("CharacterCreationPage");
+            await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "CharacterCreationPage"));
         }
 
         public async Task SelectCultureAsync(CultureVm selectedCulture)
         {
-            var persistedCulture = await _userStatusLocalPersistentRepository.SetSelectedCultureAsync(selectedCulture.CultureCode);
+            DownloadProgress.ProgressBarIsVisible = true;
+            PageIsBusy = true;
 
-            if (persistedCulture)
-            {
-                DownloadProgress.ProgressBarIsVisible = true;
-                PageIsBusy = true;
+            await _localDataManagementService.ClearLocalDataForCulctureChangeAsync();
+            var contentDownloadResult = await _gameContentDownloadAppService.DownloadGameContentForCultureAsync(DownloadProgress);
 
-                await _localDataManagementService.ClearLocalDataForCulctureChangeAsync();
-                var contentDownloadResult = await _gameContentDownloadAppService.DownloadGameContentForCultureAsync(DownloadProgress);
+            if (_isCalledAsMenuOption)
+                await NavigateToGameMasterPageAsync();
+            else
+                await NavigateToCharacterCreationPage(); //Chamar criação de personagem
 
-                if (_isActiveForFirstTime)
-                    await NavigateToCharacterCreationPage(); //Chamar criação de personagem
-                else
-                    await NavigateToGameMasterPageAsync();
-
-                await Task.Delay(5000);
-
-                DownloadProgress.ProgressBarIsVisible = false;
-                PageIsBusy = false;
-            }
-
+            DownloadProgress.ProgressBarIsVisible = false;
+            PageIsBusy = false;
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
@@ -88,12 +78,8 @@ namespace StoryTellerTemplate.ViewModels
             if (parameters.ContainsKey(ParametersKeys.model))
             {
                 var viewParams = (CultureSelectionParams)parameters[ParametersKeys.model];
-                _isActiveForFirstTime = !viewParams.IsCalledAsMenuOption;
+                _isCalledAsMenuOption = viewParams.IsCalledAsMenuOption;
             }
-
-            // ToDo: Deverá verificar se é necessário atualizar estrutura das tabelas
-            // e/ou criar novas
-            await _localDataManagementService.CreateLocalTablesAsync();
 
             var cultures = await _cultureSelectionAppService.GetCulturesAsync();
 

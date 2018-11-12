@@ -8,28 +8,15 @@ namespace StoryTellerTemplate.Factories
 {
     public class CharacterCreationVmFactory : BaseFactory, ICharacterCreationVmFactory
     {
-        public async Task<Character> MapVmToCharacterAsync(CharacterCreationVm characterCreationVm)
+        public async Task<XamarinCharacter> MapVmToCharacterAsync(CharacterCreationVm characterCreationVm)
         {
             return await Task.Run(() =>
             {
-                var character = new Character(characterCreationVm.Name, characterCreationVm.Gender);
+                var character = new XamarinCharacter(characterCreationVm.Name, characterCreationVm.Gender);
 
                 return character;
             });
         }
 
-        public async Task<XamarinCharacter> MapVmToCharacterDtoAsync(CharacterCreationVm characterCreationVm)
-        {
-            return await Task.Run(() =>
-            {
-                var character = new XamarinCharacter()
-                {
-                    Name = characterCreationVm.Name,
-                    Gender = characterCreationVm.Gender
-                };
-
-                return character;
-            });
-        }
     }
 }

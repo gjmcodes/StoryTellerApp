@@ -7,7 +7,7 @@ namespace StoryTeller.ExternalData.FireBase.Persistent.Pages
 {
     public class PagePersistentWs : BaseFirebaseWs, IPageExternalRepository
     {
-        public PagePersistentWs(IUserStatusLocalRepository userStatusLocalRepository) 
+        public PagePersistentWs(IUserLocalRepository userStatusLocalRepository) 
             : base("Pages", userStatusLocalRepository)
         {
         }

@@ -7,7 +7,6 @@ namespace StoryTellerTemplate.Interfaces.Factories
 {
     public interface ICharacterCreationVmFactory : IBaseFactory
     {
-        Task<Character> MapVmToCharacterAsync(CharacterCreationVm characterCreationVm);
         Task<XamarinCharacter> MapVmToCharacterAsync(CharacterCreationVm characterCreationVm);
     }
 }

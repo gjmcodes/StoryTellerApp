@@ -1,6 +1,6 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.External.Pages;
-using StoryTeller.Core.Interfaces.Repositories.Local.Pages;
 using StoryTeller.Core.Interfaces.Services.Users;
+using StoryTeller.Xamarin.Domain.Entities.Pages.Repositories;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Models.MainPage;

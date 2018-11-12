@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackLayout 
+        <!--<StackLayout 
                 Grid.Row="1"
                 IsVisible="{Binding DownloadProgress.ProgressBarIsVisible}"
                 Orientation="Vertical"
@@ -31,12 +31,11 @@
             <ProgressBar 
             ProgressColor="Green"
             Progress="{Binding DownloadProgress.Progress}"/>
-        </StackLayout>
+        </StackLayout>-->
 
 
         <ListView 
             Grid.Row="1"
-            IsVisible="{Binding PageIsBusy, Converter={StaticResource NotConverter}}"
             ItemsSource="{Binding Cultures}"
             HorizontalOptions="CenterAndExpand"
             SeparatorColor="Transparent"

@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using StoryTeller.Core.ContentTranslation;
 using StoryTeller.Core.Enums.Text;
 using StoryTeller.Core.Interfaces.Services.ContentTranslation;
 using StoryTeller.Core.Text;
-using StoryTeller.CrossCutting.Disposable;
-using StoryTeller.InternalData.DTOs.PersistentObjects.Pages;
+using StoryTeller.Xamarin.Domain.Entities.Pages;
 using StoryTellerTemplate.Interfaces.Factories;
 using Xamarin.Forms;
 
@@ -22,90 +20,52 @@ namespace StoryTellerTemplate.Factories
             _pronoumTranslatorService = pronoumTranslatorService;
         }
 
-        public async Task<IEnumerable<Span>> MapContentDtoToSpanAsync(IEnumerable<PageContentDto> pageContentDtos)
-        {
-            return await Task.Run(async () =>
-            {
-                var spans = new List<Span>();
-
-                var textSpans = new List<TextSpan>();
-
-                foreach (var item in pageContentDtos)
-                {
-                    var content = item.Content;
-
-                    if (_pronoumTranslatorService.HasPronoumMarkers(item.Content))
-                        content = await _pronoumTranslatorService.TranslatePronoumAsync(item.Content);
-
-                    var textSpan = new TextSpan();
-
-                    textSpan.amountLineBreaks = item.AmountLineBreaks;
-                    textSpan.content = content;
-                    textSpan.fontAttribute = (FontAttribute)item.FontAttribute;
-                    textSpan.fontFamily = item.FontFamily;
-                    textSpan.fontSize = (FontNamedSize)item.FontSize;
-                    textSpan.hexBackgroundColor = item.HexBackgroundColor;
-                    textSpan.hexForegroundColor = item.HexForegroundColor;
-                    textSpan.lineBreak = item.LineBreak;
-
-                    textSpans.Add(textSpan);
-                }
-
-                foreach (var item in textSpans)
-                {
-                    spans.Add(MapTextSpanToXamarinSpan(item));
-                }
-
-                return spans;
-            });
-        }
-
-        public Span MapTextSpanToXamarinSpan(TextSpan textSpan)
-        {
-            if (textSpan.lineBreak)
-            {
-                var spanText = new StringBuilder();
-
-                for (int i = 0; i < textSpan.amountLineBreaks; i++)
-                {
-                    spanText.Append(Environment.NewLine);
-                    spanText.Append(" ");
-                }
-                return new Span() { Text = spanText.ToString() };
-            };
-
-            string filteredContent = string.Empty;
-
-            // Deverá tratar pronoum calls e character data aqui
-            var span = new Span()
-            {
-                Text = textSpan.Content,
-                FontSize = Device.GetNamedSize((NamedSize)textSpan.fontSize.GetHashCode(), typeof(Label)),
-                BackgroundColor = Color.FromHex(textSpan.HexBackgroundColor),
-                ForegroundColor = Color.FromHex(textSpan.HexForegroundColor),
-                FontFamily = textSpan.fontFamily,
-                FontAttributes = (FontAttributes)textSpan.fontAttribute.GetHashCode()
-            };
-
-
-            return span;
-        }
-
-        public IEnumerable<Span> MapTextSpanToXamarinSpan(IEnumerable<TextSpan> textSpan)
+        public async Task<IEnumerable<Span>> MapContentToSpanAsync(IEnumerable<XamarinPageContent> pageContent)
         {
             var spans = new List<Span>();
 
-            foreach (var item in textSpan)
+            foreach (var item in pageContent)
             {
-                var span = MapTextSpanToXamarinSpan(item);
+                var span = await MapTextSpanToXamarinSpanAsync(item);
+
                 spans.Add(span);
             }
 
             return spans;
         }
 
+        async Task<Span> MapTextSpanToXamarinSpanAsync(XamarinPageContent pageContent)
+        {
+
+            if (pageContent.LineBreak)
+            {
+                return new Span() { Text = pageContent.Content };
+            };
+
+            string content = pageContent.Content;
+
+            if (_pronoumTranslatorService.HasPronoumMarkers(pageContent.Content))
+                content = await _pronoumTranslatorService.TranslatePronoumAsync(pageContent.Content);
+
+            // Deverá tratar pronoum calls e character data aqui
+            var span = new Span()
+            {
+                Text = content,
+                FontSize = Device.GetNamedSize((NamedSize)pageContent.FontSize.GetHashCode(), typeof(Label)),
+                BackgroundColor = Color.FromHex(pageContent.HexBackgroundColor),
+                ForegroundColor = Color.FromHex(pageContent.HexForegroundColor),
+                FontFamily = pageContent.FontFamily,
+                FontAttributes = (FontAttributes)pageContent.FontAttribute.GetHashCode()
+            };
+
+
+            return span;
+        }
+
+
         protected override void ReleaseResources()
         {
+            _pronoumTranslatorService.Dispose();
         }
     }
 }

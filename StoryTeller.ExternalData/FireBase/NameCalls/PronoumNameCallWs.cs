@@ -10,7 +10,7 @@ namespace StoryTeller.ExternalData.FireBase.NameCalls
 {
     public class PronoumNameCallWs : BaseFirebaseWs, IPronoumExternalRepository
     {
-        public PronoumNameCallWs(IUserStatusLocalRepository userStatusLocalRepository) 
+        public PronoumNameCallWs(IUserLocalRepository userStatusLocalRepository) 
             : base("PronoumNameCalls", userStatusLocalRepository)
         {
         }

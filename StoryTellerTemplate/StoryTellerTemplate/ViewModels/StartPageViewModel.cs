@@ -3,6 +3,8 @@ using StoryTeller.Core.Services.GameContentDownload;
 using StoryTeller.Xamarin.Domain.Interfaces.Services.LocalData;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Models.ContentDownload;
+using StoryTellerTemplate.Navigations;
+using System;
 
 namespace StoryTellerTemplate.ViewModels
 {
@@ -10,7 +12,6 @@ namespace StoryTellerTemplate.ViewModels
     {
 
         private readonly ILocalDataManagementService _localDataManagementService;
-        private readonly IGameContentDownloadAppService _gameContentDownloadAppService;
 
         public StartPageViewModel(INavigationService navigationService,
             ILocalDataManagementService localDataManagementService,
@@ -20,7 +21,6 @@ namespace StoryTellerTemplate.ViewModels
             DownloadProgress = new DownloadProgress();
 
             _localDataManagementService = localDataManagementService;
-            _gameContentDownloadAppService = gameContentDownloadAppService;
         }
 
         public DownloadProgress DownloadProgress { get; }
@@ -35,9 +35,7 @@ namespace StoryTellerTemplate.ViewModels
             {
                 await _localDataManagementService.CreateLocalTablesAsync();
 
-                var downloadResult = await _gameContentDownloadAppService.DownloadGameContentForCultureAsync(DownloadProgress);
-
-                await NavigationService.NavigateAsync("CultureSelectionPage");
+                await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "CultureSelectionPage"));
             }
             else
             {
@@ -45,7 +43,7 @@ namespace StoryTellerTemplate.ViewModels
 
                 //Verificar se há dados existentes (Personagem criado, cultura selecionada, etc)
                 if (await _localDataManagementService.HasCharactersCreatedAsync())
-                    await NavigationService.NavigateAsync("GameMasterPage/NavigationPage/GamePage");
+                    await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "GameMasterPage/NavigationPage/GamePage"));
             }
 
             PageIsBusy = false;
