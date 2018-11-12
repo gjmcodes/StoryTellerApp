@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using StoryTeller.Core.CharactersData;
 
 namespace StoryTeller.Xamarin.Domain.Entities.CharactersData
 {
@@ -21,5 +20,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.CharactersData
         public bool Gender { get; private set; }
 
         public bool IsFemale => Gender;
+
+        public string UserId { get; private set; }
     }
 }

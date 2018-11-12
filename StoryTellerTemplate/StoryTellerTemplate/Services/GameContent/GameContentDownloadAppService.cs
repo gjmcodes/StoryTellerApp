@@ -47,10 +47,5 @@ namespace StoryTellerTemplate.Services.GameContent
 
             return tasks.All(x => x.Result);
         }
-
-        public async Task<bool> HasLocalContentAsync()
-        {
-            return false;
-        }
     }
 }

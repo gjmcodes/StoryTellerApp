@@ -48,6 +48,7 @@ namespace StoryTellerTemplate
             containerRegistry.RegisterForNavigation<CultureSelectionPage>();
             containerRegistry.RegisterForNavigation<GameMasterPage, GameMasterPageViewModel>();
             containerRegistry.RegisterForNavigation<GamePage, GamePageViewModel>();
+            containerRegistry.RegisterForNavigation<StartPage, StartPageViewModel>();
         }
 
         void RegisterAppServices(IContainerRegistry containerRegistry)

@@ -7,6 +7,10 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
     [Table("TB_PAGE_CONTENT")]
     public class XamarinPageContent : BaseXamarinModel
     {
+        public XamarinPageContent()
+        {
+        }
+
         public XamarinPageContent(
             string pageId,
             string content,

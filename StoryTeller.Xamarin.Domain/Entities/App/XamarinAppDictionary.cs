@@ -5,6 +5,10 @@ namespace StoryTeller.Xamarin.Domain.Entities.App
     [Table("TB_APP_DICTIONARY")]
     public class XamarinAppDictionary : BaseXamarinModel
     {
+        public XamarinAppDictionary()
+        {
+        }
+
         public XamarinAppDictionary(string exit, string male, string female, string languages, string namePlaceholder, string version)
         {
             Exit = exit;

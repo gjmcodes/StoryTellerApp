@@ -5,6 +5,10 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums
     [Table("TB_PRONOUMS")]
     public class XamarinPronoum : BaseXamarinModel
     {
+        public XamarinPronoum()
+        {
+        }
+
         public XamarinPronoum(string pronoumId, string forMale, string forFemale)
         {
             PronoumId = pronoumId;

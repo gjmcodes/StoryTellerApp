@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Prism.Navigation;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
-using StoryTeller.InternalData.Interfaces.Services;
+using StoryTeller.Xamarin.Domain.Interfaces.Services.LocalData;
 using StoryTellerTemplate.Interfaces.Services.CultureSelection;
 using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Models.ContentDownload;
@@ -18,7 +18,7 @@ namespace StoryTellerTemplate.ViewModels
 
         private readonly ICultureSelectionAppService _cultureSelectionAppService;
         private readonly IUserStatusLocalRepository _userStatusLocalPersistentRepository;
-        private readonly ILocalDataManagerService _localDataManagerService;
+        private readonly ILocalDataManagementService _localDataManagementService;
         private readonly IGameContentDownloadAppService _gameContentDownloadAppService;
 
         public ObservableCollection<CultureVm> Cultures { get; }
@@ -26,12 +26,12 @@ namespace StoryTellerTemplate.ViewModels
         public CultureSelectionPageViewModel(INavigationService navigationService,
             ICultureSelectionAppService cultureSelectionAppService,
             IUserStatusLocalRepository userStatusLocalPersistentRepository,
-            ILocalDataManagerService localDataManagerService,
+            ILocalDataManagementService localDataManagementService,
             IGameContentDownloadAppService gameContentDownloadAppService) : base(navigationService)
         {
             _cultureSelectionAppService = cultureSelectionAppService;
             _userStatusLocalPersistentRepository = userStatusLocalPersistentRepository;
-            _localDataManagerService = localDataManagerService;
+            _localDataManagementService = localDataManagementService;
             _gameContentDownloadAppService = gameContentDownloadAppService;
 
             DownloadProgress = new DownloadProgress();
@@ -67,7 +67,7 @@ namespace StoryTellerTemplate.ViewModels
                 DownloadProgress.ProgressBarIsVisible = true;
                 PageIsBusy = true;
 
-                await _localDataManagerService.ClearLocalDataForCulctureChangeAsync();
+                await _localDataManagementService.ClearLocalDataForCulctureChangeAsync();
                 var contentDownloadResult = await _gameContentDownloadAppService.DownloadGameContentForCultureAsync(DownloadProgress);
 
                 if (_isActiveForFirstTime)
@@ -93,7 +93,7 @@ namespace StoryTellerTemplate.ViewModels
 
             // ToDo: Deverá verificar se é necessário atualizar estrutura das tabelas
             // e/ou criar novas
-            await _localDataManagerService.UpdateCreateLocalTablesAsync();
+            await _localDataManagementService.CreateLocalTablesAsync();
 
             var cultures = await _cultureSelectionAppService.GetCulturesAsync();
 

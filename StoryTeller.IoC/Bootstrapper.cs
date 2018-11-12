@@ -32,6 +32,8 @@ using StoryTeller.Xamarin.Domain.Entities.Pronoums.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Factories;
 using StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories;
+using StoryTeller.Xamarin.Domain.Interfaces.Services.LocalData;
+using StoryTeller.Xamarin.LocalData.Services;
 
 public static class Bootstrapper
 {
@@ -69,7 +71,7 @@ public static class Bootstrapper
 
         // XAMARIN
         containerRegistry.Register<IGameContentDownloadService, GameContentDownloadService>();
-
+        containerRegistry.Register<ILocalDataManagementService, LocalDataManagementService>();
     }
 
     static void RegisterInternalRepositories(IContainerRegistry containerRegistry)

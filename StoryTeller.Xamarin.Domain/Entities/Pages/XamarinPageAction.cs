@@ -2,6 +2,10 @@
 {
     public class XamarinPageAction : BaseXamarinModel
     {
+        public XamarinPageAction()
+        {
+        }
+
         public XamarinPageAction(string pageId, string description, string pageIdToNagivate, string externalVersion)
         {
             PageId = pageId;

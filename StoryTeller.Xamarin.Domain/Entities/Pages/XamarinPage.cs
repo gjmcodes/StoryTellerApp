@@ -6,6 +6,10 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
     [Table("TB_PAGES")]
     public class XamarinPage : BaseXamarinModel
     {
+        public XamarinPage()
+        {
+        }
+
         public XamarinPage(string pageId, string title, string image, string externalVersion)
         {
             PageId = pageId;
