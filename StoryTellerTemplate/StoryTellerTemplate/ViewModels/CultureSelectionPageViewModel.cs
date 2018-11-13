@@ -85,6 +85,7 @@ namespace StoryTellerTemplate.ViewModels
 
             Cultures.Clear();
 
+
             foreach (var item in cultures)
             {
                 Cultures.Add(item);

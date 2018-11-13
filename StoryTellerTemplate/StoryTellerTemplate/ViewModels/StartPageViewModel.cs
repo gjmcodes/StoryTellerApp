@@ -35,7 +35,7 @@ namespace StoryTellerTemplate.ViewModels
             {
                 await _localDataManagementService.CreateLocalTablesAsync();
 
-                await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "CultureSelectionPage"));
+                await NavigationService.NavigateAsync("CultureSelectionPage");
             }
             else
             {
