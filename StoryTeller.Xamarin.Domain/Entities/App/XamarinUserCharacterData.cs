@@ -16,8 +16,8 @@ namespace StoryTeller.Xamarin.Domain.Entities.App
             CharacterCurrentPageId = characterCurrentPageId;
         }
 
-        public string UserId { get; private set; }
-        public string CharacterId { get; private set; }
-        public string CharacterCurrentPageId { get; private set; }
+        public string UserId { get;  set; }
+        public string CharacterId { get;  set; }
+        public string CharacterCurrentPageId { get;  set; }
     }
 }

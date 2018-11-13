@@ -1,4 +1,6 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.GameCultures;
+using StoryTeller.Core.Interfaces.Repositories.Local.Users;
+using StoryTeller.Core.Interfaces.Repositories.Users;
 using StoryTellerTemplate.Interfaces.Factories;
 using StoryTellerTemplate.Interfaces.Services.CultureSelection;
 using StoryTellerTemplate.Models.GameCultures;
@@ -11,13 +13,15 @@ namespace StoryTellerTemplate.Services.CultureSelection
     {
         private readonly IGameCultureRepository _gameCultureRepository;
         private readonly ICultureVmFactory _cultureVmFactory;
-
+        private readonly IUserLocalRepository _userLocalRepository;
 
         public CultureSelectionAppService(IGameCultureRepository gameCultureRepository,
-            ICultureVmFactory cultureVmFactory)
+            ICultureVmFactory cultureVmFactory,
+            IUserLocalRepository userLocalRepository)
         {
             _gameCultureRepository = gameCultureRepository;
             _cultureVmFactory = cultureVmFactory;
+            _userLocalRepository = userLocalRepository;
         }
 
         public async Task<IEnumerable<CultureVm>> GetCulturesAsync()
@@ -26,6 +30,11 @@ namespace StoryTellerTemplate.Services.CultureSelection
             var culturesVm = _cultureVmFactory.MapCultureToVm(cultures);
 
             return culturesVm;
+        }
+
+        public async Task<bool> SetSelectedCultureAsync(string selectedCulture)
+        {
+            return await _userLocalRepository.SetSelectedCultureAsync(selectedCulture);
         }
     }
 }

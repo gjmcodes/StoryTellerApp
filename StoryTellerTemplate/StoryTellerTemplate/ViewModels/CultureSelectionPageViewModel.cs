@@ -61,6 +61,7 @@ namespace StoryTellerTemplate.ViewModels
             DownloadProgress.ProgressBarIsVisible = true;
             PageIsBusy = true;
 
+            var cultureResult = await _cultureSelectionAppService.SetSelectedCultureAsync(selectedCulture.CultureCode);
             await _localDataManagementService.ClearLocalDataForCulctureChangeAsync();
             var contentDownloadResult = await _gameContentDownloadAppService.DownloadGameContentForCultureAsync(DownloadProgress);
 

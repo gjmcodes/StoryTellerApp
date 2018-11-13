@@ -12,10 +12,10 @@ namespace StoryTeller.Xamarin.Domain.Factories.Pages
             return await Task.Run(() =>
             {
                 var xamPg = new XamarinPage(
-                    page.PageId,
-                    page.Title,
-                    page.Image,
-                    page.Version
+                    page.pageId,
+                    page.title,
+                    page.image,
+                    page.version
                 );
 
                 return xamPg;

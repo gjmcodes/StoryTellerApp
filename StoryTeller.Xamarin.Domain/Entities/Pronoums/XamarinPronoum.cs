@@ -16,8 +16,8 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums
             ForFemale = forFemale;
         }
 
-        public string PronoumId { get; private set; }
-        public string ForMale { get; private set; }
-        public string ForFemale { get; private set; }
+        public string PronoumId { get;  set; }
+        public string ForMale { get;  set; }
+        public string ForFemale { get;  set; }
     }
 }

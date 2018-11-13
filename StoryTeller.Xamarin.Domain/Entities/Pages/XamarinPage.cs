@@ -19,9 +19,9 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
             base.ExternalTableVersion = externalVersion;
         }
 
-        public string PageId { get; private set; }
-        public string Title { get; private  set; }
-        public string Image { get; private  set; }
+        public string PageId { get; set; }
+        public string Title { get; set; }
+        public string Image { get; set; }
 
         [Ignore]
         public IEnumerable<XamarinPageAction> PageActions { get; set; }

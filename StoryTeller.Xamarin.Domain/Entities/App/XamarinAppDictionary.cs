@@ -19,10 +19,10 @@ namespace StoryTeller.Xamarin.Domain.Entities.App
             base.ExternalTableVersion = version;
         }
 
-        public string Exit { get; private set; }
-        public string Male { get; private set; }
-        public string Female { get; private set; }
-        public string Languages { get; private set; }
-        public string NamePlaceholder { get; private set; }
+        public string Exit { get;  set; }
+        public string Male { get;  set; }
+        public string Female { get;  set; }
+        public string Languages { get;  set; }
+        public string NamePlaceholder { get;  set; }
     }
 }

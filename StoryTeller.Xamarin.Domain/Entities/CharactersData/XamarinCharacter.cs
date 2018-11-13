@@ -15,12 +15,12 @@ namespace StoryTeller.Xamarin.Domain.Entities.CharactersData
             Gender = gender;
         }
 
-        public string Name { get; private set; }
+        public string Name { get;  set; }
 
-        public bool Gender { get; private set; }
+        public bool Gender { get;  set; }
 
         public bool IsFemale => Gender;
 
-        public string UserId { get; private set; }
+        public string UserId { get;  set; }
     }
 }

@@ -7,7 +7,6 @@ namespace StoryTeller.Core.Interfaces.Repositories.Local.Users
         Task<bool> UpdateUserCurrentPageAsync(string pageId);
         Task<bool> SetSelectedCultureAsync(string selectedCulture);
         Task<bool> HasSelectedCultureAsync();
-        Task<string> GetCurrentPageAsync();
         Task<string> GetSelectedCultureAsync();
     }
 }

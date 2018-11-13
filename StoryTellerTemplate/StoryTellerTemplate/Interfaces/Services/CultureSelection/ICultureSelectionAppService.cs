@@ -9,5 +9,6 @@ namespace StoryTellerTemplate.Interfaces.Services.CultureSelection
     public interface ICultureSelectionAppService : IBaseAppService
     {
         Task<IEnumerable<CultureVm>> GetCulturesAsync();
+        Task<bool> SetSelectedCultureAsync(string selectedCulture);
     }
 }

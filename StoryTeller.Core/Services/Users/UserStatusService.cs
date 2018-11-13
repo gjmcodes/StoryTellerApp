@@ -1,4 +1,5 @@
 ﻿using StoryTeller.Core.Interfaces.Repositories.Local.Users;
+using StoryTeller.Core.Interfaces.Repositories.Users;
 using StoryTeller.Core.Interfaces.Services.Users;
 using System.Threading.Tasks;
 
@@ -7,10 +8,13 @@ namespace StoryTeller.Core.Services.Users
     public class UserStatusService : BaseService, IUserStatusService
     {
         private readonly IUserLocalRepository _userStatusLocalRepository;
+        private readonly IUserCharacterRepository _userCharacterRepository;
 
-        public UserStatusService(IUserLocalRepository userStatusLocalRepository)
+        public UserStatusService(IUserLocalRepository userStatusLocalRepository,
+            IUserCharacterRepository userCharacterRepository)
         {
             _userStatusLocalRepository = userStatusLocalRepository;
+            _userCharacterRepository = userCharacterRepository;
         }
 
         public async Task UpdateCurrentPageIdAsync(string pageId)
@@ -20,7 +24,7 @@ namespace StoryTeller.Core.Services.Users
 
         public async Task<string> GetCurrentPageIdAsync()
         {
-            var currentPage = await _userStatusLocalRepository.GetCurrentPageAsync();
+            var currentPage =  await _userCharacterRepository.GetCharacterCurrentPageAsync();
             if (string.IsNullOrEmpty(currentPage))
                 return "page-1";
 
@@ -29,6 +33,8 @@ namespace StoryTeller.Core.Services.Users
 
         protected override void ReleaseResources()
         {
+            _userCharacterRepository.Dispose();
+            _userStatusLocalRepository.Dispose();
         }
     }
 }

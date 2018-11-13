@@ -39,6 +39,7 @@ using StoryTeller.Core.Interfaces.Repositories.Pronoums;
 using StoryTeller.Xamarin.Domain.Entities.CharactersData.Repositories;
 using StoryTeller.Xamarin.LocalData.Repositories.CharactersData;
 using StoryTeller.Core.Interfaces.Repositories.CharactersData;
+using StoryTeller.Core.Interfaces.Repositories.Users;
 
 public static class Bootstrapper
 {
@@ -82,6 +83,8 @@ public static class Bootstrapper
     static void RegisterLocalRepositories(IContainerRegistry containerRegistry)
     {
         //containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
+
+        
         containerRegistry.Register<ICharacterLocalRepository, CharacterLocalRepository>();
         containerRegistry.Register<ICharacterDataRepository, CharacterLocalRepository>();
 
@@ -90,7 +93,9 @@ public static class Bootstrapper
 
         containerRegistry.Register<IPageLocalRepository, PageLocalRepository>();
         containerRegistry.Register<IAppDictionaryLocalRepository, AppDictionaryLocalRepository>();
+
         containerRegistry.Register<IUserLocalRepository, UserLocalRepository>();
+        containerRegistry.Register<IUserCharacterRepository, UserCharacterLocalRepository>();
     }
 
     static void RegisterInternalDataServices(IContainerRegistry containerRegistry)

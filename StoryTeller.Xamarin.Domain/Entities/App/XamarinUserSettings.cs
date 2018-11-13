@@ -16,8 +16,8 @@ namespace StoryTeller.Xamarin.Domain.Entities.App
             SelectedCharacterId = selectedCharacterId;
         }
 
-        public string UserId { get; private set; }
-        public string SelectedCulture { get; private set; }
-        public string SelectedCharacterId { get; private set; }
+        public string UserId { get; set; }
+        public string SelectedCulture { get; set; }
+        public string SelectedCharacterId { get; set; }
     }
 }
