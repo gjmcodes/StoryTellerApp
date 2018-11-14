@@ -6,6 +6,7 @@ namespace StoryTellerTemplate.Models.CharacterCreation
 {
     public class CharacterCreationVm
     {
+        public string CharacterId { get; set; }
         public string Name { get; set; }
         public bool Gender { get; set; }
     }

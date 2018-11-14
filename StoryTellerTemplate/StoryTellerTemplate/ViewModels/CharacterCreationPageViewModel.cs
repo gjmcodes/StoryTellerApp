@@ -6,6 +6,7 @@ using StoryTellerTemplate.Interfaces.ViewModels;
 using StoryTellerTemplate.Interfaces.Views;
 using StoryTellerTemplate.Models.CharacterCreation;
 using StoryTellerTemplate.Models.GameContent;
+using StoryTellerTemplate.Navigations;
 using StoryTellerTemplate.ViewModels.Bases;
 
 namespace StoryTellerTemplate.ViewModels
@@ -33,7 +34,7 @@ namespace StoryTellerTemplate.ViewModels
 
         async Task NavigateToGameMasterPageAsync()
         {
-            await NavigationService.NavigateAsync("GameMasterPage/NavigationPage/GamePage");
+            await NavigationService.NavigateAsync(new System.Uri(NavigationConstants.appAddress + "GameMasterPage/NavigationPage/GamePage"));
         }
 
         protected override async Task ExecuteActionAsync(GameActionVm action)

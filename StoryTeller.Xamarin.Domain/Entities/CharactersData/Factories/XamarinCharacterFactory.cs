@@ -11,9 +11,10 @@ namespace StoryTeller.Xamarin.Domain.Entities.CharactersData.Factories
         {
             return await Task.Run(() =>
             {
-                var xamChar = new XamarinCharacter(character.Name, character.Gender);
+                var xamChar = new XamarinCharacter();
+                var newXamChar = xamChar.CreateNewCharacter(character.Name, character.Gender);
 
-                return xamChar;
+                return newXamChar;
             });
         }
 

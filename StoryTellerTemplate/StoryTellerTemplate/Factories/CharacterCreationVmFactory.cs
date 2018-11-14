@@ -12,9 +12,11 @@ namespace StoryTellerTemplate.Factories
         {
             return await Task.Run(() =>
             {
-                var character = new XamarinCharacter(characterCreationVm.Name, characterCreationVm.Gender);
+                var character = new XamarinCharacter();
 
-                return character;
+                var xamChara = character.CreateNewCharacter(characterCreationVm.Name, characterCreationVm.Gender);
+
+                return xamChara;
             });
         }
 
