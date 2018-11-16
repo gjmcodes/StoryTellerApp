@@ -40,7 +40,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
         public string HexBackgroundColor { get; set; }
         public string Content { get; set; }
         public bool LineBreak { get; set; }
-        int AmountLineBreaks { get; set; }
+        public int AmountLineBreaks { get; set; }
 
         public string PageId { get; set; }
         public string FontFamily { get; set; }
@@ -49,7 +49,6 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
 
         public string GetHexForegroundColor => string.IsNullOrEmpty(HexForegroundColor) ? "#000" : HexForegroundColor;
         public string GetHexBackgroundColor => string.IsNullOrEmpty(HexBackgroundColor) ? "#FF" : HexBackgroundColor;
-        public bool GetLineBreak => LineBreak;
         public string GetContent => LineBreak ? GetAmountNewLines() : Content;
 
         string GetAmountNewLines()

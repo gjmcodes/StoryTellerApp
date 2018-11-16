@@ -37,7 +37,7 @@ namespace StoryTellerTemplate.Factories
         async Task<Span> MapTextSpanToXamarinSpanAsync(XamarinPageContent pageContent)
         {
 
-            if (pageContent.GetLineBreak)
+            if (pageContent.LineBreak)
             {
                 return new Span() { Text = pageContent.GetContent };
             };
