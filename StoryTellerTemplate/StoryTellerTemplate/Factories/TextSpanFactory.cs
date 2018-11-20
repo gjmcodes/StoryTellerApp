@@ -14,10 +14,13 @@ namespace StoryTellerTemplate.Factories
     public class TextSpanFactory : BaseFactory, ITextSpanFactory
     {
         private readonly IPronoumTranslatorService _pronoumTranslatorService;
+        private readonly ICharacterDataTranslatorService _characterDataTranslatorService;
 
-        public TextSpanFactory(IPronoumTranslatorService pronoumTranslatorService)
+        public TextSpanFactory(IPronoumTranslatorService pronoumTranslatorService,
+            ICharacterDataTranslatorService characterDataTranslatorService)
         {
             _pronoumTranslatorService = pronoumTranslatorService;
+            _characterDataTranslatorService = characterDataTranslatorService;
         }
 
         public async Task<IEnumerable<Span>> MapContentToSpanAsync(IEnumerable<XamarinPageContent> pageContent)
@@ -46,6 +49,9 @@ namespace StoryTellerTemplate.Factories
 
             if (_pronoumTranslatorService.HasPronoumMarkers(pageContent.GetContent))
                 content = await _pronoumTranslatorService.TranslatePronoumAsync(pageContent.GetContent);
+
+            if (_characterDataTranslatorService.HasCharacterDataMarkers(content))
+                content = await _characterDataTranslatorService.TranslateCharacterDataAsync(content);
 
             // Deverá tratar pronoum calls e character data aqui
             var span = new Span()

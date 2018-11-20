@@ -14,14 +14,14 @@ namespace StoryTeller.Core.Services.ContentTranslation
     {
         FontAttributeContentFormatter fontAttributeContentFormatter;
 
-        const string italicRegexPattern = @"(<atr-italic>[\s\S]+?<\/atr-italic>)";
-        const string boldRegexPattern = @"(<atr-bold>[\s\S]+?<\/atr-bold>)";
+        const string italicRegexPattern = @"(<i>[\s\S]+?<\/i>)";
+        const string boldRegexPattern = @"(<b>[\s\S]+?<\/b>)";
 
-        public const string attributeBoldStart = "<atr-bold>";
-        public const string attributeBoldEnd = "</atr-bold>";
+        public const string attributeBoldStart = "<b>";
+        public const string attributeBoldEnd = "</b>";
 
-        public const string attributeItalicStart = "<atr-italic>";
-        public const string attributeItalicEnd = "</atr-italic>";
+        public const string attributeItalicStart = "<i>";
+        public const string attributeItalicEnd = "</i>";
 
         async Task<IList<ContentTranslationDto>> BreakIntoAttributeAsync(IEnumerable<ContentTranslationDto> paragraphedContents, FontAttribute attribute, string regexPattern, string attributeMarkStart, string attributeMarkEnd)
         {

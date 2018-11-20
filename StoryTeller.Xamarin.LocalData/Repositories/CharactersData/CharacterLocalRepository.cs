@@ -15,6 +15,12 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.CharactersData
             _xamarinCharacterFactory = xamarinCharacterFactory;
         }
 
+        async Task<XamarinCharacter> GetXamarinCharacterAsync()
+        {
+            var data = await Conn.Table<XamarinCharacter>().FirstOrDefaultAsync();
+
+            return data;
+        }
         public async Task<bool> AddCharacterAsync(Character character)
         {
             var xamChar = await _xamarinCharacterFactory.MapCharacterToXamarinAsync(character);
@@ -32,9 +38,13 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.CharactersData
             return character;
         }
 
-        public Task<string> GetCharacterDataByColumnAsync(string column)
+        public async Task<string> GetCharacterDataByColumnAsync(string column)
         {
-            throw new System.NotImplementedException();
+            var xamChar = await GetXamarinCharacterAsync();
+            var query = $@"SELECT {column} FROM {TableName<XamarinCharacter>()} WHERE LocalPk = '{xamChar.LocalPk}'";
+            var data = await Conn.ExecuteScalarAsync<string>(query);
+
+            return data;
         }
 
         protected override void ReleaseResources()

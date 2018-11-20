@@ -28,6 +28,34 @@ namespace StoryTeller.Core.Services.ContentTranslation
             _paragraphTranslatorService = paragraphTranslatorService;
         }
 
+
+        public async Task<IEnumerable<TextSpan>> TranslateParagraphsAttributesAsync(string content)
+        {
+            var textSpans = new List<TextSpan>();
+
+            var contents = BreakIntoParagraphs(content);
+            contents = await BreakFontAttributesAsync(contents);
+
+            foreach (var item in contents)
+            {
+                var span = new TextSpan()
+                {
+                    amountLineBreaks = item.amountLineBreaks,
+                    content = item.content,
+                    fontAttribute = item.fontAttribute,
+                    fontFamily = item.fontFamily,
+                    fontSize = item.fontSize,
+                    hexBackgroundColor = item.hexBackgroundColor,
+                    hexForegroundColor = item.hexForegroundColor,
+                    lineBreak = item.lineBreak
+                };
+
+                textSpans.Add(span);
+            }
+
+            return textSpans;
+        }
+
         public async Task<IEnumerable<TextSpan>> TranslateAsync(string content)
         {
             var textSpans = new List<TextSpan>();

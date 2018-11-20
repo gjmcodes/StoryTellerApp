@@ -51,12 +51,15 @@ namespace StoryTeller.Core.Services.ContentTranslation
 
         public async Task<string> TranslatePronoumAsync(string content)
         {
-            var contents = RegexSplitter.Split(content, pronoumRegexPattern);
+            var contents = RegexSplitter.Split(content, pronoumRegexPattern, pronoumStart, pronoumEnd);
 
             var sb = new StringBuilder();
 
             foreach (var item in contents)
             {
+                if (string.IsNullOrEmpty(item))
+                    continue;
+
                 var translanted = await _nameCallContentFormatter.GetFormattedContentAsync(item);
 
                 sb.Append(translanted);

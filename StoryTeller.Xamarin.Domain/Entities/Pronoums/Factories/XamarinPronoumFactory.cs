@@ -12,7 +12,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums.Factories
         {
             return await Task.Run(() =>
             {
-                var xamPronoum = new XamarinPronoum(pronoum.pronoumId, pronoum.forMale, pronoum.forMale);
+                var xamPronoum = new XamarinPronoum(pronoum.pronoumId, pronoum.forMale, pronoum.forFemale);
 
                 return xamPronoum;
             });

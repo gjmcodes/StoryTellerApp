@@ -6,6 +6,20 @@ namespace StoryTeller.Core.ContentTranslation
 {
     public static class RegexSplitter
     {
+        public static string[] Split(string content, string pattern, string markerStart, string markerEnd)
+        {
+            var contents = Split(content, pattern);
+            var newContents = new List<string>();
+
+            foreach (var item in contents)
+            {
+                var cleansedItem = item.Replace(markerStart, string.Empty).Replace(markerEnd, string.Empty);
+                newContents.Add(cleansedItem);
+            }
+
+            return newContents.ToArray();
+        }
+
         public static string[] Split(string content, string pattern)
         {
             var split = Regex.Split(content, pattern).ToArray();

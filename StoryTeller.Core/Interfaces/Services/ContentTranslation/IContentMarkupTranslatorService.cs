@@ -7,5 +7,6 @@ namespace StoryTeller.Core.Interfaces.Services.ContentTranslation
     public interface IContentMarkupTranslatorService : IBaseService
     {
         Task<IEnumerable<TextSpan>> TranslateAsync(string content);
+        Task<IEnumerable<TextSpan>> TranslateParagraphsAttributesAsync(string content);
     }
 }

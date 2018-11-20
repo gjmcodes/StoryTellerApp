@@ -6,10 +6,11 @@ namespace StoryTeller.Core.ContentTranslation.CharactersData
     public class CharacterDataFormatter : ContentFormatter
     {
         //ToDo: Injetar repository de character data
-        ICharacterDataRepository _characterDataRepository;
+        private readonly ICharacterDataRepository _characterDataRepository;
 
-        public CharacterDataFormatter()
+        public CharacterDataFormatter(ICharacterDataRepository characterDataRepository)
         {
+            _characterDataRepository = characterDataRepository;
         }
 
         public async Task<string> GetCharacterDataAsync(string dataToGet)
@@ -17,7 +18,7 @@ namespace StoryTeller.Core.ContentTranslation.CharactersData
             // Realizer um Select do repository de characterData baseado no parâmetro
             var value = await _characterDataRepository.GetCharacterDataByColumnAsync(dataToGet);
 
-            return "C_DATA";
+            return value;
         }
         public override async Task<string> GetFormattedContentAsync(string contentBetweenMarkers)
         {

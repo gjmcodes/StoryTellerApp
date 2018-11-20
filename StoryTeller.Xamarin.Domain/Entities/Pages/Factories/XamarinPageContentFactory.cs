@@ -22,7 +22,7 @@ namespace StoryTeller.Xamarin.Domain.Factories.Pages
             {
                 var contents = new List<XamarinPageContent>();
 
-                var translatedContents = await _contentMarkupTranslatorService.TranslateAsync(pageContent);
+                var translatedContents = await _contentMarkupTranslatorService.TranslateParagraphsAttributesAsync(pageContent);
 
                 foreach (var item in translatedContents)
                 {
