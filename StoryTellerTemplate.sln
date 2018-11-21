@@ -35,11 +35,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Tests", "3 - Tests", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.UnitTests", "StoryTeller.UnitTests\StoryTeller.UnitTests.csproj", "{F53C0209-5F83-4C16-B024-717BC22A57AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Xamarin.Domain", "StoryTeller.Xamarin.Domain\StoryTeller.Xamarin.Domain.csproj", "{C77BD0AD-D493-48AE-AE6A-F80AA7DD92C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.Xamarin.Domain", "StoryTeller.Xamarin.Domain\StoryTeller.Xamarin.Domain.csproj", "{C77BD0AD-D493-48AE-AE6A-F80AA7DD92C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Xamarin.LocalData", "StoryTeller.Xamarin.LocalData\StoryTeller.Xamarin.LocalData.csproj", "{B1CCDE93-7500-4C04-8837-F33F6CACB689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.Xamarin.LocalData", "StoryTeller.Xamarin.LocalData\StoryTeller.Xamarin.LocalData.csproj", "{B1CCDE93-7500-4C04-8837-F33F6CACB689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Xamarin.ExternalData", "StoryTeller.Xamarin.ExternalData\StoryTeller.Xamarin.ExternalData.csproj", "{93948298-8352-4A54-A504-46011C4B1BD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryTeller.Xamarin.ExternalData", "StoryTeller.Xamarin.ExternalData\StoryTeller.Xamarin.ExternalData.csproj", "{93948298-8352-4A54-A504-46011C4B1BD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

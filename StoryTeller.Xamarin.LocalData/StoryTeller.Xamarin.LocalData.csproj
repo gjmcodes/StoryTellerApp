@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StoryTeller.Xamarin.Domain\StoryTeller.Xamarin.Domain.csproj" />
   </ItemGroup>
 
