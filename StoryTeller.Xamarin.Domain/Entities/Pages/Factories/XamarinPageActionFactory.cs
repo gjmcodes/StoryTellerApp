@@ -8,7 +8,7 @@ namespace StoryTeller.Xamarin.Domain.Factories.Pages
 {
     public class XamarinPageActionFactory : BaseFactory, IXamarinPageActionFactory
     {
-        public async Task<XamarinPageAction> MapActionToXamarinAsync(GameAction gameAction, string pageId, string pageVersion)
+        public async Task<XamarinPageAction> MapActionToXamarinAsync(GameAction gameAction, string pageId, int pageVersion)
         {
             return await Task.Run(() =>
             {
@@ -22,7 +22,7 @@ namespace StoryTeller.Xamarin.Domain.Factories.Pages
             });
         }
 
-        public async Task<IEnumerable<XamarinPageAction>> MapActionToXamarinAsync(IEnumerable<GameAction> gameActions, string pageId, string pageVersion)
+        public async Task<IEnumerable<XamarinPageAction>> MapActionToXamarinAsync(IEnumerable<GameAction> gameActions, string pageId, int pageVersion)
         {
             var actions = new List<XamarinPageAction>();
             foreach (var item in gameActions)

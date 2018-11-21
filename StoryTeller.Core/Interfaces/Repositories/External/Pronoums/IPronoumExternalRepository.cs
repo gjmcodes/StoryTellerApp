@@ -6,6 +6,6 @@ namespace StoryTeller.Core.Interfaces.Repositories.External.Pronoums
 {
     public interface IPronoumExternalRepository
     {
-        Task<IEnumerable<Pronoum>> GetPronoumNameCallsByCultureAsync();
+        Task<PronoumRoot> GetPronoumNameCallsByCultureAsync();
     }
 }

@@ -21,7 +21,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
             int fontAttribute,
             bool lineBreak,
             int amountLineBreaks,
-            string externalVersion)
+            int externalVersion)
         {
             PageId = pageId;
             FontFamily = fontFamily;

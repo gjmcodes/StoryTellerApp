@@ -9,7 +9,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.App
         {
         }
 
-        public XamarinAppDictionary(string exit, string male, string female, string languages, string namePlaceholder, string version)
+        public XamarinAppDictionary(string exit, string male, string female, string languages, string namePlaceholder, int version)
         {
             Exit = exit;
             Male = male;

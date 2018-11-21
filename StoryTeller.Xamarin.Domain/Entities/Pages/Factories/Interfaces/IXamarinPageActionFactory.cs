@@ -7,7 +7,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages.Factories.Interfaces
 {
     public interface IXamarinPageActionFactory : IDisposableObject
     {
-        Task<XamarinPageAction> MapActionToXamarinAsync(GameAction gameAction, string pageId, string pageVersion);
-        Task<IEnumerable<XamarinPageAction>> MapActionToXamarinAsync(IEnumerable<GameAction> gameActions, string pageId, string pageVersion);
+        Task<XamarinPageAction> MapActionToXamarinAsync(GameAction gameAction, string pageId, int pageVersion);
+        Task<IEnumerable<XamarinPageAction>> MapActionToXamarinAsync(IEnumerable<GameAction> gameActions, string pageId, int pageVersion);
     }
 }

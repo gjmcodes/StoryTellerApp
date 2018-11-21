@@ -2,7 +2,7 @@
 {
     public struct AppDictionary
     {
-        public string version;
+        public int version;
         public string exit;
         public string male;
         public string female;

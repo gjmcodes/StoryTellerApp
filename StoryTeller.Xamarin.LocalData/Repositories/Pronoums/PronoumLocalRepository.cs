@@ -16,13 +16,13 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.Pronoums
             _xamarinPronoumFactory = xamarinPronoumFactory;
         }
 
-        public async Task<bool> AddPronoumsAsync(IEnumerable<Pronoum> pronoums)
+        public async Task<bool> AddPronoumsAsync(PronoumRoot pronoums)
         {
-            var xamPronoums = await _xamarinPronoumFactory.MapPronoumToXamarin(pronoums);
+                var xamPronoums = await _xamarinPronoumFactory.MapPronoumToXamarin(pronoums);
 
-            await Conn.InsertAllAsync(xamPronoums);
+                await Conn.InsertAllAsync(xamPronoums);
 
-            return true;
+                return true;
         }
 
         public async Task<Pronoum> GetPronoumByIdAsync(string pronoumId)

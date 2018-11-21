@@ -9,11 +9,12 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums
         {
         }
 
-        public XamarinPronoum(string pronoumId, string forMale, string forFemale)
+        public XamarinPronoum(string pronoumId, string forMale, string forFemale, int externalTableVersion)
         {
             PronoumId = pronoumId;
             ForMale = forMale;
             ForFemale = forFemale;
+            base.ExternalTableVersion = externalTableVersion;
         }
 
         public string PronoumId { get;  set; }

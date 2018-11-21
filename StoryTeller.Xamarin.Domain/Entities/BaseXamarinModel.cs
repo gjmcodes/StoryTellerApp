@@ -8,6 +8,6 @@ namespace StoryTeller.Xamarin.Domain.Entities
         [PrimaryKey, AutoIncrement]
         public int LocalPk { get; set; }
 
-        public string ExternalTableVersion { get; set; }
+        public int ExternalTableVersion { get; set; }
     }
 }

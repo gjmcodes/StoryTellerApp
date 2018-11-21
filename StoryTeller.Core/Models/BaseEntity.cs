@@ -2,6 +2,6 @@
 {
     public class BaseEntity
     {
-        public string version;
+        public int version;
     }
 }

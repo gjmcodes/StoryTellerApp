@@ -8,25 +8,25 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums.Factories
 {
     public class XamarinPronoumFactory : BaseFactory, IXamarinPronoumFactory
     {
-        public async Task<XamarinPronoum> MapPronoumToXamarin(Pronoum pronoum)
+        public async Task<XamarinPronoum> MapPronoumToXamarin(Pronoum pronoum, int version)
         {
             return await Task.Run(() =>
             {
-                var xamPronoum = new XamarinPronoum(pronoum.pronoumId, pronoum.forMale, pronoum.forFemale);
+                var xamPronoum = new XamarinPronoum(pronoum.pronoumId, pronoum.forMale, pronoum.forFemale, version);
 
                 return xamPronoum;
             });
         }
 
-        public async Task<IEnumerable<XamarinPronoum>> MapPronoumToXamarin(IEnumerable<Pronoum> pronoums)
+        public async Task<IEnumerable<XamarinPronoum>> MapPronoumToXamarin(PronoumRoot pronoums)
         {
             return await Task.Run(async () =>
             {
                 var xamPronoums = new List<XamarinPronoum>();
 
-                foreach (var item in pronoums)
+                foreach (var item in pronoums.GetPronoums)
                 {
-                    var xamPr = await MapPronoumToXamarin(item);
+                    var xamPr = await MapPronoumToXamarin(item, pronoums.version);
                     xamPronoums.Add(xamPr);
                 }
 

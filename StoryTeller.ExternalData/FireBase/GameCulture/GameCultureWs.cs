@@ -1,7 +1,6 @@
 ﻿using StoryTeller.Core.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.GameCultures;
 using StoryTeller.Core.Interfaces.Repositories.Local.Users;
-using StoryTeller.Core.Models.GameCultures;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

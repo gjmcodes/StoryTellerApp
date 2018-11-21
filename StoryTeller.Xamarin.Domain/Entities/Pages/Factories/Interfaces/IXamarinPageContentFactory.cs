@@ -6,6 +6,6 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages.Factories.Interfaces
 {
     public interface IXamarinPageContentFactory : IDisposableObject
     {
-        Task<IEnumerable<XamarinPageContent>> MapPageContentToXamarin(string pageContent, string pageId, string pageVersion);
+        Task<IEnumerable<XamarinPageContent>> MapPageContentToXamarin(string pageContent, string pageId, int pageVersion);
     }
 }

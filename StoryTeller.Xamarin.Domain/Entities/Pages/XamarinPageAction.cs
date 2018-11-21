@@ -6,7 +6,7 @@
         {
         }
 
-        public XamarinPageAction(string pageId, string description, string pageIdToNagivate, string externalVersion)
+        public XamarinPageAction(string pageId, string description, string pageIdToNagivate, int externalVersion)
         {
             PageId = pageId;
             Description = description;

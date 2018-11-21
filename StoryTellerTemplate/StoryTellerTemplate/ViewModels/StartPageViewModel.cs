@@ -5,6 +5,7 @@ using StoryTellerTemplate.Interfaces.Services.GameContent;
 using StoryTellerTemplate.Models.ContentDownload;
 using StoryTellerTemplate.Navigations;
 using System;
+using Xamarin.Essentials;
 
 namespace StoryTellerTemplate.ViewModels
 {
@@ -27,26 +28,32 @@ namespace StoryTellerTemplate.ViewModels
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {
-            PageIsBusy = true;
-
-            var hasLocalTables = await _localDataManagementService.HasLocalTablesAsync();
-
-            if (!hasLocalTables)
-            {
-                await _localDataManagementService.CreateLocalTablesAsync();
-
-                await NavigationService.NavigateAsync("CultureSelectionPage");
-            }
+            if (Connectivity.NetworkAccess == NetworkAccess.Unknown
+                || Connectivity.NetworkAccess == NetworkAccess.None)
+                await NavigationService.NavigateAsync("InternetConnectionRequiredPage");
             else
             {
-                //await _localDataManagementService.VerifyLocalTablesUpdateFromExternalDataAsync();
+                PageIsBusy = true;
 
-                //Verificar se há dados existentes (Personagem criado, cultura selecionada, etc)
-                if (await _localDataManagementService.HasCharactersCreatedAsync())
-                    await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "GameMasterPage/NavigationPage/GamePage"));
+                var hasLocalTables = await _localDataManagementService.HasLocalTablesAsync();
+
+                if (!hasLocalTables)
+                {
+                    await _localDataManagementService.CreateLocalTablesAsync();
+
+                    await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "CultureSelectionPage"));
+                }
+                else
+                {
+                    //await _localDataManagementService.VerifyLocalTablesUpdateFromExternalDataAsync();
+
+                    //Verificar se há dados existentes (Personagem criado, cultura selecionada, etc)
+                    if (await _localDataManagementService.HasCharactersCreatedAsync())
+                        await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "GameMasterPage/NavigationPage/GamePage"));
+                }
+
+                PageIsBusy = false;
             }
-
-            PageIsBusy = false;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages
         {
         }
 
-        public XamarinPage(string pageId, string title, string image, string externalVersion)
+        public XamarinPage(string pageId, string title, string image, int externalVersion)
         {
             PageId = pageId;
             Title = title;

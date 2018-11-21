@@ -8,6 +8,6 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pronoums.Repositories
 {
     public interface IPronoumLocalRepository : IBaseRepository, IPronoumRepository
     {
-        Task<bool> AddPronoumsAsync(IEnumerable<Pronoum> pronoums);
+        Task<bool> AddPronoumsAsync(PronoumRoot pronoums);
     }
 }

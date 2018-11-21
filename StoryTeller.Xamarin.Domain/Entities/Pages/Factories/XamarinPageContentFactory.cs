@@ -16,7 +16,7 @@ namespace StoryTeller.Xamarin.Domain.Factories.Pages
             _contentMarkupTranslatorService = contentMarkupTranslatorService;
         }
 
-        public async Task<IEnumerable<XamarinPageContent>> MapPageContentToXamarin(string pageContent, string pageId, string pageVersion)
+        public async Task<IEnumerable<XamarinPageContent>> MapPageContentToXamarin(string pageContent, string pageId, int pageVersion)
         {
             return await Task.Run(async () =>
             {
