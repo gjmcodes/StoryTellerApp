@@ -68,7 +68,7 @@ namespace StoryTellerTemplate.ViewModels
             if (_isCalledAsMenuOption)
                 await NavigateToGameMasterPageAsync();
             else
-                await NavigateToCharacterCreationPage(); //Chamar criação de personagem
+                await NavigateToCharacterCreationPage(); 
 
             DownloadProgress.ProgressBarIsVisible = false;
             PageIsBusy = false;

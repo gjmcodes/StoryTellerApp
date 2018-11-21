@@ -11,7 +11,7 @@ using StoryTellerTemplate.ViewModels.Bases;
 
 namespace StoryTellerTemplate.ViewModels
 {
-    public class CharacterCreationPageViewModel : BindableContentBaseViewModel, IGameContentManagerViewModelBinder
+    public class CharacterCreationPageViewModel : BindableContentBaseViewModel, IGameContentManagerViewModelBinder, IAppDictionaryViewModel
     {
         private ICharacterCreationAppService _characterCreationAppService;
 
