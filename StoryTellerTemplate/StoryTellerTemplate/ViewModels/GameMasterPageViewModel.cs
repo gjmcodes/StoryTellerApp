@@ -24,23 +24,25 @@ namespace StoryTellerTemplate.ViewModels
         {
             var navParams = new NavigationParameters();
 
-            switch (option)
+            if (option == "Exit")
+                App.Current.Quit();
+            else
             {
-                case "CultureSelectionPage":
-                    var cultureSelParams = new CultureSelectionParams() { IsCalledAsMenuOption = true };
-                    navParams.Add(ParametersKeys.model, cultureSelParams);
-                    break;
 
-                case "Exit":
-                    App.Current.Quit();
-                    break;
+                switch (option)
+                {
+                    case "CultureSelectionPage":
+                        var cultureSelParams = new CultureSelectionParams() { IsCalledAsMenuOption = true };
+                        navParams.Add(ParametersKeys.model, cultureSelParams);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
+
+                await NavigationService.NavigateAsync("GameMasterPage/NavigationPage/" + option, navParams);
             }
 
-
-            await NavigationService.NavigateAsync("GameMasterPage/NavigationPage/" + option, navParams);
         }
 
         public void BindDictionaryConsumer(IAppDictionaryConsumer appDictionaryConsumer)

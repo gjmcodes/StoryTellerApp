@@ -11,7 +11,7 @@
         <ContentPage Title="Menu">
             <StackLayout Padding="20">
                 <Button x:Name="btnLanguage" Text="Language" Command="{Binding SelectMenuOptionCommand}" CommandParameter="CultureSelectionPage" />
-                <Button x:Name="btnExit" Text="Exit" Command="{Binding SelectMenuOptionCommand}" CommandParameter="CultureSelectionPage" />
+                <Button x:Name="btnExit" Text="Exit" Command="{Binding SelectMenuOptionCommand}" CommandParameter="Exit" />
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
