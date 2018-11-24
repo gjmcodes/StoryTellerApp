@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StoryTeller.Core.Pages
 {
-    public class Page : BaseEntity
+    public class Page
     {
         public string pageId;
         public string title;

@@ -8,5 +8,6 @@ namespace StoryTeller.Xamarin.Domain.Entities.App.Repositories
     {
         Task<bool> AddAppDictionaryAsync(AppDictionary appDictionary);
         Task<XamarinAppDictionary> GetAppDictionaryAsync();
+        Task<int> GetVersionAsync();
     }
 }

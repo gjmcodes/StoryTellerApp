@@ -1,4 +1,5 @@
-﻿using StoryTeller.Core.Models.Pronoums;
+﻿using StoryTeller.Core.Interfaces.Repositories.External.App;
+using StoryTeller.Core.Models.Pronoums;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Interfaces;
 using StoryTeller.Xamarin.Domain.Entities.Pronoums.Repositories;
@@ -10,19 +11,24 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.Pronoums
     public class PronoumLocalRepository : BaseRepository, IPronoumLocalRepository
     {
         private readonly IXamarinPronoumFactory _xamarinPronoumFactory;
+        private readonly IAppUpdateExternalRepository _appUpdateExternalRepository;
 
-        public PronoumLocalRepository(IXamarinPronoumFactory xamarinPronoumFactory)
+        public PronoumLocalRepository(IXamarinPronoumFactory xamarinPronoumFactory,
+            IAppUpdateExternalRepository appUpdateExternalRepository)
         {
             _xamarinPronoumFactory = xamarinPronoumFactory;
+            _appUpdateExternalRepository = appUpdateExternalRepository;
         }
 
-        public async Task<bool> AddPronoumsAsync(PronoumRoot pronoums)
+        public async Task<bool> AddPronoumsAsync(IEnumerable<Pronoum> pronoums)
         {
-                var xamPronoums = await _xamarinPronoumFactory.MapPronoumToXamarin(pronoums);
+            var pronoumVersion = await _appUpdateExternalRepository.GetPronoumCurrentVersionByCultureAsync();
 
-                await Conn.InsertAllAsync(xamPronoums);
+            var xamPronoums = await _xamarinPronoumFactory.MapPronoumToXamarin(pronoums, pronoumVersion.version);
 
-                return true;
+            await Conn.InsertAllAsync(xamPronoums);
+
+            return true;
         }
 
         public async Task<Pronoum> GetPronoumByIdAsync(string pronoumId)
@@ -35,6 +41,19 @@ namespace StoryTeller.Xamarin.LocalData.Repositories.Pronoums
             pronoum.pronoumId = xamPronoum.PronoumId;
 
             return pronoum;
+        }
+
+        public async Task<int> GetVersionAsync()
+        {
+            var xamPronoum = await Conn.Table<XamarinPronoum>().FirstAsync();
+            return xamPronoum.ExternalTableVersion;
+        }
+
+        protected override void ReleaseResources()
+        {
+            _xamarinPronoumFactory.Dispose();
+            _appUpdateExternalRepository.Dispose();
+            base.ReleaseResources();
         }
     }
 }

@@ -11,17 +11,13 @@ namespace StoryTeller.ExternalData.FireBase.NameCalls
     public class PronoumNameCallWs : BaseFirebaseWs, IPronoumExternalRepository
     {
         public PronoumNameCallWs(IUserLocalRepository userStatusLocalRepository)
-            : base("PronoumNameCalls", userStatusLocalRepository)
+            : base("Pronoums", userStatusLocalRepository)
         {
         }
 
-        public async Task<PronoumRoot> GetPronoumNameCallsByCultureAsync()
+        public async Task<IEnumerable<Pronoum>> GetPronoumsByCultureAsync()
         {
-            var langQuery = await base.QueryableCollectionWithLanguageAsync();
-
-            var pronoums = await langQuery.OnceSingleAsync<PronoumRoot>();
-
-            return pronoums;
+            return await base.GetAllByCultureAsync<Pronoum>();
         }
 
         protected override void ReleaseResources()

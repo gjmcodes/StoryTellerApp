@@ -83,7 +83,6 @@ public static class Bootstrapper
     static void RegisterLocalRepositories(IContainerRegistry containerRegistry)
     {
         //containerRegistry.Register<IUserStatusLocalRepository, UserStatusPersistentRepository>();
-
         
         containerRegistry.Register<ICharacterLocalRepository, CharacterLocalRepository>();
         containerRegistry.Register<ICharacterDataRepository, CharacterLocalRepository>();
@@ -129,6 +128,7 @@ public static class Bootstrapper
         containerRegistry.Register<IPageExternalRepository, PageWs>();
         containerRegistry.Register<IPronoumExternalRepository, PronoumNameCallWs>();
         containerRegistry.Register<IAppDictionaryExternalRepository, AppDictionaryWs>();
+        containerRegistry.Register<IAppUpdateExternalRepository, AppUpdateWs>();
     }
 
     static void RegisterCrossCuttingServices(IContainerRegistry containerRegistry)

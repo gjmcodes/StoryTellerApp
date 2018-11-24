@@ -9,5 +9,6 @@ namespace StoryTeller.Xamarin.Domain.Entities.Pages.Repositories
     {
         Task<XamarinPage> GetPageByIdAsync(string pageId);
         Task<bool> AddPagesAsync(IEnumerable<Page> entities);
+        Task<int> GetVersionAsync();
     }
 }

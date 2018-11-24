@@ -16,7 +16,7 @@ namespace StoryTeller.ExternalData.FireBase
         protected FirebaseClient _fireBaseClient;
         protected string collection;
 
-        private readonly IUserLocalRepository _userStatusLocalRepository;
+        protected readonly IUserLocalRepository _userStatusLocalRepository;
 
         public BaseFirebaseWs(string collection, IUserLocalRepository userStatusLocalRepository)
         {
@@ -27,7 +27,7 @@ namespace StoryTeller.ExternalData.FireBase
             _fireBaseClient = new FirebaseClient(baseDatabaseUrl);
         }
 
-        protected async Task<ChildQuery> QueryableCollectionWithLanguageAsync()
+        protected virtual async Task<ChildQuery> QueryableCollectionWithLanguageAsync()
         {
             var userCulture = await _userStatusLocalRepository.GetSelectedCultureAsync();
             return _fireBaseClient

@@ -6,6 +6,6 @@ namespace StoryTeller.Xamarin.Domain.Entities.App.Factories.Interfaces
 {
     public interface IXamarinAppDictionaryFactory : IDisposableObject
     {
-        Task<XamarinAppDictionary> MapAppDictionaryToXamarin(AppDictionary appDictionary);
+        Task<XamarinAppDictionary> MapAppDictionaryToXamarin(AppDictionary appDictionary, int dictionaryVersion);
     }
 }

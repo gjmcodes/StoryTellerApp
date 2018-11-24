@@ -10,5 +10,6 @@ namespace StoryTeller.Xamarin.Domain.Interfaces.Services.LocalData
         Task ClearLocalDataForCulctureChangeAsync();
         Task<bool> HasLocalTablesAsync();
         Task<bool> HasCharactersCreatedAsync();
+        Task<bool> HasCultureSelectedAsync();
     }
 }

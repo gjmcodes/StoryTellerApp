@@ -57,7 +57,7 @@ namespace StoryTeller.Xamarin.Domain.Services
 
         public async Task<bool> DownloadPronoumsAsync()
         {
-            var pronoums = await _pronoumExternalRepository.GetPronoumNameCallsByCultureAsync();
+            var pronoums = await _pronoumExternalRepository.GetPronoumsByCultureAsync();
 
             return await _pronoumLocalRepository.AddPronoumsAsync(pronoums);
         }
@@ -79,6 +79,18 @@ namespace StoryTeller.Xamarin.Domain.Services
             tasks.Add(DownloadPronoumsAsync());
 
             return tasks;
+        }
+
+        protected override void ReleaseResources()
+        {
+            _appDictionaryExternalRepository.Dispose();
+            _appDictionaryLocalRepository.Dispose();
+            _pageExternalRepository.Dispose();
+            _pageLocalRepository.Dispose();
+            _pronoumExternalRepository.Dispose();
+            _pronoumLocalRepository.Dispose();
+
+            base.ReleaseResources();
         }
     }
 }

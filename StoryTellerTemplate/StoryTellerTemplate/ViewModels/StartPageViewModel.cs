@@ -15,8 +15,7 @@ namespace StoryTellerTemplate.ViewModels
         private readonly ILocalDataManagementService _localDataManagementService;
 
         public StartPageViewModel(INavigationService navigationService,
-            ILocalDataManagementService localDataManagementService,
-            IGameContentDownloadAppService gameContentDownloadAppService)
+            ILocalDataManagementService localDataManagementService)
             : base(navigationService)
         {
             DownloadProgress = new DownloadProgress();
@@ -45,15 +44,25 @@ namespace StoryTellerTemplate.ViewModels
                 }
                 else
                 {
-                    //await _localDataManagementService.VerifyLocalTablesUpdateFromExternalDataAsync();
+                    await _localDataManagementService.VerifyLocalTablesUpdateFromExternalDataAsync();
 
-                    //Verificar se há dados existentes (Personagem criado, cultura selecionada, etc)
                     if (await _localDataManagementService.HasCharactersCreatedAsync())
                         await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "GameMasterPage/NavigationPage/GamePage"));
+                    else if (!(await _localDataManagementService.HasCultureSelectedAsync()))
+                        await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "CultureSelectionPage"));
+                    else
+                        await NavigationService.NavigateAsync(new Uri(NavigationConstants.appAddress + "CharacterCreationPage"));
+
                 }
 
                 PageIsBusy = false;
             }
+        }
+
+        public override void Destroy()
+        {
+            _localDataManagementService.Dispose();
+            base.Destroy();
         }
     }
 }

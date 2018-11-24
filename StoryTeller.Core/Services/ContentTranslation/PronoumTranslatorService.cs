@@ -17,7 +17,6 @@ namespace StoryTeller.Core.Services.ContentTranslation
         const string pronoumStart = "<pronoum>";
         const string pronoumEnd = "</pronoum>";
 
-        public IEnumerable<PronoumRoot> pronoums;
         PronoumFormatter _nameCallContentFormatter;
 
         public PronoumTranslatorService(PronoumFormatter nameCallContentFormatter)
