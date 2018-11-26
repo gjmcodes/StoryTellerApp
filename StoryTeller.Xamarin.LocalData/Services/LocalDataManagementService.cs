@@ -144,7 +144,6 @@ namespace StoryTeller.Xamarin.LocalData.Services
 
         protected override void ReleaseResources()
         {
-            _conn.Dispose();
             _appDictionaryLocalRepository.Dispose();
             _appUpdateExternalRepository.Dispose();
             _gameContentDownloadService.Dispose();

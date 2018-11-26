@@ -58,12 +58,26 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <Button Text="{Binding Description}"
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="texture.jpg" Aspect="AspectFill" />
+                                <Label Grid.Column="0" 
+                                       Margin="5, 5" 
+                                       FontSize="Small" 
+                                       FontAttributes="Italic" 
+                                       Text="{Binding Description}"
+                                       HorizontalOptions="CenterAndExpand"/>
+                            </Grid>
+                            <!--<Button Text="{Binding Description}"
                                     FontAttributes="Italic"
                                     FontSize="Small"
                             HorizontalOptions="Center"  
                             Command="{Binding Source={x:Reference Page}, Path=BindingContext.ExecuteActionCommand}"
-                            CommandParameter="{Binding .}"/>
+                            CommandParameter="{Binding .}"/>-->
                         </ViewCell.View>
                     </ViewCell>
 

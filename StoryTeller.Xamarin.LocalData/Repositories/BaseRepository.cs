@@ -49,7 +49,7 @@ namespace StoryTeller.Xamarin.LocalData.Repositories
 
         protected override void ReleaseResources()
         {
-            _conn.Dispose();
+
         }
     }
 }
